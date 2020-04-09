@@ -21,7 +21,6 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
        # Wait for Postgres connection to open.
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           name: install dependencies
           command: npm config set registry http://registry.npmjs.org && npm ci
