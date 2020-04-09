@@ -8,7 +8,7 @@ jobs:
       - image: circleci/node:12-browsers
       - image: circleci/postgres:9.6.2-alpine
         environment:
-          POSTGRES_DB: study-data-manager
+          POSTGRES_DB: study_data_manager
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           DATABASE_URL: 127.0.0.1
