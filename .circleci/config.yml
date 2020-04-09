@@ -15,9 +15,7 @@ jobs:
       - checkout
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-          name: 
-          command: npm config set registry http://registry.npmjs.org && npm ci
+      
   build:
     docker:
       - image: circleci/node:12-browsers
