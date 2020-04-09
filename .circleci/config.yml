@@ -14,8 +14,6 @@ jobs:
           DATABASE_URL: 127.0.0.1
 
       - image: circleci/node:12-browsers
-        environment:
-           POSTGRES_DB: study_data_manager
     steps:
       - checkout
       - restore_cache: # Restores the cached dependency.
