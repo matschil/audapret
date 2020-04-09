@@ -1,0 +1,14 @@
+#ENTRYPOINT /entrypoint.sh
+FROM node:10-alpine
+#Workdir of image filesystem
+WORKDIR /app 
+ADD package.json /app/package.json
+RUN npm config set registry http://registry.npmjs.org
+RUN npm install
+ADD . /app/
+ENV STUDY_DATA_MANAGER_ADDRESS http://study-data-manager
+ENV STUDY_ADMINISTRATOR_ADDRESS http://study-administrator
+ENV STUDY_ADMINISTRATOR_DB study_administrator_db
+
+
+CMD npm start study-administrator

@@ -1,0 +1,1 @@
+export const dropSchemaAtEveryStart = true;

@@ -1,0 +1,31 @@
+<header class="flex"></header>
+<div *ngFor="let study of studies">
+  <table border="1" class="table">
+    <thead>
+      <tr>
+        <th scope="col">
+          Title
+        </th>
+        <th scope="col">
+          Participants
+        </th>
+        <th scope="col">
+          Researcher
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">
+          {{ study.studyTitle }}
+        </td>
+        <td scope="row">
+          {{ extractParticipantNames(study) | json }}
+        </td>
+        <td scope="row">
+          {{ extractResearcherNames(study) | json }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

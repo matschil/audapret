@@ -1,0 +1,41 @@
+{
+  "npmScope": "audapret",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "study-data-manager": {
+      "tags": []
+    },
+    "oura-adapter": {
+      "tags": []
+    },
+    "shared": {
+      "tags": []
+    },
+    "limesurvey-adapter": {
+      "tags": []
+    },
+
+    "study-data-manager-client": {
+      "tags": []
+    },
+
+    "study-administrator-client": {
+      "tags": []
+    },
+    "study-administrator": {
+      "tags": []
+    },
+    "netatmo-adapter": {
+      "tags": []
+    },
+    "administrator": {
+      "tags": []
+    }
+  }
+}

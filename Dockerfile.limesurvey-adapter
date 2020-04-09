@@ -1,0 +1,12 @@
+FROM node:10-alpine
+WORKDIR /app 
+ADD package.json /app/package.json
+RUN npm config set registry http://registry.npmjs.org
+RUN npm install
+ADD . /app/
+ENV STUDY_DATA_MANAGER_ADDRESS http://study-data-manager
+ENV LIMESURVEY_ADAPTER_DB limesurvey_adapter_db
+ENV LIMESURVEY_ADAPTER_address http://limesurvey-adapter
+
+
+CMD npm start limesurvey-adapter

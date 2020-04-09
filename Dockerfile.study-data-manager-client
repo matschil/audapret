@@ -1,0 +1,10 @@
+#ENTRYPOINT /entrypoint.sh
+FROM node:10-alpine
+#Workdir of image filesystem
+WORKDIR /app 
+ADD package.json /app/package.json
+RUN npm config set registry http://registry.npmjs.org
+RUN npm install
+ADD . /app/
+
+CMD npm start study-data-manager-client -- --prod --port 4200

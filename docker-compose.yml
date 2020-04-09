@@ -1,0 +1,120 @@
+version: "3"
+
+networks:
+  isolation-network:
+    driver: bridge
+
+services:
+  # Stage 1: Database Layer
+  study-data-manager-db:
+    restart: always
+    image: postgres:9.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: study_data_manager
+    networks:
+      - isolation-network
+
+  oura_adapter_db:
+    restart: always
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: oura_adapter
+    networks:
+      - isolation-network
+
+  study_administrator_db:
+    restart: always
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: study_administrator
+    networks:
+      - isolation-network
+
+  netatmo_adapter_db:
+    restart: always
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: netatmo_adapter
+    networks:
+      - isolation-network
+
+  limesurvey_adapter_db:
+    restart: always
+    image: postgres:9.4
+    environment:
+      POSTGRES_DB: limesurvey_adapter
+    networks:
+      - isolation-network
+
+  #Stage 2.1: Application Layer (Server)
+  study-data-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile.study-data-manager
+    ports:
+      - "3333:3333"
+    networks:
+      - isolation-network
+
+  study-administrator:
+    build:
+      context: .
+      dockerfile: Dockerfile.study-administrator
+    ports:
+      - "3336:3336"
+    networks:
+      - isolation-network
+
+  limesurvey-adapter:
+    build:
+      context: .
+      dockerfile: Dockerfile.limesurvey-adapter
+    ports:
+      - "3335:3335"
+    links:
+      - limesurvey_adapter_db
+    networks:
+      - isolation-network
+
+  oura-adapter:
+    build:
+      context: .
+      dockerfile: Dockerfile.oura-adapter
+    ports:
+      - "3334:3334"
+    links:
+      - oura_adapter_db
+    networks:
+      - isolation-network
+
+  netatmo-adapter:
+    build:
+      context: .
+      dockerfile: Dockerfile.netatmo-adapter
+    ports:
+      - "3339:3339"
+    links:
+      - netatmo_adapter_db
+    networks:
+      - isolation-network
+
+  #Stage 2.2: Application Layer (Client)
+  study-data-manager-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.study-data-manager-client
+    ports:
+      - "4200:4200"
+    networks:
+      - isolation-network
+
+  study-administrator-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.study-administrator-client
+    ports:
+      - "4201:4201"
+    networks:
+      - isolation-network

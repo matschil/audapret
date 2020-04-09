@@ -1,0 +1,33 @@
+<main>
+  <br />
+
+  <div *ngFor="let source of dataSources$">
+    <br />
+    <button (click)="loadDataFromSource(source)" class="btn btn-secondary">
+      Load {{ source }} data
+    </button>
+  </div>
+
+  <br />
+
+  <div *ngFor="let adapterData of data$">
+    <table border="1" class="table">
+      <thead>
+        <tr>
+          <th *ngFor="let attribute of keys(adapterData.content)" scope="col">
+            {{ attribute }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td *ngFor="let attribute of keys(adapterData.content)" scope="row">
+            {{ adapterData.content[attribute] | json }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<router-outlet></router-outlet>
