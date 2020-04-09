@@ -11,6 +11,9 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
+          name: list files
+          command: dir
+      - run:
           name: install dependencies
           command: ls && npm config set registry http://registry.npmjs.org && npm install
 # Use a package of configuration called an orb.
