@@ -20,7 +20,6 @@ jobs:
       - checkout
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-       # Wait for Postgres connection to open.
       - run:
           name: install dependencies
           command: npm config set registry http://registry.npmjs.org && npm ci
