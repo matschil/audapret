@@ -11,14 +11,11 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: list files
-          command: echo | dir
-      - run:
           name: install dependencies
           command: npm config set registry http://registry.npmjs.org && npm ci
       - run: 
-          name: setup server
-          command: nx serve study-data-manager
+          name: setup study-data-manager
+          command: npm start study-data-manager 
 # Use a package of configuration called an orb.
 orbs:
   # Declare a dependency on the welcome-orb
