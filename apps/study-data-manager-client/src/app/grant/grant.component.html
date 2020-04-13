@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <br />
+  <font size="5">Create DataAccessGrant</font>
+  <br />
+  <br />
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <div class="form-group">
+      <label>Name of Researcher</label>
+      <input name="requester" type="text" class="form-control" ngModel />
+    </div>
+
+    <div class="form-group">
+      <label>Select Detail Level</label>
+      <select name="detailLevel" class="custom-select" ngModel>
+        <option *ngFor="let detailLevel of detailLevels">{{
+          detailLevel
+        }}</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Create Grant</button>
+  </form>
+</div>

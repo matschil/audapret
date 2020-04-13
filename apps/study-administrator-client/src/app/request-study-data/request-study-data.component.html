@@ -1,0 +1,73 @@
+<header class="flex"></header>
+<br />
+<br />
+<font size="5"> Request User Data</font>
+<br />
+<br />
+<div>
+  <table border="1" class="table">
+    <thead>
+      <tr>
+        <th scope="col">
+          User
+        </th>
+        <th scope="col">
+          Type
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td scope="row">
+          {{ user.name }}
+        </td>
+        <td scope="row">
+          {{ user.userType }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container-fluid">
+  <form #studyForm="ngForm" (ngSubmit)="loadData(studyForm.value.username)">
+    <div class="form-group">
+      <label>Username</label>
+      <input name="username" type="text" class="form-control" ngModel />
+    </div>
+    <button class="btn btn-primary" type="submit">Request Data</button>
+  </form>
+</div>
+<br />
+<br />
+
+<div class="container-fluid">
+  <form (ngSubmit)="loadDataFromAllUsers()">
+    <button class="btn btn-primary" type="submit">
+      Request StudyData from all Users
+    </button>
+  </form>
+</div>
+<br />
+<br />
+<br />
+
+<div *ngFor="let content of currentContent">
+  <div *ngFor="let adapterData of content">
+    <table border="1" class="table">
+      <thead>
+        <tr>
+          <th scope="col">
+            {{ adapterData }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">
+            {{ adapterData.content | json }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

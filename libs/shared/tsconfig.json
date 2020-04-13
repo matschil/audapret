@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest"]
+  },
+  "include": [
+    "**/*.ts",
+    "../../apps/oura-adapter/src/app/entity/adapter-auth.entity.ts",
+    "../../apps/studyDataManager/src/app/entity/content-schema.entity.ts",
+    "../../apps/studyDataManager/src/app/entity/data-source.entity.ts",
+    "../../apps/studyDataManager/src/app/entity/grant.entity.ts",
+    "../../apps/studyDataManager/src/app/entity/adapter-data.entity.ts"
+  ]
+}

@@ -1,0 +1,13 @@
+#docker build -f Dockerfile.study-data-manager . -t study-data-manager
+#ENTRYPOINT /entrypoint.sh
+FROM node:10-alpine
+#Workdir of image filesystem
+WORKDIR /app 
+ADD package.json /app/package.json
+RUN npm config set registry http://registry.npmjs.org
+RUN npm install
+ADD . /app/
+ENV STUDY_DATA_MANAGER_ADDRESS http://study-data-manager
+ENV STUDY_DATA_MANAGER_DB study-data-manager-db
+
+CMD npm start study-data-manager 
