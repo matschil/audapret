@@ -17,10 +17,10 @@ async function bootstrap() {
     process.env.STUDY_DATA_MANAGER_ADDRESS = 'http://localhost';
   }
   if (!process.env.OURA_ADAPTER_DB) {
-    process.env.OURA_ADAPTER_DB = 'localhost';
+    process.env.OURA_ADAPTER_DB = 'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
   }
   if (!process.env.OURA_ADAPTER_ADDRESS) {
-    process.env.OURA_ADAPTER_ADDRESS = 'http://localhost';
+    process.env.OURA_ADAPTER_ADDRESS = 'http://localhost/';
   }
 
   console.log(process.env.STUDY_DATA_MANAGER_ADDRESS);

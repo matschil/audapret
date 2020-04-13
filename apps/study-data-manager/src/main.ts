@@ -11,11 +11,11 @@ async function bootstrap() {
   inspector.open(7778);
 
   if (!process.env.STUDY_DATA_MANAGER_DB) {
-    process.env.STUDY_DATA_MANAGER_DB = 'localhost';
+    process.env.STUDY_DATA_MANAGER_DB = 'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
   }
 
   if (!process.env.STUDY_DATA_MANAGER_ADDRESS) {
-    process.env.STUDY_DATA_MANAGER_ADDRESS = 'http://localhost';
+    process.env.STUDY_DATA_MANAGER_ADDRESS = ''//'http://localhost';
   }
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';

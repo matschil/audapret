@@ -10,6 +10,11 @@ import { GrantEntity } from '../entity/grant.entity';
 export class TestingController {
   constructor(private readonly testingService: TestingService) {}
 
+  @Get('test')
+  test(){
+    return "test"
+  }
+
   @Get('nestedAdapterData')
   async getNestedAdapterData(@Query('id') id: number) {
     return this.testingService.findNestedAdapterDataEntity(id);

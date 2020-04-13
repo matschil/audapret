@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  STUDY_DATA_MANAGER_ADDRESS: 'http://localhost'
+  STUDY_DATA_MANAGER_ADDRESS: 'http://3.126.99.175'//'http://localhost'
 };
 
 /*

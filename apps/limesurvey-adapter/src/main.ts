@@ -16,7 +16,7 @@ async function bootstrap() {
     process.env.STUDY_DATA_MANAGER_ADDRESS = 'http://localhost';
   }
   if (!process.env.LIMESURVEY_ADAPTER_DB) {
-    process.env.LIMESURVEY_ADAPTER_DB = 'localhost';
+    process.env.LIMESURVEY_ADAPTER_DB = 'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
   }
   if (!process.env.LIMESURVEY_ADAPTER_ADDRESS) {
     process.env.LIMESURVEY_ADAPTER_ADDRESS = 'http://localhost';

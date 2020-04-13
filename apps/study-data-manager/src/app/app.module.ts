@@ -22,8 +22,8 @@ import { dropSchemaAtEveryStart } from '../assets/config';
         type: 'postgres',
         host: `${process.env.STUDY_DATA_MANAGER_DB}`,
         port: 5432,
-        username: 'postgres',
-        password: 'postgres',
+        username: 'audapret',
+        password: 'audapret',
         database: 'study_data_manager',
         entities: [
           AdapterDataEntity,
