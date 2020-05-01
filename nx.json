@@ -20,11 +20,9 @@
     "limesurvey-adapter": {
       "tags": []
     },
-
     "study-data-manager-client": {
       "tags": []
     },
-
     "study-administrator-client": {
       "tags": []
     },
@@ -35,6 +33,9 @@
       "tags": []
     },
     "administrator": {
+      "tags": []
+    },
+    "qsforms-client": {
       "tags": []
     }
   }

@@ -1,0 +1,20 @@
+<header class="flex"></header>
+<div class="container-fluid">
+  <br />
+  <br />
+  <font size="5">Insert bloodmarker data</font>
+  <br />
+  <form
+    #bloodmarkerForm="ngForm"
+    (ngSubmit)="
+      sendBloodmarkerFormData({ ketoneLevels: bloodmarkerForm.value })
+    "
+  >
+    <div class="form-group">
+      <label>Ketone Levels</label>
+      <input name="name" type="text" class="form-control" ngModel />
+    </div>
+    <button class="btn btn-primary" type="submit">Submit Data</button>
+  </form>
+</div>
+<br />

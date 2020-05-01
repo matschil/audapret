@@ -527,6 +527,98 @@
           }
         }
       }
+    },
+    "qsforms-client": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/qsforms-client",
+      "sourceRoot": "apps/qsforms-client/src",
+      "prefix": "audapret",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/qsforms-client",
+            "index": "apps/qsforms-client/src/index.html",
+            "main": "apps/qsforms-client/src/main.ts",
+            "polyfills": "apps/qsforms-client/src/polyfills.ts",
+            "tsConfig": "apps/qsforms-client/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/qsforms-client/src/favicon.ico",
+              "apps/qsforms-client/src/assets"
+            ],
+            "styles": ["apps/qsforms-client/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/qsforms-client/src/environments/environment.ts",
+                  "with": "apps/qsforms-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "qsforms-client:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "qsforms-client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "qsforms-client:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/qsforms-client/tsconfig.app.json",
+              "apps/qsforms-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/qsforms-client/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/qsforms-client/jest.config.js",
+            "tsConfig": "apps/qsforms-client/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/qsforms-client/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -584,5 +676,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "studyDataManager"
+  "defaultProject": "study-data-manager"
 }
