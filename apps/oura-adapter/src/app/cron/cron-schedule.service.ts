@@ -1,27 +1,31 @@
-import { Controller, Get } from '@nestjs/common';
-import { OuraAuthService } from '../auth/auth.service';
-import { CronService } from './cron.service';
-import { DatabaseService } from '../database/database.service';
-import { OuraCategory } from '../../assets/shared';
-import { StudyBeginDate } from '../../assets/config';
+import { Injectable, Logger } from "@nestjs/common";
+import { Cron } from "@nestjs/schedule";
+import { AdapterPayloadDto } from "@audapret/shared";
+import { CronService } from "./cron.service";
+import { DatabaseService } from "../database/database.service";
+import { triggerInterval, StudyBeginDate } from "../../assets/config";
+import { OuraCategory } from "../../assets/shared";
+import { OuraAuthService } from "../auth/auth.service";
 
-@Controller('cron')
-export class CronController {
+@Injectable()
+export class CronScheduleService {
   constructor(
-    private readonly authService: OuraAuthService,
     private readonly cronService: CronService,
+    private readonly authService: OuraAuthService,
     private readonly databaseService: DatabaseService
   ) {}
+  initialAdapterData: boolean;
 
-  @Get('workflow')
-  async workflow() {
+  @Cron(triggerInterval)
+  async handleCron() {
     let accessToken: string;
+    console.log("triggered");
     // (1) Authentification workflow
     try {
       const latestAuthEntity = await this.databaseService.getLatestAuthEntity();
       if (latestAuthEntity === undefined) {
         throw new Error(
-          'Please manually perform first authentication at the Oura Cloud by opening `localhost:3334/api/oura` in your browser'
+          "Please manually perform first authentication at the Oura Cloud by opening `localhost:3334/api/oura` in your browser"
         );
       } else {
         const expiration_date =
@@ -39,7 +43,7 @@ export class CronController {
         } else {
           // access_token is not valid anymore and has to be obtained again
           throw new Error(
-            'Please manually perform new authentication at the Oura Cloud by opening `localhost:3334/api/oura` in your browser'
+            "Please manually perform new authentication at the Oura Cloud by opening `localhost:3334/api/oura` in your browser"
           );
         }
       }
@@ -57,7 +61,7 @@ export class CronController {
         // (2.1.1) Create new MetaEntity with begin date of study
         metaEntity = this.databaseService.createMetaDataEntity({
           category: category,
-          lastSuccessfulRetrieval: StudyBeginDate
+          lastSuccessfulRetrieval: StudyBeginDate,
         });
       }
 

@@ -1,21 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
-import { CronService } from './cron.service';
-import { AuthService } from '../auth/auth.service';
-import { AdapterPayloadDto } from '@audapret/shared';
-import { DatabaseService } from '../database/database.service';
+import { Injectable, Logger } from "@nestjs/common";
+import { Cron } from "@nestjs/schedule";
+import { AdapterPayloadDto } from "@audapret/shared";
+import { CronService } from "./cron.service";
+import { AuthService } from "../auth/auth.service";
+import { DatabaseService } from "../database/database.service";
+import { triggerInterval } from "../../assets/config";
 
-@Controller('cron')
-export class CronController {
+@Injectable()
+export class CronScheduleService {
   constructor(
     private readonly cronService: CronService,
     private readonly authService: AuthService,
     private readonly databaseService: DatabaseService
   ) {}
-
   initialAdapterData: boolean;
 
-  @Get('workflow')
-  async workflow() {
+  @Cron(triggerInterval)
+  async handleCron() {
+    console.log("triggered");
     this.initialAdapterData = false;
     try {
       // (1) Authenticate at Netatmo API
@@ -32,7 +34,7 @@ export class CronController {
 
         // (2.2.1) Create new MetaEntity
         metaEntity = this.databaseService.createMetaDataEntity({
-          lastRetreivedUserDataId: netatmoData._id
+          lastRetreivedUserDataId: netatmoData._id,
         });
 
         // (2.2.2) Remember that this is the first AdapterDataDto from the NetatmoAdapter
@@ -47,8 +49,8 @@ export class CronController {
         // (2.4) Build adapterPayload
         const adapterPayload: AdapterPayloadDto = {
           content: JSON.stringify(netatmoData),
-          description: 'netatmo_data',
-          source: 'netatmo_API'
+          description: "netatmo_data",
+          source: "netatmo_API",
         };
 
         // (2.5) Send data to StudyDataManager
