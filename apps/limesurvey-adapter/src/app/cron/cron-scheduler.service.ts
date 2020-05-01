@@ -1,19 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
-import { CronService } from './cron.service';
-import { AuthService } from '../auth/auth.service';
-import { AdapterPayloadDto } from '@audapret/shared';
-import { DatabaseService } from '../database/database.service';
+import { Injectable, Logger } from "@nestjs/common";
+import { Cron } from "@nestjs/schedule";
+import { AdapterPayloadDto } from "@audapret/shared";
+import { CronService } from "./cron.service";
+import { AuthService } from "../auth/auth.service";
+import { DatabaseService } from "../database/database.service";
+import { triggerInterval } from "../../assets/config";
 
-@Controller('cron')
-export class CronController {
+@Injectable()
+export class TasksService {
   constructor(
     private readonly cronService: CronService,
     private readonly authService: AuthService,
     private readonly databaseService: DatabaseService
   ) {}
 
-  @Get('workflow')
-  async workflow() {
+  @Cron(triggerInterval)
+  async handleCron() {
     try {
       // (1) Authenticate at Limesurvey API -> request session key
       const sessionKey = (await this.authService.getSessionKey()).data.result;
@@ -35,7 +37,7 @@ export class CronController {
 
         // (4) Decode the base64 string of the survey results
         const responses: Array<any> = JSON.parse(
-          Buffer.from(responsesCsv.data.result, 'base64').toString('binary')
+          Buffer.from(responsesCsv.data.result, "base64").toString("binary")
         ).responses;
 
         // (5) get metaEntity for latest retrieval
@@ -48,12 +50,12 @@ export class CronController {
           // (5.1) Insert new MetaEntity with smallest possible id
           metaEntity = this.databaseService.createMetaDataEntity({
             lastRetrievedResponseId: 0,
-            surveyId: survey.sid
+            surveyId: survey.sid,
           });
         }
 
         // (6) Extract responses that were not yet sent to the StudyDataManager
-        const newResponses = responses.filter(response => {
+        const newResponses = responses.filter((response) => {
           return (
             parseInt(response[Object.keys(response)[0]].id) >
             metaEntity.lastRetrievedResponseId
@@ -66,7 +68,7 @@ export class CronController {
           const adapterPayload: AdapterPayloadDto = {
             content: JSON.stringify(newResponses),
             description: survey.surveyls_title,
-            source: survey.surveyls_title
+            source: survey.surveyls_title,
           };
 
           // (8) Send data to StudyDataManager

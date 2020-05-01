@@ -1,8 +1,10 @@
-import { Module, HttpModule } from '@nestjs/common';
-import { CronModule } from './cron/cron.module';
-import { MetaDataEntity } from './entity/meta.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { dropSchemaAtEveryStart } from '../assets/config';
+import { Module, HttpModule } from "@nestjs/common";
+import { CronModule } from "./cron/cron.module";
+import { MetaDataEntity } from "./entity/meta.entity";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { dropSchemaAtEveryStart } from "../assets/config";
+import { ScheduleModule } from "@nestjs/schedule";
+import { TasksService } from "./cron/testCron.service";
 
 @Module({
   imports: [
@@ -10,21 +12,21 @@ import { dropSchemaAtEveryStart } from '../assets/config';
     CronModule,
     TypeOrmModule.forRootAsync({
       useFactory: () => ({
-        name: 'limesurvey-adapter',
-        type: 'postgres',
+        name: "limesurvey-adapter",
+        type: "postgres",
         host: `${process.env.LIMESURVEY_ADAPTER_DB}`,
         port: 5432,
-        username: 'audapret',
-        password: 'audapret',
-        database: 'limesurvey_adapter',
+        username: "postgres",
+        password: "postgres",
+        database: "limesurvey_adapter",
         entities: [MetaDataEntity],
         synchronize: true,
-        dropSchema: dropSchemaAtEveryStart
-      })
-    })
+        dropSchema: dropSchemaAtEveryStart,
+      }),
+    }),
   ],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {
   constructor() {}

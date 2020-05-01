@@ -1,9 +1,9 @@
-import { Injectable, HttpService } from '@nestjs/common';
-import { AxiosResponse } from 'axios';
-import { lsmethods } from '../../assets/shared';
-import { limesurveyConfig } from '../../assets/config';
-import { AdapterPayloadDto, studyDataManagerPort } from '@audapret/shared';
-import { studyDataManagerAdapterDataPath } from '@audapret/shared';
+import { Injectable, HttpService } from "@nestjs/common";
+import { AxiosResponse } from "axios";
+import { lsmethods } from "../../assets/shared";
+import { limesurveyConfig } from "../../assets/config";
+import { AdapterPayloadDto, studyDataManagerPort } from "@audapret/shared";
+import { studyDataManagerAdapterDataPath } from "@audapret/shared";
 
 @Injectable()
 export class CronService {
@@ -20,7 +20,7 @@ export class CronService {
         {
           method: lsmethods.LIST_SURVEYS,
           params: [sessionKey],
-          id: 1
+          id: 1,
         },
         limesurveyConfig
       )
@@ -34,8 +34,8 @@ export class CronService {
         limesurveyConfig.url,
         {
           method: lsmethods.EXPORT_RESPONSES,
-          params: [sessionKey, sid, 'json'],
-          id: 1
+          params: [sessionKey, sid, "json"],
+          id: 1,
         },
         limesurveyConfig
       )
@@ -49,7 +49,7 @@ export class CronService {
     try {
       return this.httpService
         .post(this.address, adapterPayload, {
-          headers: { requester: 'adapter' }
+          headers: { requester: "adapter" },
         })
         .toPromise();
     } catch (error) {
