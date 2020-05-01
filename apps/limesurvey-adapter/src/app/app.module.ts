@@ -4,7 +4,7 @@ import { MetaDataEntity } from "./entity/meta.entity";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { dropSchemaAtEveryStart } from "../assets/config";
 import { ScheduleModule } from "@nestjs/schedule";
-import { TasksService } from "./cron/testCron.service";
+import { TasksService } from "./cron/cron-scheduler.service";
 
 @Module({
   imports: [
