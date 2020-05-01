@@ -1,11 +1,11 @@
-import { NestFactory } from '@nestjs/core';
-import * as cron from 'node-cron';
-import { AppModule } from './app/app.module';
-import * as inspector from 'inspector';
-import '@audapret/shared';
-import { HttpService } from '@nestjs/common';
-import { workflowRoute } from './assets/shared';
-import { triggerInterval } from './assets/config';
+import { NestFactory } from "@nestjs/core";
+import * as cron from "node-cron";
+import { AppModule } from "./app/app.module";
+import * as inspector from "inspector";
+import "@audapret/shared";
+import { HttpService } from "@nestjs/common";
+import { workflowRoute } from "./assets/shared";
+import { triggerInterval } from "./assets/config";
 
 async function bootstrap() {
   // Reopen inspector on uniquely used port
@@ -14,36 +14,36 @@ async function bootstrap() {
 
   // Set environment variables
   if (!process.env.STUDY_DATA_MANAGER_ADDRESS) {
-    process.env.STUDY_DATA_MANAGER_ADDRESS = 'http://localhost';
+    process.env.STUDY_DATA_MANAGER_ADDRESS = "http://localhost";
   }
   if (!process.env.OURA_ADAPTER_DB) {
-    process.env.OURA_ADAPTER_DB = 'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
+    process.env.OURA_ADAPTER_DB = ""; //'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
   }
   if (!process.env.OURA_ADAPTER_ADDRESS) {
-    process.env.OURA_ADAPTER_ADDRESS = 'http://localhost/';
+    process.env.OURA_ADAPTER_ADDRESS = "http://localhost/";
   }
 
   console.log(process.env.STUDY_DATA_MANAGER_ADDRESS);
   const app = await NestFactory.create(AppModule);
   const httpService = new HttpService();
 
-  const globalPrefix = 'api';
+  const globalPrefix = "api";
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.port || 3334;
   await app.listen(port, () => {
     console.log(
-      'Listening at ' +
+      "Listening at " +
         process.env.OURA_ADAPTER_ADDRESS +
         +port +
-        '/' +
+        "/" +
         globalPrefix
     );
   });
-  // start cronjob to trigger adapterWorkFlow
+  /* // start cronjob to trigger adapterWorkFlow
   cron.schedule(triggerInterval, async () => {
-    console.log('triggered');
+    console.log("triggered");
     await httpService.get(workflowRoute).toPromise();
-  });
+  }); */
 }
 
 bootstrap();
