@@ -12,6 +12,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.alertService.getAlert().subscribe((message) => {
+      console.log("Init");
       switch (message && message.type) {
         case "success":
           message.cssClass = "alert alert-success";

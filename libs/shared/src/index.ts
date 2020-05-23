@@ -5,10 +5,10 @@ export * from "./lib/dtos/adapter-payload.dto";
 export * from "./lib/dtos/content-schema.dto";
 export * from "./lib/dtos/data-source.dto";
 export * from "./lib/dtos/grant-payload.dto";
-export * from "./lib/dtos/initialization-payload.dto";
+export * from "./lib/dtos/user.dto";
 // Components
-export * from "./lib/_components/alert.component";
+export * from "../../../apps/study-data-manager-client/src/app/alert/alert.component";
 // Services
-export * from "./lib/_services/alert.service";
+export * from "../../../apps/study-data-manager-client/src/app/alert/alert.service";
 //export * from "./authentication.service";
 //export * from "./user.service";

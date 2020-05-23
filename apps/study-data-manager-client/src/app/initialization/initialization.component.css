@@ -1,0 +1,35 @@
+.login-flex {
+  margin: 5px 5px 5px 5px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: flex-start;
+  border: 1px dashed;
+  height: 500px;
+}
+.header-flex {
+  margin: 5px 5px 5px 5px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px dashed;
+  height: auto;
+}
+.header-title-item {
+  align-items: flex-start;
+  height: auto;
+}
+.login-item {
+  margin: 5px 5px 5px 5px;
+  border-radius: 5px;
+  border: 1px dashed black;
+  padding: 10px;
+  width: 300px;
+  height: 300px;
+}
+.hoizontal-Line {
+  border-bottom: thick solid black;
+}

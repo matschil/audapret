@@ -18,6 +18,8 @@
 }
 
 .flex {
+  margin: 5px 5px 5px 5px;
+  border-radius: 15;
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
