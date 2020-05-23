@@ -1,588 +1,587 @@
 {
-	"version": 1,
-	"projects": {
-	  "study-data-manager": {
-		"root": "apps/study-data-manager",
-		"sourceRoot": "apps/study-data-manager/src",
-		"projectType": "application",
-		"prefix": "study-data-manager",
-		"schematics": {},
-		"architect": {
-		  "build": {
-			"builder": "@nrwl/node:build",
-			"options": {
-			  "outputPath": "dist/apps/study-data-manager",
-			  "main": "apps/study-data-manager/src/main.ts",
-			  "tsConfig": "apps/study-data-manager/tsconfig.app.json",
-			  "assets": ["apps/study-data-manager/src/assets"]
-			},
-			"configurations": {
-			  "production": {
-				"optimization": true,
-				"extractLicenses": true,
-				"inspect": false,
-				"fileReplacements": [
-				  {
-					"replace": "apps/study-data-manager/src/environments/environment.ts",
-					"with": "apps/study-data-manager/src/environments/environment.prod.ts"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@nrwl/node:execute",
-			"options": {
-			  "buildTarget": "study-data-manager:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "apps/study-data-manager/.eslintrc",
-			  "tsConfig": [
-				"apps/study-data-manager/tsconfig.app.json",
-				"apps/study-data-manager/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!apps/study-data-manager/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/study-data-manager/jest.config.js",
-			  "tsConfig": "apps/study-data-manager/tsconfig.spec.json"
-			}
-		  }
-		}
-	  },
-	  "oura-adapter": {
-		"root": "apps/oura-adapter",
-		"sourceRoot": "apps/oura-adapter/src",
-		"projectType": "application",
-		"prefix": "oura-adapter",
-		"schematics": {},
-		"architect": {
-		  "build": {
-			"builder": "@nrwl/node:build",
-			"options": {
-			  "outputPath": "dist/apps/oura-adapter",
-			  "main": "apps/oura-adapter/src/main.ts",
-			  "tsConfig": "apps/oura-adapter/tsconfig.app.json",
-			  "assets": ["apps/oura-adapter/src/assets"]
-			},
-			"configurations": {
-			  "production": {
-				"optimization": true,
-				"extractLicenses": true,
-				"inspect": false,
-				"fileReplacements": [
-				  {
-					"replace": "apps/oura-adapter/src/environments/environment.ts",
-					"with": "apps/oura-adapter/src/environments/environment.prod.ts"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@nrwl/node:execute",
-			"options": {
-			  "buildTarget": "oura-adapter:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "apps/oura-adapter/.eslintrc",
-			  "tsConfig": [
-				"apps/oura-adapter/tsconfig.app.json",
-				"apps/oura-adapter/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!apps/oura-adapter/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/oura-adapter/jest.config.js",
-			  "tsConfig": "apps/oura-adapter/tsconfig.spec.json"
-			}
-		  }
-		}
-	  },
-	  "shared": {
-		"root": "libs/shared",
-		"sourceRoot": "libs/shared/src",
-		"projectType": "library",
-		"schematics": {},
-		"architect": {
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "libs/shared/.eslintrc",
-			  "tsConfig": [
-				"libs/shared/tsconfig.lib.json",
-				"libs/shared/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!libs/shared/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "libs/shared/jest.config.js",
-			  "tsConfig": "libs/shared/tsconfig.spec.json"
-			}
-		  }
-		}
-	  },
-	  "limesurvey-adapter": {
-		"root": "apps/limesurvey-adapter",
-		"sourceRoot": "apps/limesurvey-adapter/src",
-		"projectType": "application",
-		"prefix": "limesurvey-adapter",
-		"schematics": {},
-		"architect": {
-		  "build": {
-			"builder": "@nrwl/node:build",
-			"options": {
-			  "outputPath": "dist/apps/limesurvey-adapter",
-			  "main": "apps/limesurvey-adapter/src/main.ts",
-			  "tsConfig": "apps/limesurvey-adapter/tsconfig.app.json",
-			  "assets": ["apps/limesurvey-adapter/src/assets"]
-			},
-			"configurations": {
-			  "production": {
-				"optimization": true,
-				"extractLicenses": true,
-				"inspect": false,
-				"fileReplacements": [
-				  {
-					"replace": "apps/limesurvey-adapter/src/environments/environment.ts",
-					"with": "apps/limesurvey-adapter/src/environments/environment.prod.ts"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@nrwl/node:execute",
-			"options": {
-			  "buildTarget": "limesurvey-adapter:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "apps/limesurvey-adapter/.eslintrc",
-			  "tsConfig": [
-				"apps/limesurvey-adapter/tsconfig.app.json",
-				"apps/limesurvey-adapter/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!apps/limesurvey-adapter/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/limesurvey-adapter/jest.config.js",
-			  "tsConfig": "apps/limesurvey-adapter/tsconfig.spec.json"
-			}
-		  }
-		}
-	  },
-	  "study-data-manager-client": {
-		"projectType": "application",
-		"schematics": {},
-		"root": "apps/study-data-manager-client",
-		"sourceRoot": "apps/study-data-manager-client/src",
-		"prefix": "audapret",
-		"architect": {
-		  "build": {
-			"builder": "@angular-devkit/build-angular:browser",
-			"options": {
-			  "outputPath": "dist/apps/study-data-manager-client",
-			  "index": "apps/study-data-manager-client/src/index.html",
-			  "main": "apps/study-data-manager-client/src/main.ts",
-			  "polyfills": "apps/study-data-manager-client/src/polyfills.ts",
-			  "tsConfig": "apps/study-data-manager-client/tsconfig.app.json",
-			  "aot": false,
-			  "assets": [
-				"apps/study-data-manager-client/src/favicon.ico",
-				"apps/study-data-manager-client/src/assets"
-			  ],
-			  "styles": ["apps/study-data-manager-client/src/styles.css"],
-			  "scripts": []
-			},
-			"configurations": {
-			  "production": {
-				"fileReplacements": [
-				  {
-					"replace": "apps/study-data-manager-client/src/environments/environment.ts",
-					"with": "apps/study-data-manager-client/src/environments/environment.prod.ts"
-				  }
-				],
-				"optimization": true,
-				"outputHashing": "all",
-				"sourceMap": false,
-				"extractCss": true,
-				"namedChunks": false,
-				"aot": true,
-				"extractLicenses": true,
-				"vendorChunk": false,
-				"buildOptimizer": true,
-				"budgets": [
-				  {
-					"type": "initial",
-					"maximumWarning": "2mb",
-					"maximumError": "5mb"
-				  },
-				  {
-					"type": "anyComponentStyle",
-					"maximumWarning": "6kb",
-					"maximumError": "10kb"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@angular-devkit/build-angular:dev-server",
-			"options": {
-			  "browserTarget": "study-data-manager-client:build"
-			},
-			"configurations": {
-			  "production": {
-				"browserTarget": "study-data-manager-client:build:production"
-			  }
-			}
-		  },
-		  "extract-i18n": {
-			"builder": "@angular-devkit/build-angular:extract-i18n",
-			"options": {
-			  "browserTarget": "study-data-manager-client:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@angular-devkit/build-angular:tslint",
-			"options": {
-			  "tsConfig": [
-				"apps/study-data-manager-client/tsconfig.app.json",
-				"apps/study-data-manager-client/tsconfig.spec.json"
-			  ],
-			  "exclude": [
-				"**/node_modules/**",
-				"!apps/study-data-manager-client/**"
-			  ]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/study-data-manager-client/jest.config.js",
-			  "tsConfig": "apps/study-data-manager-client/tsconfig.spec.json",
-			  "setupFile": "apps/study-data-manager-client/src/test-setup.ts"
-			}
-		  }
-		}
-	  },
+  "version": 1,
+  "projects": {
+    "study-data-manager": {
+      "root": "apps/study-data-manager",
+      "sourceRoot": "apps/study-data-manager/src",
+      "projectType": "application",
+      "prefix": "study-data-manager",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/study-data-manager",
+            "main": "apps/study-data-manager/src/main.ts",
+            "tsConfig": "apps/study-data-manager/tsconfig.app.json",
+            "assets": ["apps/study-data-manager/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/study-data-manager/src/environments/environment.ts",
+                  "with": "apps/study-data-manager/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "study-data-manager:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/study-data-manager/.eslintrc",
+            "tsConfig": [
+              "apps/study-data-manager/tsconfig.app.json",
+              "apps/study-data-manager/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/study-data-manager/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/study-data-manager/jest.config.js",
+            "tsConfig": "apps/study-data-manager/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "oura-adapter": {
+      "root": "apps/oura-adapter",
+      "sourceRoot": "apps/oura-adapter/src",
+      "projectType": "application",
+      "prefix": "oura-adapter",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/oura-adapter",
+            "main": "apps/oura-adapter/src/main.ts",
+            "tsConfig": "apps/oura-adapter/tsconfig.app.json",
+            "assets": ["apps/oura-adapter/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/oura-adapter/src/environments/environment.ts",
+                  "with": "apps/oura-adapter/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "oura-adapter:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/oura-adapter/.eslintrc",
+            "tsConfig": [
+              "apps/oura-adapter/tsconfig.app.json",
+              "apps/oura-adapter/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/oura-adapter/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/oura-adapter/jest.config.js",
+            "tsConfig": "apps/oura-adapter/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "shared": {
+      "root": "libs/shared",
+      "sourceRoot": "libs/shared/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/shared/.eslintrc",
+            "tsConfig": [
+              "libs/shared/tsconfig.lib.json",
+              "libs/shared/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared/jest.config.js",
+            "tsConfig": "libs/shared/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "limesurvey-adapter": {
+      "root": "apps/limesurvey-adapter",
+      "sourceRoot": "apps/limesurvey-adapter/src",
+      "projectType": "application",
+      "prefix": "limesurvey-adapter",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/limesurvey-adapter",
+            "main": "apps/limesurvey-adapter/src/main.ts",
+            "tsConfig": "apps/limesurvey-adapter/tsconfig.app.json",
+            "assets": ["apps/limesurvey-adapter/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/limesurvey-adapter/src/environments/environment.ts",
+                  "with": "apps/limesurvey-adapter/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "limesurvey-adapter:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/limesurvey-adapter/.eslintrc",
+            "tsConfig": [
+              "apps/limesurvey-adapter/tsconfig.app.json",
+              "apps/limesurvey-adapter/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/limesurvey-adapter/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/limesurvey-adapter/jest.config.js",
+            "tsConfig": "apps/limesurvey-adapter/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "study-data-manager-client": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/study-data-manager-client",
+      "sourceRoot": "apps/study-data-manager-client/src",
+      "prefix": "audapret",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/study-data-manager-client",
+            "index": "apps/study-data-manager-client/src/index.html",
+            "main": "apps/study-data-manager-client/src/main.ts",
+            "polyfills": "apps/study-data-manager-client/src/polyfills.ts",
+            "tsConfig": "apps/study-data-manager-client/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/study-data-manager-client/src/favicon.ico",
+              "apps/study-data-manager-client/src/assets"
+            ],
+            "styles": ["apps/study-data-manager-client/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/study-data-manager-client/src/environments/environment.ts",
+                  "with": "apps/study-data-manager-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "study-data-manager-client:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "study-data-manager-client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "study-data-manager-client:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/study-data-manager-client/tsconfig.app.json",
+              "apps/study-data-manager-client/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/study-data-manager-client/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/study-data-manager-client/jest.config.js",
+            "tsConfig": "apps/study-data-manager-client/tsconfig.spec.json",
+            "setupFile": "apps/study-data-manager-client/src/test-setup.ts"
+          }
+        }
+      }
+    },
 
-	  "study-administrator-client": {
-		"projectType": "application",
-		"schematics": {},
-		"root": "apps/study-administrator-client",
-		"sourceRoot": "apps/study-administrator-client/src",
-		"prefix": "audapret",
-		"architect": {
-		  "build": {
-			"builder": "@angular-devkit/build-angular:browser",
-			"options": {
-			  "outputPath": "dist/apps/study-administrator-client",
-			  "index": "apps/study-administrator-client/src/index.html",
-			  "main": "apps/study-administrator-client/src/main.ts",
-			  "polyfills": "apps/study-administrator-client/src/polyfills.ts",
-			  "tsConfig": "apps/study-administrator-client/tsconfig.app.json",
-			  "aot": false,
-			  "assets": [
-				"apps/study-administrator-client/src/favicon.ico",
-				"apps/study-administrator-client/src/assets"
-			  ],
-			  "styles": ["apps/study-administrator-client/src/styles.css"],
-			  "scripts": []
-			},
-			"configurations": {
-			  "production": {
-				"fileReplacements": [
-				  {
-					"replace": "apps/study-administrator-client/src/environments/environment.ts",
-					"with": "apps/study-administrator-client/src/environments/environment.prod.ts"
-				  }
-				],
-				"optimization": true,
-				"outputHashing": "all",
-				"sourceMap": false,
-				"extractCss": true,
-				"namedChunks": false,
-				"aot": true,
-				"extractLicenses": true,
-				"vendorChunk": false,
-				"buildOptimizer": true,
-				"budgets": [
-				  {
-					"type": "initial",
-					"maximumWarning": "2mb",
-					"maximumError": "5mb"
-				  },
-				  {
-					"type": "anyComponentStyle",
-					"maximumWarning": "6kb",
-					"maximumError": "10kb"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@angular-devkit/build-angular:dev-server",
-			"options": {
-			  "browserTarget": "study-administrator-client:build"
-			},
-			"configurations": {
-			  "production": {
-				"browserTarget": "study-administrator-client:build:production"
-			  }
-			}
-		  },
-		  "extract-i18n": {
-			"builder": "@angular-devkit/build-angular:extract-i18n",
-			"options": {
-			  "browserTarget": "study-administrator-client:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@angular-devkit/build-angular:tslint",
-			"options": {
-			  "tsConfig": [
-				"apps/study-administrator-client/tsconfig.app.json",
-				"apps/study-administrator-client/tsconfig.spec.json"
-			  ],
-			  "exclude": [
-				"**/node_modules/**",
-				"!apps/study-administrator-client/**"
-			  ]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/study-administrator-client/jest.config.js",
-			  "tsConfig": "apps/study-administrator-client/tsconfig.spec.json",
-			  "setupFile": "apps/study-administrator-client/src/test-setup.ts"
-			}
-		  }
-		}
-	  },
-	  
-	  "study-administrator": {
-		"root": "apps/study-administrator",
-		"sourceRoot": "apps/study-administrator/src",
-		"projectType": "application",
-		"prefix": "study-administrator",
-		"schematics": {},
-		"architect": {
-		  "build": {
-			"builder": "@nrwl/node:build",
-			"options": {
-			  "outputPath": "dist/apps/study-administrator",
-			  "main": "apps/study-administrator/src/main.ts",
-			  "tsConfig": "apps/study-administrator/tsconfig.app.json",
-			  "assets": ["apps/study-administrator/src/assets"]
-			},
-			"configurations": {
-			  "production": {
-				"optimization": true,
-				"extractLicenses": true,
-				"inspect": false,
-				"fileReplacements": [
-				  {
-					"replace": "apps/study-administrator/src/environments/environment.ts",
-					"with": "apps/study-administrator/src/environments/environment.prod.ts"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@nrwl/node:execute",
-			"options": {
-			  "buildTarget": "study-administrator:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "apps/study-administrator/.eslintrc",
-			  "tsConfig": [
-				"apps/study-administrator/tsconfig.app.json",
-				"apps/study-administrator/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!apps/study-administrator/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/study-administrator/jest.config.js",
-			  "tsConfig": "apps/study-administrator/tsconfig.spec.json"
-			}
-		  }
-		}
-	  },
-	  "netatmo-adapter": {
-		"root": "apps/netatmo-adapter",
-		"sourceRoot": "apps/netatmo-adapter/src",
-		"projectType": "application",
-		"prefix": "netatmo-adapter",
-		"schematics": {},
-		"architect": {
-		  "build": {
-			"builder": "@nrwl/node:build",
-			"options": {
-			  "outputPath": "dist/apps/netatmo-adapter",
-			  "main": "apps/netatmo-adapter/src/main.ts",
-			  "tsConfig": "apps/netatmo-adapter/tsconfig.app.json",
-			  "assets": ["apps/netatmo-adapter/src/assets"]
-			},
-			"configurations": {
-			  "production": {
-				"optimization": true,
-				"extractLicenses": true,
-				"inspect": false,
-				"fileReplacements": [
-				  {
-					"replace": "apps/netatmo-adapter/src/environments/environment.ts",
-					"with": "apps/netatmo-adapter/src/environments/environment.prod.ts"
-				  }
-				]
-			  }
-			}
-		  },
-		  "serve": {
-			"builder": "@nrwl/node:execute",
-			"options": {
-			  "buildTarget": "netatmo-adapter:build"
-			}
-		  },
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "apps/netatmo-adapter/.eslintrc",
-			  "tsConfig": [
-				"apps/netatmo-adapter/tsconfig.app.json",
-				"apps/netatmo-adapter/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!apps/netatmo-adapter/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "apps/netatmo-adapter/jest.config.js",
-			  "tsConfig": "apps/netatmo-adapter/tsconfig.spec.json"
-			}
-		  }
-		}
-	  },
-	  "administrator": {
-		"root": "libs/administrator",
-		"sourceRoot": "libs/administrator/src",
-		"projectType": "library",
-		"schematics": {},
-		"architect": {
-		  "lint": {
-			"builder": "@nrwl/linter:lint",
-			"options": {
-			  "linter": "eslint",
-			  "config": "libs/administrator/.eslintrc",
-			  "tsConfig": [
-				"libs/administrator/tsconfig.lib.json",
-				"libs/administrator/tsconfig.spec.json"
-			  ],
-			  "exclude": ["**/node_modules/**", "!libs/administrator/**"]
-			}
-		  },
-		  "test": {
-			"builder": "@nrwl/jest:jest",
-			"options": {
-			  "jestConfig": "libs/administrator/jest.config.js",
-			  "tsConfig": "libs/administrator/tsconfig.spec.json"
-			}
-		  }
-		}
-	  }
-	},
-	"cli": {
-	  "defaultCollection": "@nrwl/nest"
-	},
-	"schematics": {
-	  "@nrwl/workspace": {
-		"library": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/cypress": {
-		"cypress-project": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/react": {
-		"application": {
-		  "linter": "eslint"
-		},
-		"library": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/next": {
-		"application": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/web": {
-		"application": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/node": {
-		"application": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/nest": {
-		"application": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/express": {
-		"application": {
-		  "linter": "eslint"
-		}
-	  },
-	  "@nrwl/angular:application": {
-		"unitTestRunner": "jest",
-		"e2eTestRunner": "cypress"
-	  },
-	  "@nrwl/angular:library": {
-		"unitTestRunner": "jest"
-	  }
-	},
-	"defaultProject": "studyDataManager"
-  }
-  
+    "study-administrator-client": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "apps/study-administrator-client",
+      "sourceRoot": "apps/study-administrator-client/src",
+      "prefix": "audapret",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/study-administrator-client",
+            "index": "apps/study-administrator-client/src/index.html",
+            "main": "apps/study-administrator-client/src/main.ts",
+            "polyfills": "apps/study-administrator-client/src/polyfills.ts",
+            "tsConfig": "apps/study-administrator-client/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/study-administrator-client/src/favicon.ico",
+              "apps/study-administrator-client/src/assets"
+            ],
+            "styles": ["apps/study-administrator-client/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/study-administrator-client/src/environments/environment.ts",
+                  "with": "apps/study-administrator-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "study-administrator-client:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "study-administrator-client:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "study-administrator-client:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/study-administrator-client/tsconfig.app.json",
+              "apps/study-administrator-client/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/study-administrator-client/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/study-administrator-client/jest.config.js",
+            "tsConfig": "apps/study-administrator-client/tsconfig.spec.json",
+            "setupFile": "apps/study-administrator-client/src/test-setup.ts"
+          }
+        }
+      }
+    },
+
+    "study-administrator": {
+      "root": "apps/study-administrator",
+      "sourceRoot": "apps/study-administrator/src",
+      "projectType": "application",
+      "prefix": "study-administrator",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/study-administrator",
+            "main": "apps/study-administrator/src/main.ts",
+            "tsConfig": "apps/study-administrator/tsconfig.app.json",
+            "assets": ["apps/study-administrator/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/study-administrator/src/environments/environment.ts",
+                  "with": "apps/study-administrator/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "study-administrator:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/study-administrator/.eslintrc",
+            "tsConfig": [
+              "apps/study-administrator/tsconfig.app.json",
+              "apps/study-administrator/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/study-administrator/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/study-administrator/jest.config.js",
+            "tsConfig": "apps/study-administrator/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "netatmo-adapter": {
+      "root": "apps/netatmo-adapter",
+      "sourceRoot": "apps/netatmo-adapter/src",
+      "projectType": "application",
+      "prefix": "netatmo-adapter",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/netatmo-adapter",
+            "main": "apps/netatmo-adapter/src/main.ts",
+            "tsConfig": "apps/netatmo-adapter/tsconfig.app.json",
+            "assets": ["apps/netatmo-adapter/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/netatmo-adapter/src/environments/environment.ts",
+                  "with": "apps/netatmo-adapter/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "netatmo-adapter:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/netatmo-adapter/.eslintrc",
+            "tsConfig": [
+              "apps/netatmo-adapter/tsconfig.app.json",
+              "apps/netatmo-adapter/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/netatmo-adapter/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/netatmo-adapter/jest.config.js",
+            "tsConfig": "apps/netatmo-adapter/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "administrator": {
+      "root": "libs/administrator",
+      "sourceRoot": "libs/administrator/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/administrator/.eslintrc",
+            "tsConfig": [
+              "libs/administrator/tsconfig.lib.json",
+              "libs/administrator/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/administrator/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/administrator/jest.config.js",
+            "tsConfig": "libs/administrator/tsconfig.spec.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "study-data-manager"
+}

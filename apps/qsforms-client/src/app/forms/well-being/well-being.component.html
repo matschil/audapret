@@ -1,0 +1,30 @@
+<form [formGroup]="wellBeingForm" (ngSubmit)="onSubmit()">
+  <div class="form-group mb-3">
+    <label for="selectSleepRating"> Subjective Sleep rating: </label>
+
+    <select
+      class="form-control form-control"
+      style="width: 15rem;"
+      formControlName="SubjectiveSleepRating"
+    >
+      <option *ngFor="let option of [1, 2, 3, 4, 5, 6, 7, 8, 9]">
+        {{ option }}</option
+      >
+    </select>
+  </div>
+  <div class="form-group mb-3">
+    <label for="selectFocusEvening"> Focus in the evening: </label>
+
+    <select
+      class="form-control form-control"
+      style="width: 15rem;"
+      formControlName="FocusEvening"
+    >
+      <option *ngFor="let option of [1, 2, 3, 4, 5, 6, 7, 8, 9]">
+        {{ option }}</option
+      >
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="!wellBeingForm.valid">Submit</button>
+</form>
