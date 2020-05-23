@@ -34,6 +34,9 @@ main {
   padding: 0 36px;
 }
 
+l {
+  text-align: left;
+}
 p {
   text-align: center;
 }
