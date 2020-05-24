@@ -3,18 +3,14 @@
   display: flex;
   border-radius: 5px;
   justify-content: flex-start;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   border: 1px dashed;
   height: 500px;
 }
-.header-flex {
+.top-item {
   margin: 5px 5px 5px 5px;
-  display: flex;
   border-radius: 5px;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: flex-start;
   border: 1px dashed;
   height: auto;
 }

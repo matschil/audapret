@@ -3,12 +3,14 @@ import { GrantComponent } from "./grant/grant.component";
 import { DataLoaderComponent } from "./data-loader/data-loader.component";
 import { InitializationComponent } from "./initialization/initialization.component";
 import { LoginComponent } from "./login/login.component";
+import { AuthenticationGuard } from "./login/authentication.guard";
 
 // Route config let's you map routes to components
 const routes: Routes = [
   {
     path: "grant",
     component: GrantComponent,
+    canActivate: [AuthenticationGuard],
   },
   {
     path: "data-loader",

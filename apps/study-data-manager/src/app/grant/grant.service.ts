@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { GrantPayloadDto } from '@audapret/shared';
-import { GrantEntity } from '../entity/grant.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindOneOptions } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { GrantPayloadDto } from "@audapret/shared";
+import { GrantEntity } from "../entity/grant.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 export type User = any;
 
@@ -19,7 +19,7 @@ export class GrantService {
   async findGrantByRequester(requesterName: string): Promise<GrantEntity> {
     try {
       return await this.grantRepository.findOne({
-        where: { requester: requesterName }
+        where: { requester: requesterName },
       });
     } catch (error) {
       console.error(error.message);
@@ -41,7 +41,7 @@ export class GrantService {
    */
   async saveGrantEntity(grantEntity: GrantEntity): Promise<GrantEntity> {
     // Assumes that requester names are unique!
-    const matchingGrant = await this.grantRepository.findOne({
+    /* const matchingGrant = await this.grantRepository.findOne({
       where: {
         requester: grantEntity.requester,
         detailLevel: grantEntity.detailLevel,
@@ -50,7 +50,7 @@ export class GrantService {
     });
     if (matchingGrant !== undefined) {
       grantEntity.id = matchingGrant.id;
-    }
+    } */
     return this.grantRepository.save(grantEntity);
   }
 

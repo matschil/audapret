@@ -1,10 +1,10 @@
-<alert></alert>
-<div class="header-flex">
-  <h2>Initialize your personal Study-Data-Manager Instance</h2>
-  <hr width="600px" size="2px" color="black" align="left" />
-  Please provide your username below
-</div>
 <div class="login-flex">
+  <div class="top-item">
+    <h2>Initialize your personal Study-Data-Manager Instance</h2>
+    <hr width="600px" size="2px" color="black" align="left" />
+    Please provide your username below
+  </div>
+
   <div class="login-item">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -46,7 +46,6 @@
           ></span>
           Initialize
         </button>
-        <a routerLink="/login" class="btn btn-link">Cancel</a>
       </div>
     </form>
   </div>

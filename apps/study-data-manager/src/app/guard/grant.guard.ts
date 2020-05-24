@@ -3,13 +3,13 @@ import {
   CanActivate,
   ExecutionContext,
   HttpException,
-  HttpStatus
-} from '@nestjs/common';
+  HttpStatus,
+} from "@nestjs/common";
 
-import { GrantService } from '../grant/grant.service';
-import { Reflector } from '@nestjs/core';
-import { GrantedAction, DetailLevel } from '@audapret/shared';
-import { GrantEntity } from '../entity/grant.entity';
+import { GrantService } from "../grant/grant.service";
+import { Reflector } from "@nestjs/core";
+import { GrantedAction, DetailLevel } from "@audapret/shared";
+import { GrantEntity } from "../entity/grant.entity";
 
 @Injectable()
 export class GrantGuard implements CanActivate {
@@ -18,17 +18,17 @@ export class GrantGuard implements CanActivate {
     private readonly reflector: Reflector
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    console.log("In here");
     let request = context.switchToHttp().getRequest();
     let associatedGrant: GrantEntity;
     // (1) Check if requester is adapter
-    if (request.headers.requester === 'adapter') {
+    if (request.headers.requester === "adapter") {
       // (1.1) Set grant manually
       // IMPORTANT: As currently no registration exists for Adapters, the grant is hardcoded here.
       associatedGrant = {
         detailLevel: DetailLevel.DAILY_AGGREGATE,
         grantedActions: [GrantedAction.CREATE],
         isOwner: false,
-        requester: request.headers.requester
       };
     } else {
       // (1.2) Check if grant exists for requester
@@ -40,7 +40,7 @@ export class GrantGuard implements CanActivate {
 
     // (2) Check whether the requested function requires the requester to be Owner
     const isOwner = this.reflector.get<boolean>(
-      'isOwner',
+      "isOwner",
       context.getHandler()
     );
 
@@ -50,7 +50,7 @@ export class GrantGuard implements CanActivate {
 
     // (3) Get the grantedActions that are required by the route that is going to be called
     const requiredGrantedActions = this.reflector.get<GrantedAction[]>(
-      'grantedActions',
+      "grantedActions",
       context.getHandler()
     );
 
@@ -65,6 +65,7 @@ export class GrantGuard implements CanActivate {
         return false;
       }
     }
+
     return true;
   }
 
@@ -73,11 +74,11 @@ export class GrantGuard implements CanActivate {
    * @throws Error if requester is not specified or no grant exists for requester
    */
   async getGrant(req: any) {
-    const requester: string = req.headers.requester;
-
+    const requester: string = req.user.username;
+    console.log(requester);
     if (requester === undefined) {
       throw new HttpException(
-        'Unauthorized! Please specify the requester header',
+        "Unauthorized! Please specify the requester header",
         HttpStatus.UNAUTHORIZED
       );
     }

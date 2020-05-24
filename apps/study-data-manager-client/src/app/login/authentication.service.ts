@@ -2,29 +2,28 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { UserDto } from "@audapret/shared";
+import { map } from "rxjs/operators";
+import { User } from "../models/user";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<UserDto>;
-  public currentUser: Observable<UserDto>;
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<UserDto>(
+    this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem("currentUser"))
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): UserDto {
+  public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
 
   login(username, password) {
-    return new Observable((subscriber) => {
-      subscriber.next(false);
-    });
-    /* return this.http
-      .post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
+    return this.http
+      .post<any>(`http://localhost:3333/api/auth/login`, { username, password })
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -32,7 +31,7 @@ export class AuthenticationService {
           this.currentUserSubject.next(user);
           return user;
         })
-      ); */
+      );
   }
 
   logout() {

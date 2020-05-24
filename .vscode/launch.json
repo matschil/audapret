@@ -1,0 +1,38 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug StudyDataManager",
+      "type": "node",
+      "request": "attach",
+      "port": 7778
+    },
+    {
+      "name": "Debug Oura-Adapter",
+      "type": "node",
+      "request": "attach",
+      "port": 7779
+    },
+    {
+      "name": "Debug Limesurvey-adapter",
+      "type": "node",
+      "request": "attach",
+      "port": 7780
+    },
+    {
+      "name": "Debug study-administrator",
+      "type": "node",
+      "request": "attach",
+      "port": 7781
+    },
+    {
+      "name": "Debug Netatmo-adapter",
+      "type": "node",
+      "request": "attach",
+      "port": 7782
+    }
+  ]
+}

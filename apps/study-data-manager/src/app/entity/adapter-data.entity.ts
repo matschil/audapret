@@ -3,31 +3,30 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  OneToMany,
-  CreateDateColumn
-} from 'typeorm';
-import { ContentSchemaEntity } from './content-schema.entity';
-import { AdapterDataDto } from '@audapret/shared';
+  CreateDateColumn,
+} from "typeorm";
+import { ContentSchemaEntity } from "./content-schema.entity";
+import { AdapterDataDto } from "@audapret/shared";
 
 @Entity()
 export class AdapterDataEntity {
-  toDto(): AdapterDataDto {
-    return { content: this.content };
-  }
-
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @CreateDateColumn({ name: 'created_at', nullable: false })
+  @CreateDateColumn({ name: "created_at", nullable: false })
   createdAt?: Date;
 
   @ManyToOne(
-    'ContentSchemaEntity',
+    "ContentSchemaEntity",
     (schema: ContentSchemaEntity) => schema.adapterData,
-    { cascade: true, onDelete: 'CASCADE' }
+    { cascade: true, onDelete: "CASCADE" }
   )
   contentSchema?: ContentSchemaEntity;
 
-  @Column('jsonb')
+  @Column("jsonb")
   content: any;
+
+  toDto(): AdapterDataDto {
+    return { content: this.content };
+  }
 }

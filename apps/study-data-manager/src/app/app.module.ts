@@ -12,6 +12,8 @@ import { TestingModule } from "./testing/testing.module";
 import { DataSourceModule } from "./data-source/data-source.module";
 import { InitializationModule } from "./initialization/initialization.module";
 import { dropSchemaAtEveryStart } from "../assets/config";
+import { AuthModule } from "./auth/auth.module";
+import { UserEntity } from "./entity/user.entity";
 
 @Module({
   imports: [
@@ -30,9 +32,10 @@ import { dropSchemaAtEveryStart } from "../assets/config";
           ContentSchemaEntity,
           DataSourceEntity,
           GrantEntity,
+          UserEntity,
         ],
         synchronize: true,
-        dropSchema: dropSchemaAtEveryStart,
+        dropSchema: false /* dropSchemaAtEveryStart */,
       }),
     }),
     GrantModule,
@@ -40,6 +43,7 @@ import { dropSchemaAtEveryStart } from "../assets/config";
     TestingModule,
     DataSourceModule,
     InitializationModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

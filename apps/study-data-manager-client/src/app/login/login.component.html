@@ -1,9 +1,10 @@
-<div class="header-flex">
-  <h2>Login</h2>
-  <hr width="600px" size="2px" color="black" align="left" />
-  Please provide your username below
-</div>
 <div class="login-flex">
+  <div class="top-item">
+    <h2>Login</h2>
+    <hr width="600px" size="2px" color="black" align="left" />
+    Please provide your username below
+  </div>
+
   <div class="login-item">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
