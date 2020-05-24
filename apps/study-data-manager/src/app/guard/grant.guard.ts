@@ -18,8 +18,7 @@ export class GrantGuard implements CanActivate {
     private readonly reflector: Reflector
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log("In here");
-    let request = context.switchToHttp().getRequest();
+    /* let request = context.switchToHttp().getRequest();
     let associatedGrant: GrantEntity;
     // (1) Check if requester is adapter
     if (request.headers.requester === "adapter") {
@@ -65,7 +64,7 @@ export class GrantGuard implements CanActivate {
         return false;
       }
     }
-
+ */
     return true;
   }
 

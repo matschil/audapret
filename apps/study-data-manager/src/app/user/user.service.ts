@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { UserDto, GrantPayloadDto } from "@audapret/shared";
+import { UserDto, GrantPayloadDto, UserType } from "@audapret/shared";
 import { UserEntity } from "../entity/user.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -14,8 +14,23 @@ export class UserService {
   async findUserByName(name: string): Promise<UserEntity> {
     return this.userRepository.findOne({ where: { username: name } });
   }
-  async createUser(user: UserDto, grant: GrantEntity): Promise<UserEntity> {
+
+  async createAdapterUser(user: UserDto, grant: GrantPayloadDto) {
+    this.createUser(user, grant, UserType.ADAPTER);
+  }
+  async createResearcherUser(user: UserDto, grant: GrantPayloadDto) {
+    this.createUser(user, grant, UserType.RESEARCHER);
+  }
+  async createOwnerUser(user: UserDto, grant: GrantPayloadDto) {
+    this.createUser(user, grant, UserType.OWNER);
+  }
+  async createUser(
+    user: UserDto,
+    grant: GrantPayloadDto,
+    type: UserType
+  ): Promise<UserEntity> {
     const userEntity: UserEntity = {
+      type,
       password: user.password,
       username: user.username,
       grant,

@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { GrantEntity } from "./grant.entity";
+import { UserType } from "@audapret/shared";
 
 @Entity()
 export class UserEntity {
@@ -15,15 +17,19 @@ export class UserEntity {
   @CreateDateColumn({ name: "created_at", nullable: false })
   createdAt?: Date;
 
+  @Column("enum", { name: "type", enum: UserType })
+  type: UserType;
+
   @Column()
-  password: string; // ToDO!
+  password: string;
 
   @Column()
   username: string; // ToDO!
 
-  @OneToOne("GrantEntity", (grant: GrantEntity) => grant.user, {
+  @OneToOne((type) => GrantEntity, {
     cascade: true,
     onDelete: "CASCADE",
   })
+  @JoinColumn()
   grant: GrantEntity;
 }

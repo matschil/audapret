@@ -7,7 +7,12 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { CustomValidationPipe } from "../pipe/validation.pipe";
-import { UserDto, DetailLevel, GrantedAction } from "@audapret/shared";
+import {
+  UserDto,
+  DetailLevel,
+  GrantedAction,
+  UserType,
+} from "@audapret/shared";
 import { InitializationGuard } from "../guard/initialization.guard";
 import { GrantService } from "../grant/grant.service";
 import { UserService } from "../user/user.service";
@@ -34,14 +39,10 @@ export class InitializationController {
         GrantedAction.DELETE,
         GrantedAction.UPDATE,
       ],
-      requester: userDto.username,
     });
-    // Manually set owner properties
-    grantEntity.isOwner = true;
-    grantEntity.id = 1;
 
     // Todo: Inconsistent. Decide wether to take Dtos or entities
-    const user = await this.userService.createUser(userDto, grantEntity);
+    const user = await this.userService.createOwnerUser(userDto, grantEntity);
     return user;
   }
 }

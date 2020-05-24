@@ -17,7 +17,7 @@ export class GrantController {
    * Otherwise, the grant is persisted to the database
    */
   @Post()
-  @UseGuards(GrantGuard)
+  //@UseGuards(GrantGuard)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new CustomValidationPipe())
   @Owner()

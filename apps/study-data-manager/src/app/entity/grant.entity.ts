@@ -21,10 +21,4 @@ export class GrantEntity {
 
   @Column("enum", { name: "granted_actions", enum: GrantedAction, array: true })
   grantedActions: GrantedAction[];
-
-  @Column("boolean", { default: false })
-  isOwner: boolean;
-
-  @OneToOne("UserEntity", (user: UserEntity) => user.grant)
-  user?: GrantEntity;
 }
