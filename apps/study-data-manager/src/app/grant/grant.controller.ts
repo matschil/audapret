@@ -55,7 +55,7 @@ export class GrantController {
     );
   }
 
-  @Get("getAll")
+  @Get()
   //@UseGuards(GrantGuard)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new CustomValidationPipe())

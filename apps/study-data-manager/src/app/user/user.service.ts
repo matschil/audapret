@@ -22,7 +22,8 @@ export class UserService {
     return this.userRepository.findOne({ where: { type: UserType.OWNER } });
   }
   async getAllUsers(): Promise<UserEntity[]> {
-    return this.userRepository.find();
+    const allUsers = await this.userRepository.find({ relations: ["grant"] });
+    return allUsers;
   }
 
   async createAdapterUser(user: UserDto, grant: GrantPayloadDto) {

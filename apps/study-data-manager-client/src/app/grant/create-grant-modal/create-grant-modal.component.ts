@@ -1,0 +1,39 @@
+import { Component, OnInit } from "@angular/core";
+
+import { ModalService } from "../../modals/modal.service";
+import {
+  DetailLevel,
+  CreateGrantPayloadDto,
+  GrantedAction,
+} from "@audapret/shared";
+import { GrantService } from "../grant.service";
+
+@Component({
+  selector: "create-grant-modal",
+  templateUrl: "./create-grant-modal.html",
+  styleUrls: ["./create-grant-modal.css"],
+})
+export class CreateGrantModalComponant {
+  constructor(
+    private readonly modalService: ModalService,
+    private readonly grantService: GrantService
+  ) {}
+  detailLevels = [DetailLevel.DAILY_AGGREGATE, DetailLevel.FULL];
+
+  public close() {
+    this.modalService.destroy();
+  }
+  jsonTransform(object: object) {
+    return JSON.stringify(object, null, "  ");
+  }
+  onSubmit(anyData: any) {
+    const createGrantPayload: CreateGrantPayloadDto = {
+      username: anyData.requester,
+      grantedActions: [GrantedAction.READ],
+      detailLevel: anyData.detailLevel,
+    };
+    const obs = this.grantService.postGrant(createGrantPayload);
+    obs.subscribe((obj) => console.log(obj));
+    //console.log(anyData);
+  }
+}

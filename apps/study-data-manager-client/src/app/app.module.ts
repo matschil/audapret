@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { LoginModule } from "./login/login.module";
 import { AlertComponent } from "./alert/alert.component";
 import { JwtInterceptor } from "./jwt.interceptor";
+import { ModalModule } from "./modals/modal.module";
 
 @NgModule({
   declarations: [AppComponent, AlertComponent],
@@ -22,6 +23,7 @@ import { JwtInterceptor } from "./jwt.interceptor";
     DataLoaderModule,
     InitializationModule,
     LoginModule,
+    ModalModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

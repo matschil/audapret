@@ -9,4 +9,5 @@ export class UserDto {
   username: string;
 
   type?: UserType;
+  grant?: GrantPayloadDto;
 }

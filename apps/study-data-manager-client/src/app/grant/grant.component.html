@@ -1,22 +1,22 @@
-<div class="container-fluid">
-  <br />
-  <font size="5">Create DataAccessGrant</font>
-  <br />
-  <br />
-  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
-    <div class="form-group">
-      <label>Name of Researcher</label>
-      <input name="requester" type="text" class="form-control" ngModel />
-    </div>
+<div class="grant-flex">
+  <div class="top-item">
+    <h2>Manage your Data Access Grants</h2>
+    <hr width="600px" size="2px" color="black" align="left" />
+  </div>
 
-    <div class="form-group">
-      <label>Select Detail Level</label>
-      <select name="detailLevel" class="custom-select" ngModel>
-        <option *ngFor="let detailLevel of detailLevels">{{
-          detailLevel
-        }}</option>
-      </select>
+  <div class="grant-item">
+    <!-- IN here: menu -->
+    <div class="list-group">
+      <button
+        type="button"
+        class="list-group-item list-group-item-action"
+        *ngFor="let user of users"
+      >
+        {{ user.username }}
+      </button>
     </div>
-    <button class="btn btn-primary" type="submit">Create Grant</button>
-  </form>
+    <button class="btn btn-primary" (click)="openCreateGrantModal()">
+      Create
+    </button>
+  </div>
 </div>

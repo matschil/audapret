@@ -3,5 +3,9 @@
   "compilerOptions": {
     "types": ["node", "jest"]
   },
-  "include": ["**/*.ts", "src/app/_components/index.js"]
+  "include": [
+    "**/*.ts",
+    "src/app/_components/index.js",
+    "src/app/modals/create-grant.modal.http"
+  ]
 }

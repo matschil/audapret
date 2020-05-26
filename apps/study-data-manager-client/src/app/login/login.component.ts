@@ -5,6 +5,7 @@ import { first } from "rxjs/operators";
 
 import { AlertService } from "@audapret/shared";
 import { AuthenticationService } from "./authentication.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   templateUrl: "login.component.html",
@@ -63,8 +64,8 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.router.navigate([this.returnUrl]);
         },
-        (error) => {
-          this.alertService.error(error);
+        (error: HttpErrorResponse) => {
+          this.alertService.error(error.statusText);
           this.loading = false;
         }
       );
