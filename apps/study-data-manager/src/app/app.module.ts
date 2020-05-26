@@ -35,7 +35,7 @@ import { UserEntity } from "./entity/user.entity";
           UserEntity,
         ],
         synchronize: true,
-        dropSchema: true /* dropSchemaAtEveryStart */,
+        dropSchema: false /* dropSchemaAtEveryStart */,
       }),
     }),
     GrantModule,

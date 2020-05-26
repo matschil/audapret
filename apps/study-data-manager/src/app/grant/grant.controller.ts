@@ -1,29 +1,66 @@
-import { Controller, Post, Body, UsePipes, UseGuards } from "@nestjs/common";
-import { GrantPayloadDto } from "@audapret/shared";
+import {
+  Controller,
+  Post,
+  Body,
+  UsePipes,
+  UseGuards,
+  Get,
+  HttpException,
+} from "@nestjs/common";
+import {
+  GrantPayloadDto,
+  UserType,
+  CreateGrantPayloadDto,
+} from "@audapret/shared";
 import { CustomValidationPipe } from "../pipe/validation.pipe";
 import { GrantGuard } from "../guard/grant.guard";
-import { GrantService } from "./grant.service";
+import { UserService } from "../user/user.service";
 import { Owner } from "../decorator/owner.decorator";
 import { JwtAuthGuard } from "../guard/jwt-auth.guard";
 
 @Controller("grant")
 export class GrantController {
-  constructor(private readonly grantService: GrantService) {}
+  constructor(private readonly userService: UserService) {}
 
   /**
-   * @param grantPayloadDto
+   * @param createGrantPayloadDto
    * If grantPayloadDto is invalid: Response 400
    * If the requester is not the Owner of the studyDataManager: Response 403
-   * Otherwise, the grant is persisted to the database
+   * Otherwise, a new User with the role Researcher is created with the respective grant
    */
   @Post()
+  @UseGuards(GrantGuard)
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new CustomValidationPipe())
+  @Owner()
+  async create(@Body() createGrantPayloadDto: CreateGrantPayloadDto) {
+    const userAlreadyExists =
+      (await this.userService.findUserByName(
+        createGrantPayloadDto.username
+      )) !== undefined;
+
+    if (userAlreadyExists) {
+      throw new HttpException("Grant for this user already exists", 400);
+    }
+    return this.userService.createUser(
+      {
+        password: "default",
+        type: UserType.RESEARCHER,
+        username: createGrantPayloadDto.username,
+      },
+      {
+        detailLevel: createGrantPayloadDto.detailLevel,
+        grantedActions: createGrantPayloadDto.grantedActions,
+      }
+    );
+  }
+
+  @Get("getAll")
   //@UseGuards(GrantGuard)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new CustomValidationPipe())
   @Owner()
-  async create(@Body() grantPayloadDto: GrantPayloadDto) {
-    console.log(grantPayloadDto);
-    const grantEntity = this.grantService.createGrant(grantPayloadDto);
-    return await this.grantService.saveGrantEntity(grantEntity);
+  async getAll() {
+    return this.userService.getAllUsers();
   }
 }

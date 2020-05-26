@@ -30,6 +30,6 @@ export class UserEntity {
     cascade: true,
     onDelete: "CASCADE",
   })
-  @JoinColumn()
+  @JoinColumn({ name: "grantId" })
   grant: GrantEntity;
 }

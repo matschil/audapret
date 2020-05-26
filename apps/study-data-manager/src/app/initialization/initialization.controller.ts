@@ -14,15 +14,11 @@ import {
   UserType,
 } from "@audapret/shared";
 import { InitializationGuard } from "../guard/initialization.guard";
-import { GrantService } from "../grant/grant.service";
 import { UserService } from "../user/user.service";
 
 @Controller("initialization")
 export class InitializationController {
-  constructor(
-    private readonly grantService: GrantService,
-    private readonly userService: UserService
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   /** Initialization of studyDataManager.
    *  Creates the owner grant for the requester that is specified in @body initializationPayloadDto.
@@ -32,7 +28,8 @@ export class InitializationController {
   @UsePipes(new CustomValidationPipe())
   @UseGuards(InitializationGuard)
   async create(@Body() userDto: UserDto) {
-    const grantEntity = this.grantService.createGrant({
+    // Todo: Inconsistent. Decide wether to take Dtos or entities
+    const user = await this.userService.createOwnerUser(userDto, {
       detailLevel: DetailLevel.FULL,
       grantedActions: [
         GrantedAction.READ,
@@ -40,9 +37,6 @@ export class InitializationController {
         GrantedAction.UPDATE,
       ],
     });
-
-    // Todo: Inconsistent. Decide wether to take Dtos or entities
-    const user = await this.userService.createOwnerUser(userDto, grantEntity);
     return user;
   }
 }

@@ -11,30 +11,46 @@ export class UserService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>
   ) {}
+
   async findUserByName(name: string): Promise<UserEntity> {
-    return this.userRepository.findOne({ where: { username: name } });
+    return this.userRepository.findOne({
+      relations: ["grant"],
+      where: { username: name },
+    });
+  }
+  async getOwner(): Promise<UserEntity> {
+    return this.userRepository.findOne({ where: { type: UserType.OWNER } });
+  }
+  async getAllUsers(): Promise<UserEntity[]> {
+    return this.userRepository.find();
   }
 
   async createAdapterUser(user: UserDto, grant: GrantPayloadDto) {
-    this.createUser(user, grant, UserType.ADAPTER);
+    user.type = UserType.ADAPTER;
+    this.createUser(user, grant);
   }
   async createResearcherUser(user: UserDto, grant: GrantPayloadDto) {
-    this.createUser(user, grant, UserType.RESEARCHER);
+    user.type = UserType.RESEARCHER;
+    this.createUser(user, grant);
   }
   async createOwnerUser(user: UserDto, grant: GrantPayloadDto) {
-    this.createUser(user, grant, UserType.OWNER);
+    user.type = UserType.OWNER;
+    this.createUser(user, grant);
   }
-  async createUser(
-    user: UserDto,
-    grant: GrantPayloadDto,
-    type: UserType
-  ): Promise<UserEntity> {
+
+  async createUser(user: UserDto, grant: GrantPayloadDto): Promise<UserEntity> {
     const userEntity: UserEntity = {
-      type,
+      type: user.type,
       password: user.password,
       username: user.username,
       grant,
     };
     return this.userRepository.save(userEntity);
+  }
+
+  async updateGrantForUser(username: string, newGrant: GrantPayloadDto) {
+    const userToUpdate = await this.findUserByName(username);
+    userToUpdate.grant = newGrant;
+    return await this.userRepository.save(userToUpdate);
   }
 }
