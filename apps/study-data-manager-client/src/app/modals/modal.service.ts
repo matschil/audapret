@@ -23,8 +23,8 @@ export class ModalService {
     document.getElementById(this.overlayElementId).className = "show";
   }
 
-  getComponentConfig() {
-    return this.componentConfig;
+  getInputs() {
+    return this.componentConfig.inputs;
   }
 
   destroy() {

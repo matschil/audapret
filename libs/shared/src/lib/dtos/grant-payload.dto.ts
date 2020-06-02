@@ -1,4 +1,4 @@
-import { IsString, IsArray, IsDate } from "class-validator";
+import { IsString, IsArray, IsDate, IsDateString } from "class-validator";
 import { GrantedAction, DetailLevel } from "@audapret/shared";
 
 export class GrantPayloadDto {
@@ -9,6 +9,6 @@ export class GrantPayloadDto {
   @IsString()
   detailLevel: DetailLevel;
 
-  @IsDate()
+  //@IsDateString()
   createdAt?: Date;
 }

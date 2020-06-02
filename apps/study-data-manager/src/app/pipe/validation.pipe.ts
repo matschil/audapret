@@ -1,4 +1,4 @@
-import { ValidationPipe, ArgumentMetadata } from '@nestjs/common';
+import { ValidationPipe, ArgumentMetadata } from "@nestjs/common";
 
 export class CustomValidationPipe extends ValidationPipe {
   constructor() {

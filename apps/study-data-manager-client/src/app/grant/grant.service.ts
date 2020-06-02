@@ -16,6 +16,7 @@ export class GrantService {
   constructor(private readonly httpClient: HttpClient) {}
 
   postGrant(createGrantPayload: CreateGrantPayloadDto) {
+    console.log(createGrantPayload);
     return this.httpClient.post(
       `${environment.STUDY_DATA_MANAGER_ADDRESS}:${studyDataManagerPort}${studyDataManagerGrantPath}`,
       createGrantPayload

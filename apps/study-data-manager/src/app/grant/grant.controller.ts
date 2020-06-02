@@ -73,7 +73,7 @@ export class GrantController {
     );
 
     if (!userToUpdate) {
-      throw new HttpException("Grant for this user does not yet exists", 400);
+      throw new HttpException("Grant for this user does not yet exist", 400);
     }
     // Update Grant accordingly
     userToUpdate.grant.detailLevel = updateGrantPayloadDto.detailLevel;

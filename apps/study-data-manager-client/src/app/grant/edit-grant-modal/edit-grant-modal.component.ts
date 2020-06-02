@@ -20,7 +20,7 @@ export class EditGrantModalComponant {
     private readonly modalService: ModalService,
     private readonly grantService: GrantService
   ) {
-    this.userToEdit = this.modalService.getComponentConfig().inputs;
+    this.userToEdit = this.modalService.getInputs().userToEdit;
   }
 
   detailLevels = [DetailLevel.DAILY_AGGREGATE, DetailLevel.FULL];
@@ -31,13 +31,14 @@ export class EditGrantModalComponant {
   jsonTransform(object: object) {
     return JSON.stringify(object, null, "  ");
   }
-  onSubmit(anyData: any) {
+  onSubmit() {
     // Update existing grant
     const updateGrantPayload: UpdateGrantPayloadDto = {
-      username: anyData.requester,
+      username: this.userToEdit.username,
       grantedActions: [GrantedAction.READ],
-      detailLevel: anyData.detailLevel,
+      detailLevel: this.userToEdit.grant.detailLevel,
     };
+    console.log(updateGrantPayload);
     const obs = this.grantService.putGrant(updateGrantPayload);
     obs.subscribe((obj) => console.log(obj));
   }

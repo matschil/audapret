@@ -7,13 +7,30 @@
   <div class="grant-item">
     <!-- IN here: menu -->
     <div class="list-group">
+      <a class="list-group-item list-group-item disabled">
+        <div class="list-group-item-flex">
+          <div class="list-group-item-item-left">
+            Researcher
+          </div>
+          <div class="list-group-item-item-right">
+            Creation date
+          </div>
+        </div>
+      </a>
       <button
         type="button"
         class="list-group-item list-group-item-action"
         *ngFor="let user of users"
         (click)="openEditGrantModal(user)"
       >
-        {{ user.username }}{{ user.grant.createdAt }}
+        <div class="list-group-item-flex">
+          <div class="list-group-item-item-left">
+            {{ user.username }}
+          </div>
+          <div class="list-group-item-item-right">
+            {{ user.grant.createdAt }}
+          </div>
+        </div>
       </button>
     </div>
     <button class="btn btn-primary" (click)="openCreateGrantModal()">
