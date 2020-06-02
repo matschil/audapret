@@ -7,19 +7,24 @@ export class ModalService {
 
   private modalElementId = "modal-container";
   private overlayElementId = "overlay";
+  private componentConfig: { inputs: any; outputs: any };
 
-  init(component: any, inputs: object, outputs: object) {
-    const componentConfig = {
+  init(component: any, inputs?: object, outputs?: object) {
+    this.componentConfig = {
       inputs: inputs,
       outputs: outputs,
     };
     this.domService.appendComponentTo(
       this.modalElementId,
       component,
-      componentConfig
+      this.componentConfig
     );
     document.getElementById(this.modalElementId).className = "show";
     document.getElementById(this.overlayElementId).className = "show";
+  }
+
+  getComponentConfig() {
+    return this.componentConfig;
   }
 
   destroy() {

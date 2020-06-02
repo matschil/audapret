@@ -27,6 +27,7 @@ export class CreateGrantModalComponant {
     return JSON.stringify(object, null, "  ");
   }
   onSubmit(anyData: any) {
+    // Create new Grant
     const createGrantPayload: CreateGrantPayloadDto = {
       username: anyData.requester,
       grantedActions: [GrantedAction.READ],
@@ -34,6 +35,5 @@ export class CreateGrantModalComponant {
     };
     const obs = this.grantService.postGrant(createGrantPayload);
     obs.subscribe((obj) => console.log(obj));
-    //console.log(anyData);
   }
 }

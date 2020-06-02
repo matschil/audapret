@@ -6,3 +6,8 @@ export class CreateGrantPayloadDto extends GrantPayloadDto {
   @IsString()
   username: string;
 }
+
+export class UpdateGrantPayloadDto extends GrantPayloadDto {
+  @IsString()
+  username: string;
+}

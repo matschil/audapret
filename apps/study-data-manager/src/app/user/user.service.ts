@@ -32,6 +32,9 @@ export class UserService {
     return allUsers;
   }
 
+  async updateUser(userToUpdate: UserDto) {
+    this.userRepository.save(userToUpdate);
+  }
   async createAdapterUser(user: UserDto, grant: GrantPayloadDto) {
     user.type = UserType.ADAPTER;
     this.createUser(user, grant);

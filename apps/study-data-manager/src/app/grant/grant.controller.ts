@@ -6,11 +6,12 @@ import {
   UseGuards,
   Get,
   HttpException,
+  Put,
 } from "@nestjs/common";
 import {
-  GrantPayloadDto,
   UserType,
   CreateGrantPayloadDto,
+  UpdateGrantPayloadDto,
 } from "@audapret/shared";
 import { CustomValidationPipe } from "../pipe/validation.pipe";
 import { GrantGuard } from "../guard/grant.guard";
@@ -24,7 +25,7 @@ export class GrantController {
 
   /**
    * @param createGrantPayloadDto
-   * If grantPayloadDto is invalid: Response 400
+   * If createGrantPayloadDto is invalid: Response 400
    * If the requester is not the Owner of the studyDataManager: Response 403
    * Otherwise, a new User with the role Researcher is created with the respective grant
    */
@@ -55,8 +56,32 @@ export class GrantController {
     );
   }
 
+  /**
+   * @param updateGrantPayloadDto
+   * If updateGrantPayloadDto is invalid: Response 400
+   * If the requester is not the Owner of the studyDataManager: Response 403
+   * Otherwise, a new User with the role Researcher is created with the respective grant
+   */
+  @Put()
+  @UseGuards(GrantGuard)
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new CustomValidationPipe())
+  @Owner()
+  async update(@Body() updateGrantPayloadDto: UpdateGrantPayloadDto) {
+    const userToUpdate = await this.userService.findUserByName(
+      updateGrantPayloadDto.username
+    );
+
+    if (!userToUpdate) {
+      throw new HttpException("Grant for this user does not yet exists", 400);
+    }
+    // Update Grant accordingly
+    userToUpdate.grant.detailLevel = updateGrantPayloadDto.detailLevel;
+
+    return this.userService.updateUser(userToUpdate);
+  }
   @Get()
-  //@UseGuards(GrantGuard)
+  @UseGuards(GrantGuard)
   @UseGuards(JwtAuthGuard)
   @UsePipes(new CustomValidationPipe())
   @Owner()

@@ -9,6 +9,8 @@ import {
 } from "@audapret/shared";
 import { ModalService } from "../modals/modal.service";
 import { CreateGrantModalComponant } from "./create-grant-modal/create-grant-modal.component";
+import { EditGrantModalComponant } from "./edit-grant-modal/edit-grant-modal.component";
+
 import { map } from "rxjs/operators";
 
 @Component({
@@ -34,21 +36,12 @@ export class GrantComponent implements OnInit {
   }
 
   openCreateGrantModal() {
-    console.log("I got triggered");
-
-    this.modalService.init(CreateGrantModalComponant, { isMobile: false }, {});
+    this.modalService.init(CreateGrantModalComponant, {}, {});
+  }
+  openEditGrantModal(user: UserDto) {
+    this.modalService.init(EditGrantModalComponant, { userToEdit: user }, {});
   }
   jsonTransform(object: object) {
     return JSON.stringify(object, null, "  ");
-  }
-  onSubmit(anyData: any) {
-    const createGrantPayload: CreateGrantPayloadDto = {
-      username: anyData.requester,
-      grantedActions: [GrantedAction.READ],
-      detailLevel: anyData.detailLevel,
-    };
-    const obs = this.grantService.postGrant(createGrantPayload);
-    obs.subscribe((obj) => console.log(obj));
-    //console.log(anyData);
   }
 }

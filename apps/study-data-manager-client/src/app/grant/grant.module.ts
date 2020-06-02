@@ -6,9 +6,14 @@ import { GrantComponent } from "./grant.component";
 import { GrantService } from "./grant.service";
 import { ModalModule } from "../modals/modal.module";
 import { CreateGrantModalComponant } from "./create-grant-modal/create-grant-modal.component";
+import { EditGrantModalComponant } from "./edit-grant-modal/edit-grant-modal.component";
 
 @NgModule({
-  declarations: [GrantComponent, CreateGrantModalComponant],
+  declarations: [
+    GrantComponent,
+    CreateGrantModalComponant,
+    EditGrantModalComponant,
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -16,7 +21,7 @@ import { CreateGrantModalComponant } from "./create-grant-modal/create-grant-mod
     ReactiveFormsModule,
     ModalModule,
   ],
-  entryComponents: [CreateGrantModalComponant],
+  entryComponents: [CreateGrantModalComponant, EditGrantModalComponant],
 
   providers: [GrantService],
 })
