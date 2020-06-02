@@ -1,14 +1,21 @@
-<main>
-  <br />
-  <div *ngFor="let source of dataSources$">
-    <br />
-    <button (click)="loadDataFromSource(source)" class="btn btn-secondary">
-      Load {{ source }} data
-    </button>
+<div class="data-loader-flex">
+  <div class="top-item">
+    <h2>View data</h2>
+    <hr width="600px" size="2px" color="black" align="left" />
+    Load your own data
   </div>
 
-  <br />
-  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+  <div class="data-loader-item">
+    <br />
+    <div *ngFor="let source of dataSources$">
+      <br />
+      <button (click)="loadDataFromSource(source)" class="btn btn-secondary">
+        Load {{ source }} data
+      </button>
+    </div>
+  </div>
+  <div class="data-loader-item table-wrapper-scroll-y scrollbar">
+    <!--div class="table-wrapper-scroll-y scrollbar"-->
     <table border="1" class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -26,6 +33,6 @@
       </tbody>
     </table>
   </div>
-</main>
+</div>
 
 <router-outlet></router-outlet>

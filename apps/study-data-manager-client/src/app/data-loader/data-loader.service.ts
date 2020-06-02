@@ -88,7 +88,7 @@ export class DataLoaderService {
     for (const level0Key of Object.keys(json)) {
       switch (typeof json[level0Key]) {
         case "object":
-          table[level0Key] = "No support for level-0 objects";
+          table[level0Key] = "Not displayed";
           break;
         default:
           const stringifiedEntry =

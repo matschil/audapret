@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/",
+    redirectTo: "/data-loader",
     pathMatch: "full",
   },
 ];
