@@ -1,6 +1,5 @@
 <main>
   <br />
-
   <div *ngFor="let source of dataSources$">
     <br />
     <button (click)="loadDataFromSource(source)" class="btn btn-secondary">
@@ -9,20 +8,19 @@
   </div>
 
   <br />
-
-  <div *ngFor="let adapterData of data$">
-    <table border="1" class="table"> 
+  <div class="table-wrapper-scroll-y my-custom-scrollbar">
+    <table border="1" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th *ngFor="let attribute of keys(adapterData.content)" scope="col">
-            {{ attribute }}
+          <th *ngFor="let column of columns" scope="col">
+            {{ column }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td *ngFor="let attribute of keys(adapterData.content)" scope="row">
-            {{ adapterData.content[attribute] | json }}
+        <tr *ngFor="let row of rows" scope="row">
+          <td *ngFor="let cell of row" scope="col">
+            {{ cell }}
           </td>
         </tr>
       </tbody>

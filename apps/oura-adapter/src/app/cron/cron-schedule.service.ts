@@ -37,9 +37,9 @@ export class CronScheduleService {
             latestAuthEntity.refresh_token
           );
           refreshedToken.id = latestAuthEntity.id;
-          accessToken = (await this.databaseService.saveAdapterAuthEntity(
-            refreshedToken
-          )).access_token;
+          accessToken = (
+            await this.databaseService.saveAdapterAuthEntity(refreshedToken)
+          ).access_token;
         } else {
           // access_token is not valid anymore and has to be obtained again
           throw new Error(
@@ -74,11 +74,13 @@ export class CronScheduleService {
       try {
         // (2.3) Fetch data that was between today and the latestRetrivalDate
 
-        ouraData = (await this.cronService.fetchData(
-          category,
-          accessToken,
-          latestRetrievalDate
-        )).data;
+        ouraData = (
+          await this.cronService.fetchData(
+            category,
+            accessToken,
+            latestRetrievalDate
+          )
+        ).data;
         if (
           ouraData[category.toString()].length === 0 ||
           new Date().toISOString().slice(0, 10) === latestRetrievalDate
@@ -94,8 +96,9 @@ export class CronScheduleService {
       }
       try {
         // (2.4) Send data to StudyDataManager
-        const res = await this.cronService.sendData(ouraData);
-        if (res.status === 201) {
+        const responses = await this.cronService.sendData(ouraData);
+        // Very sketchy -> this only checks whether the last request has been successful
+        if (responses[responses.length - 1].status === 201) {
           // (2.5) Update metaEntity to latest retrieval data
           metaEntity.lastSuccessfulRetrieval = new Date();
           await this.databaseService.saveMetaDataEntity(metaEntity);
