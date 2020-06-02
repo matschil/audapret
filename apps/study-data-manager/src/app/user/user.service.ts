@@ -4,6 +4,7 @@ import { UserEntity } from "../entity/user.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { GrantEntity } from "../entity/grant.entity";
+import { hashPassword } from "../encryption";
 
 @Injectable()
 export class UserService {
@@ -45,9 +46,11 @@ export class UserService {
   }
 
   async createUser(user: UserDto, grant: GrantPayloadDto): Promise<UserEntity> {
+    // Hash Password before creating user account
+    const hashedPassword = await hashPassword(user.password);
     const userEntity: UserEntity = {
       type: user.type,
-      password: user.password,
+      password: hashedPassword,
       username: user.username,
       grant,
     };
