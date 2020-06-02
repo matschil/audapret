@@ -20,26 +20,20 @@ export class GrantGuard implements CanActivate {
      */
 
     const request = context.switchToHttp().getRequest();
-    let associatedGrant: GrantEntity;
+
+    // (0) If requester is an adapter -> Bypass for the moment (TODO)
+    if (request.headers.requester === "adapter") {
+      return true;
+    }
 
     // (0) Get entity of requesting user
     const requestingUser = await this.userService.findUserByName(
       request.user.username
     );
-    // (1) Check if requester is adapter
-    // Todo! Fix adapters
-    if (requestingUser.type === UserType.ADAPTER) {
-      // (1.1) Set grant manually
-      // IMPORTANT: As currently no registration exists for Adapters, the grant is hardcoded here.
-      associatedGrant = {
-        detailLevel: DetailLevel.DAILY_AGGREGATE,
-        grantedActions: [GrantedAction.CREATE],
-      };
-    } else {
-      // (1.2) Check if grant exists for requester
-      if (!requestingUser.grant) {
-        return false;
-      }
+
+    // (1) Check if grant exists for requester
+    if (!requestingUser.grant) {
+      return false;
     }
 
     // (2) Check whether the requested function requires the requester to be Owner

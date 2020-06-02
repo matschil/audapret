@@ -1,16 +1,13 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import {
-  GrantPayloadDto,
+  
   CreateGrantPayloadDto,
   UserDto,
 } from "@audapret/shared";
-import { owner, studyDataManagerGrantPath } from "../../assets/config";
+import {  studyDataManagerGrantPath } from "../../assets/config";
 import { studyDataManagerPort } from "@audapret/shared";
 import { environment } from "../../environments/environment";
-import { map } from "rxjs/operators";
-import { userInfo } from "os";
-import { copyFileSync } from "fs";
 import { Observable } from "rxjs";
 
 @Injectable()

@@ -36,7 +36,7 @@ export class AdapterDataController {
    * @param adapterPayloadDto
    */
   @Post()
-  //@UseGuards(GrantGuard)
+  @UseGuards(GrantGuard)
   @Grants(GrantedAction.CREATE)
   @UsePipes(new CustomValidationPipe())
   async persistanceWorkflow(@Body() adapterPayloadDto: AdapterPayloadDto) {

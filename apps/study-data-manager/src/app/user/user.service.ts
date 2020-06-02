@@ -12,11 +12,16 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>
   ) {}
 
-  async findUserByName(name: string): Promise<UserEntity> {
-    return this.userRepository.findOne({
-      relations: ["grant"],
-      where: { username: name },
-    });
+  async findUserByName(name: string): Promise<UserEntity | undefined> {
+    try {
+      return this.userRepository.findOne({
+        relations: ["grant"],
+        where: { username: name },
+      });
+    } catch (error) {
+      // In case no user does exist yet
+      return undefined;
+    }
   }
   async getOwner(): Promise<UserEntity> {
     return this.userRepository.findOne({ where: { type: UserType.OWNER } });
