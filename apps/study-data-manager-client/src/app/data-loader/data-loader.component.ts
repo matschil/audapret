@@ -12,6 +12,7 @@ export class DataLoaderComponent implements OnInit {
   title = "study-data-manager-client";
   data$: AdapterDataDto[];
   dataSources$: string[];
+  selectedDataSource: string;
   dataTable$: JsonTable;
   columns: string[];
   rows: string[][];
@@ -29,6 +30,7 @@ export class DataLoaderComponent implements OnInit {
     });
   }
   loadDataFromSource(source: string) {
+    this.selectedDataSource = source;
     const obs = this.dataLoaderService.fetchData(source);
     obs.subscribe((sth) => {
       this.data$ = <AdapterDataDto[]>sth;
@@ -36,8 +38,8 @@ export class DataLoaderComponent implements OnInit {
       this.dataTable$ = this.dataLoaderService.tablifyJson(
         this.data$.map((data) => data.content)
       );
-      // extract columns
-      this.columns = Object.keys(this.dataTable$);
+      // extract columns - limit to 15 columns
+      this.columns = Object.keys(this.dataTable$).slice(0, 14);
 
       // determine number of rows
       this.rows = [];

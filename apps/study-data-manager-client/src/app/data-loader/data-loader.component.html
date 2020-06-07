@@ -2,19 +2,32 @@
   <div class="top-item">
     <h2>View data</h2>
     <hr width="600px" size="2px" color="black" align="left" />
-    Load your own data
-  </div>
-
-  <div class="data-loader-item">
-    <br />
-    <div *ngFor="let source of dataSources$">
-      <br />
-      <button (click)="loadDataFromSource(source)" class="btn btn-secondary">
-        Load {{ source }} data
+    Select the data source you want to view data from
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary btn-sm dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="true"
+      >
+        Data Source
       </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          *ngFor="let source of dataSources$"
+          class="dropdown-item"
+          (click)="loadDataFromSource(source)"
+          >{{ source }}</a
+        >
+      </div>
     </div>
   </div>
-  <div class="data-loader-item table-wrapper-scroll-y scrollbar">
+</div>
+<div class="data-loader-item">
+  <h6>{{ selectedDataSource ? selectedDataSource + ":" : "" }}</h6>
+  <div class="table-wrapper-scroll-y scrollbar">
     <!--div class="table-wrapper-scroll-y scrollbar"-->
     <table border="1" class="table table-bordered table-striped">
       <thead>
@@ -34,5 +47,4 @@
     </table>
   </div>
 </div>
-
 <router-outlet></router-outlet>
