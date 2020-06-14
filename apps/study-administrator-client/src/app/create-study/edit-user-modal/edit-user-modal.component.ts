@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 
 import { ModalService } from "@audapret/shared";
 import { DetailLevel, UserDto } from "@audapret/shared";
+import { StudyDto, StudyUserDto } from "@audapret/administrator";
+import { CreateStudyService } from "../create-study.service";
 
 @Component({
   selector: "edit-user-modal",
@@ -9,8 +11,11 @@ import { DetailLevel, UserDto } from "@audapret/shared";
   styleUrls: ["./edit-user-modal.css"],
 })
 export class EditUserModalComponent {
-  userToEdit: UserDto;
-  constructor(private readonly modalService: ModalService) {
+  userToEdit: StudyUserDto;
+  constructor(
+    private readonly modalService: ModalService,
+    private readonly createStudyService: CreateStudyService
+  ) {
     this.userToEdit = this.modalService.getInputs().userToEdit;
   }
 
@@ -18,7 +23,12 @@ export class EditUserModalComponent {
     this.modalService.destroy();
   }
 
-  onSubmit() {
+  onSubmit(userToUpdate: StudyUserDto) {
     // Update user in list of users
+    this.createStudyService.updateUser(userToUpdate);
+  }
+  removeUser() {
+    // Update user in list of users
+    this.createStudyService.removeUser(this.userToEdit);
   }
 }

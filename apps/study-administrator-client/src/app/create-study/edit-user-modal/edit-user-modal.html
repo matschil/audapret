@@ -9,37 +9,29 @@
 
 <div class="container-fluid">
   <br />
-  <font size="5">Edit Access Grant of {{userToEdit.username}} </font>
+  <font size="5">Edit User {{userToEdit.username}} </font>
   <br />
   <br />
   <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
     <div class="form-group">
-      <label>Name of Researcher</label>
-      <input
-        type="text"
-        name="requester"
-        [(ngModel)]="userToEdit.username"
-        disabled
-      />
+      <label>Name</label>
+      <input type="text" name="name" [(ngModel)]="userToEdit.name" disabled />
     </div>
 
     <div class="form-group">
       <label>Select Detail Level</label>
-
-      <select
-        name="detailLevel"
-        class="custom-select"
-        [(ngModel)]="userToEdit.grant.detailLevel"
-        disabled
-      >
+      <select disabled>
         <option *ngFor="let detailLevel of detailLevels"
           >{{ detailLevel }}</option
         >
       </select>
     </div>
-    <button class="btn btn-primary" type="submit">Save canges</button>
+    <button class="btn btn-primary" type="submit" disabled>Save canges</button>
     <button class="btn btn-secondary" (click)="close()">
       Close Modal
+    </button>
+    <button class="btn btn-secondary" (click)="removeUser(userToEdit.username)">
+      Remove User
     </button>
   </form>
 </div>

@@ -3,7 +3,8 @@ import { Component } from "@angular/core";
 import { ModalService } from "@audapret/shared";
 import { DetailLevel } from "@audapret/shared";
 import { CreateStudyService } from "../create-study.service";
-import { StudyUserDto } from "@audapret/administrator";
+import { StudyUserDto, UserType } from "@audapret/administrator";
+import { CreateStudyComponent } from "../create-study.component";
 
 @Component({
   selector: "add-user-modal",
@@ -15,20 +16,12 @@ export class AddUserModalComponent {
     private readonly modalService: ModalService,
     private readonly createStudyService: CreateStudyService
   ) {}
-  detailLevels = [DetailLevel.DAILY_AGGREGATE, DetailLevel.FULL];
+  roles: UserType[] = [UserType.PARTICIPANT, UserType.RESEARCHER];
 
   public close() {
     this.modalService.destroy();
   }
-
-  onSubmit(anyData: any) {
-    // Create new Grant
-    const studyUser: StudyUserDto = {
-      name: anyData.studyDataManagerAddress,
-      studyDataManagerAddress: anyData.studyDataManagerAddress,
-      userType: anyData.userType,
-    };
-    const obs = this.createStudyService.createStudy(null);
-    obs.subscribe((obj) => console.log(obj));
+  addUser(user: StudyUserDto) {
+    this.createStudyService.addUser(user);
   }
 }

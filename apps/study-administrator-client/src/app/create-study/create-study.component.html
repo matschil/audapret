@@ -22,10 +22,7 @@
       >
         <div class="list-group-item-flex">
           <div class="list-group-item-item-left">
-            {{ user.username }}
-          </div>
-          <div class="list-group-item-item-right">
-            {{ user.grant.createdAt }}
+            {{ user.name }}
           </div>
         </div>
       </button>
@@ -34,10 +31,15 @@
       Add
     </button>
   </div>
+
   <div class="study-item">
-    <button class="btn btn-primary">
-      Create Study
-    </button>
+    <form #studyForm="ngForm" (ngSubmit)="createStudy(studyForm.value)">
+      <div class="form-group">
+        <label>Study title</label>
+        <input name="title" type="text" class="form-control" ngModel />
+      </div>
+      <button class="btn btn-primary" type="submit">Create Study</button>
+    </form>
   </div>
 </div>
 <!-- Old code

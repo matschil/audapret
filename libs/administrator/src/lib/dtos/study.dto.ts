@@ -1,6 +1,6 @@
-import { UserDto } from '../user.dto';
+import { StudyUserDto } from "../user.dto";
 
 export interface StudyDto {
   studyTitle: string;
-  users: UserDto[];
+  users: StudyUserDto[];
 }
