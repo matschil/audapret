@@ -1,27 +1,23 @@
-<header class="flex">
-  <h1>AUDAPRET</h1>
-</header>
-<br />
-<header class="flex">
-  <h1>StudySataManagerClient</h1>
-</header>
-<nav>
-  <br />
-  <br />
-  <font size="5">
-    <a routerLink="/grant" routerLinkActive="active">Authorize Researcher</a>
-  </font>
-  <br />
-  <br />
-  <font size="5">
-    <a routerLink="/data-loader" routerLinkActive="active"
-      >Load your own data</a
-    >
-  </font>
-  <br />
-  <br />
-  <font size="5">
-    <a routerLink="/init" routerLinkActive="active">Initialize Server</a>
-  </font>
-</nav>
+<!---Navigation Bar-->
+<div class="flex">
+  <nav
+    class="navbar navbar-expand navbar-light"
+    style="background-color: transparent;"
+  >
+    <div class="navbar-nav" *ngIf="currentUser">
+      <a class="nav-item nav-link" routerLink="/data-loader">Home</a>
+      <a class="nav-item nav-link" routerLink="/grant">Manage Access Grants</a>
+      <a class="nav-item nav-link" routerLink="/">Leave Study</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+  </nav>
+  <div class="logo-item">
+    <h1>Audapret</h1>
+  </div>
+</div>
+<alert></alert>
+
+<!-- Custom modal setup -->
+<div id="modal-container" class="hidden"></div>
+<div id="overlay" class="hidden"></div>
 <router-outlet></router-outlet>

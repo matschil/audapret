@@ -9,6 +9,9 @@
     "../../apps/studyDataManager/src/app/entity/content-schema.entity.ts",
     "../../apps/studyDataManager/src/app/entity/data-source.entity.ts",
     "../../apps/studyDataManager/src/app/entity/grant.entity.ts",
-    "../../apps/studyDataManager/src/app/entity/adapter-data.entity.ts"
+    "../../apps/studyDataManager/src/app/entity/adapter-data.entity.ts",
+    "../../apps/study-data-manager-client/src/app/alert/alert.service.ts",
+    "../../apps/study-data-manager-client/src/app/alert/alert.component.ts",
+    "../../apps/study-data-manager-client/src/app/login/authentication.service.ts"
   ]
 }

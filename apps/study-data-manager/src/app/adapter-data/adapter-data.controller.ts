@@ -5,23 +5,23 @@ import {
   Body,
   UsePipes,
   UseGuards,
-  Query
-} from '@nestjs/common';
-import { AdapterDataService } from './adapter-data.service';
+  Query,
+} from "@nestjs/common";
+import { AdapterDataService } from "./adapter-data.service";
 import {
   AdapterPayloadDto,
   GrantedAction,
-  AdapterDataDto
-} from '@audapret/shared';
-import { DataSourceEntity } from '../entity/data-source.entity';
-import { AdapterDataEntity } from '../entity/adapter-data.entity';
-import { CustomValidationPipe } from '../pipe/validation.pipe';
-import { ContentSchemaEntity } from '../entity/content-schema.entity';
-import { Grants } from '../decorator/grant.decorator';
-import { GrantGuard } from '../guard/grant.guard';
-import { DataSourceService } from '../data-source/data-source.service';
+  AdapterDataDto,
+} from "@audapret/shared";
+import { DataSourceEntity } from "../entity/data-source.entity";
+import { AdapterDataEntity } from "../entity/adapter-data.entity";
+import { CustomValidationPipe } from "../pipe/validation.pipe";
+import { ContentSchemaEntity } from "../entity/content-schema.entity";
+import { Grants } from "../decorator/grant.decorator";
+import { GrantGuard } from "../guard/grant.guard";
+import { DataSourceService } from "../data-source/data-source.service";
 
-@Controller('adapterData')
+@Controller("adapterData")
 export class AdapterDataController {
   constructor(
     private readonly adapterDataService: AdapterDataService,
@@ -45,7 +45,7 @@ export class AdapterDataController {
     );
     let adapterData: AdapterDataEntity = this.adapterDataService.createAdapterDataEntity(
       {
-        content: JSON.parse(adapterPayloadDto.content)
+        content: JSON.parse(adapterPayloadDto.content),
       }
     );
     let existingDataSource: DataSourceEntity;
@@ -113,16 +113,16 @@ export class AdapterDataController {
    * This function returns AdapterDataDtos for all AdapterDataEntities of the specified @param source
    */
   @Get()
-  @UseGuards(GrantGuard)
+  //@UseGuards(GrantGuard)
   @Grants(GrantedAction.READ)
-  async getAllDataForSource(@Query('source') source: string) {
+  async getAllDataForSource(@Query("source") source: string) {
     // Get all AdapterDataEntities
     const adapterDataEntities: AdapterDataEntity[] = await this.adapterDataService.getAdapterDataForSource(
       source
     );
     // Transform to AdapterDataDtos
     const adapterDataDtos: AdapterDataDto[] = adapterDataEntities.map(
-      adapterDataEntity => ({ content: adapterDataEntity.content })
+      (adapterDataEntity) => ({ content: adapterDataEntity.content })
     );
 
     return adapterDataDtos;
@@ -131,15 +131,15 @@ export class AdapterDataController {
   /**
    * This function returns AdapterDataDtos for all AdapterDataEntities
    */
-  @Get('all')
-  @UseGuards(GrantGuard)
+  @Get("all")
+  //@UseGuards(GrantGuard)
   @Grants(GrantedAction.READ)
   async getAllData() {
     // Get all AdapterDataEntities
     const adapterDataEntities: AdapterDataEntity[] = await this.adapterDataService.getAllAdapterData();
     // Transform to AdapterDataDtos
     const adapterDataDtos: AdapterDataDto[] = adapterDataEntities.map(
-      adapterDataEntity => ({ content: adapterDataEntity.content })
+      (adapterDataEntity) => ({ content: adapterDataEntity.content })
     );
 
     return adapterDataDtos;

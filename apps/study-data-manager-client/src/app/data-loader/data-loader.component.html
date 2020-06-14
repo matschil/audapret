@@ -1,33 +1,50 @@
-<main>
-  <br />
-
-  <div *ngFor="let source of dataSources$">
-    <br />
-    <button (click)="loadDataFromSource(source)" class="btn btn-secondary">
-      Load {{ source }} data
-    </button>
+<div class="data-loader-flex">
+  <div class="top-item">
+    <h2>View data</h2>
+    <hr width="600px" size="2px" color="black" align="left" />
+    Select the data source you want to view data from
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary btn-sm dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="true"
+      >
+        Data Source
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a
+          *ngFor="let source of dataSources$"
+          class="dropdown-item"
+          (click)="loadDataFromSource(source)"
+          >{{ source }}</a
+        >
+      </div>
+    </div>
   </div>
-
-  <br />
-
-  <div *ngFor="let adapterData of data$">
-    <table border="1" class="table"> 
+</div>
+<div class="data-loader-item">
+  <h6>{{ selectedDataSource ? selectedDataSource + ":" : "" }}</h6>
+  <div class="table-wrapper-scroll-y scrollbar p">
+    <!--div class="table-wrapper-scroll-y scrollbar"-->
+    <table border="1" class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th *ngFor="let attribute of keys(adapterData.content)" scope="col">
-            {{ attribute }}
+          <th *ngFor="let column of columns" scope="col">
+            {{ column }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td *ngFor="let attribute of keys(adapterData.content)" scope="row">
-            {{ adapterData.content[attribute] | json }}
+        <tr *ngFor="let row of rows" scope="row">
+          <td *ngFor="let cell of row" scope="col">
+            {{ cell }}
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-</main>
-
+</div>
 <router-outlet></router-outlet>

@@ -1,0 +1,40 @@
+.scrollbar {
+  height: 450px;
+  width: auto;
+}
+.table-wrapper-scroll-y {
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+.data-loader-flex {
+  margin: 5px 5px 5px 5px;
+  display: flex;
+  border-radius: 5px;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  border: 1px dashed;
+  height: auto;
+}
+.top-item {
+  margin: 5px 5px 5px 5px;
+  border-radius: 5px;
+  border: 1px dashed;
+  height: auto;
+}
+.header-title-item {
+  align-items: flex-start;
+  height: auto;
+}
+.data-loader-item {
+  margin: 5px 5px 5px 5px;
+  border-radius: 5px;
+  border: 1px dashed black;
+  padding: 10px;
+  width: auto;
+  height: 500px;
+}
+.hoizontal-Line {
+  border-bottom: thick solid black;
+}

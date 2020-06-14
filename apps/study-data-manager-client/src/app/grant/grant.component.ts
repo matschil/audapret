@@ -1,28 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { GrantService } from './grant.service';
-import { DetailLevel, GrantPayloadDto, GrantedAction } from '@audapret/shared';
+import { Component, OnInit } from "@angular/core";
+import { GrantService } from "./grant.service";
+import {
+  DetailLevel,
+  GrantedAction,
+  CreateGrantPayloadDto,
+  GrantPayloadDto,
+  UserDto,
+} from "@audapret/shared";
+import { ModalService } from "@audapret/shared";
+import { CreateGrantModalComponent } from "./create-grant-modal/create-grant-modal.component";
+import { EditGrantModalComponent } from "./edit-grant-modal/edit-grant-modal.component";
+
+import { map } from "rxjs/operators";
 
 @Component({
-  selector: 'audapret-grant',
-  templateUrl: './grant.component.html'
+  selector: "audapret-grant",
+  templateUrl: "./grant.component.html",
+  styleUrls: ["./grant.component.css"],
 })
 export class GrantComponent implements OnInit {
-  constructor(private readonly grantService: GrantService) {}
-  detailLevels = [DetailLevel.DAILY_AGGREGATE, DetailLevel.FULL];
+  constructor(
+    private readonly grantService: GrantService,
+    private readonly modalService: ModalService
+  ) {}
+  users: UserDto[] = [];
 
-  ngOnInit() {}
+  ngOnInit() {
+    const grantsObs$ = this.grantService.getUsers();
 
-  jsonTransform(object: object) {
-    return JSON.stringify(object, null, '  ');
+    grantsObs$.subscribe((users) => {
+      this.users = users;
+
+      console.log(this.users);
+    });
   }
-  onSubmit(anyData: any) {
-    const grant: GrantPayloadDto = {
-      requester: anyData.requester,
-      grantedActions: [GrantedAction.READ],
-      detailLevel: anyData.detailLevel
-    };
-    const obs = this.grantService.postGrants(grant);
-    obs.subscribe(obj => console.log(obj));
-    //console.log(anyData);
+
+  openCreateGrantModal() {
+    this.modalService.init(CreateGrantModalComponent, {}, {});
+  }
+  openEditGrantModal(user: UserDto) {
+    this.modalService.init(EditGrantModalComponent, { userToEdit: user }, {});
+  }
+  jsonTransform(object: object) {
+    return JSON.stringify(object, null, "  ");
   }
 }

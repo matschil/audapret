@@ -3,31 +3,31 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  CreateDateColumn
-} from 'typeorm';
-import { ContentSchemaEntity } from './content-schema.entity';
-import { DataSourceDto } from '@audapret/shared';
+  CreateDateColumn,
+} from "typeorm";
+import { ContentSchemaEntity } from "./content-schema.entity";
+import { DataSourceDto } from "@audapret/shared";
 
 @Entity()
 export class DataSourceEntity {
-  toDto(): DataSourceDto {
-    return {
-      source: this.source
-    };
-  }
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @CreateDateColumn({ name: 'created_at', nullable: false })
+  @CreateDateColumn({ name: "created_at", nullable: false })
   createdAt?: Date;
 
   @Column()
   source: string;
 
   @OneToMany(
-    'ContentSchemaEntity',
+    "ContentSchemaEntity",
     (contentSchema: ContentSchemaEntity) => contentSchema.dataSource,
-    { onDelete: 'CASCADE' }
+    { onDelete: "CASCADE" }
   )
   contentSchemas?: ContentSchemaEntity[];
+  toDto(): DataSourceDto {
+    return {
+      source: this.source,
+    };
+  }
 }

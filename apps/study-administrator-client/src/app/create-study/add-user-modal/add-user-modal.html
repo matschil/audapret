@@ -1,4 +1,3 @@
-<header class="flex"></header>
 <div class="container-fluid">
   <br />
   <br />
@@ -25,18 +24,8 @@
       </select>
     </div>
     <button class="btn btn-primary" type="submit">Add User</button>
-  </form>
-</div>
-<br />
-<br />
-<div class="container-fluid">
-  <font size="5">Create a Study</font>
-  <br />
-  <form #studyForm="ngForm" (ngSubmit)="createStudy(studyForm.value)">
-    <div class="form-group">
-      <label>Study title</label>
-      <input name="title" type="text" class="form-control" ngModel />
-    </div>
-    <button class="btn btn-primary" type="submit">Create Study</button>
+    <button class="btn btn-secondary" (click)="close()">
+      Close Modal
+    </button>
   </form>
 </div>
