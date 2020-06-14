@@ -1,29 +1,17 @@
-<header class="flex">
-  <h1>AUDAPRET</h1>
-</header>
-<br />
-<header class="flex">
-  <h1>StudyAdministrator</h1>
-</header>
-<nav>
-  <font size="5"
-    ><a routerLink="/study" routerLinkActive="active">Create a Study</a></font
+<div class="flex">
+  <nav
+    class="navbar navbar-expand navbar-light"
+    style="background-color: transparent;"
   >
-  <br />
-  <br />
-  <font size="5"
-    ><a routerLink="/overview" routerLinkActive="active"
-      >Study Overview</a
-    ></font
-  >
-  <br />
-  <br />
-  <font size="5">
-    <a routerLink="/data-loader" routerLinkActive="active"
-      >Request Data of User</a
-    >
-  </font>
-  <br />
-</nav>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/overview">Overview</a>
+      <a class="nav-item nav-link" routerLink="/study">Create Study</a>
+      <a class="nav-item nav-link" routerLink="/data-loader">Request Data</a>
+    </div>
+  </nav>
+  <div class="logo-item">
+    <h1>Audapret</h1>
+  </div>
+</div>
 
 <router-outlet></router-outlet>

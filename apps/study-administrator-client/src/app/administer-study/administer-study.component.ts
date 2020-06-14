@@ -6,7 +6,8 @@ import { UserType } from '@audapret/administrator';
 
 @Component({
   selector: 'audapret-study',
-  templateUrl: './administer-study.component.html'
+  templateUrl: './administer-study.component.html',
+  styleUrls: ["./administer-study.component.css"]
 })
 export class AdministerStudyComponent {
   constructor(private readonly studyService: AdministerStudyService) {}

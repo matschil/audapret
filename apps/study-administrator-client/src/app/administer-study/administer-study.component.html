@@ -1,3 +1,46 @@
+<div class="study-flex">
+  <div class="top-item">
+    <h2>Create a new Study</h2>
+    <hr width="600px" size="2px" color="black" align="left" />
+  </div>
+
+  <div class="study-item">
+    <!-- IN here: menu -->
+    <div class="list-group">
+      <a class="list-group-item list-group-item disabled">
+        <div class="list-group-item-flex">
+          <div class="list-group-item-item-left">
+            Users
+          </div>
+        </div>
+      </a>
+      <button
+        type="button"
+        class="list-group-item list-group-item-action"
+        *ngFor="let user of users"
+        (click)="openEditUserModal(user)"
+      >
+        <div class="list-group-item-flex">
+          <div class="list-group-item-item-left">
+            {{ user.username }}
+          </div>
+          <div class="list-group-item-item-right">
+            {{ user.grant.createdAt }}
+          </div>
+        </div>
+      </button>
+    </div>
+    <button class="btn btn-primary" (click)="openEditUserModal()">
+      Add
+    </button>
+  </div>
+  <div class="study-item">
+    <button class="btn btn-primary">
+      Create Study
+    </button>
+  </div>
+</div>
+<!-- Old code
 <header class="flex"></header>
 <div class="container-fluid">
   <br />
@@ -40,3 +83,4 @@
     <button class="btn btn-primary" type="submit">Create Study</button>
   </form>
 </div>
+-->

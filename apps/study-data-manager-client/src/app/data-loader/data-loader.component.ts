@@ -39,7 +39,7 @@ export class DataLoaderComponent implements OnInit {
         this.data$.map((data) => data.content)
       );
       // extract columns - limit to 15 columns
-      this.columns = Object.keys(this.dataTable$).slice(0, 14);
+      this.columns = Object.keys(this.dataTable$).slice(0, 12);
 
       // determine number of rows
       this.rows = [];

@@ -88,12 +88,25 @@ export class DataLoaderService {
     for (const level0Key of Object.keys(json)) {
       switch (typeof json[level0Key]) {
         case "object":
-          table[level0Key] = "Not displayed";
+          // If object is an array of strings
+          if (
+            json[level0Key].length > 0 &&
+            (typeof json[level0Key][0] === "string" ||
+              typeof json[level0Key][0] === "number")
+          ) {
+            table[level0Key] = `${String(json[level0Key]).substr(0, 15)}...`;
+          }
+
+          // Otherwise
+          else {
+            table[level0Key] = "Not displayed";
+          }
+
           break;
         default:
           const stringifiedEntry =
-            String(json[level0Key]).length > 20
-              ? `${String(json[level0Key]).substr(0, 20)}...`
+            String(json[level0Key]).length > 15
+              ? `${String(json[level0Key]).substr(0, 15)}...`
               : json[level0Key];
           table[level0Key] = stringifiedEntry;
           break;
