@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { LoginModule } from "./login/login.module";
 import { AlertComponent } from "./alert/alert.component";
 import { JwtInterceptor } from "./jwt.interceptor";
-import { ModalModule } from "./modals/modal.module";
+import { ModalModule } from "@audapret/shared";
 
 @NgModule({
   declarations: [AppComponent, AlertComponent],

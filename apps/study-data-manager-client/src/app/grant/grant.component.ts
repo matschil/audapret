@@ -7,7 +7,7 @@ import {
   GrantPayloadDto,
   UserDto,
 } from "@audapret/shared";
-import { ModalService } from "../modals/modal.service";
+import { ModalService } from "@audapret/shared";
 import { CreateGrantModalComponant } from "./create-grant-modal/create-grant-modal.component";
 import { EditGrantModalComponant } from "./edit-grant-modal/edit-grant-modal.component";
 

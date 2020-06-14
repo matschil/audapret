@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { ModalService } from "../../modals/modal.service";
+import { ModalService } from "@audapret/shared";
 import {
   DetailLevel,
   GrantedAction,

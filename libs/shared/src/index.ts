@@ -13,3 +13,8 @@ export * from "../../../apps/study-data-manager-client/src/app/alert/alert.compo
 export * from "../../../apps/study-data-manager-client/src/app/alert/alert.service";
 //export * from "./authentication.service";
 //export * from "./user.service";
+
+// Modals
+export * from "./lib/client/modals/dom.service";
+export * from "./lib/client/modals/modal.module";
+export * from "./lib/client/modals/modal.service";
