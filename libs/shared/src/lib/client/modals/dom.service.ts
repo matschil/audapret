@@ -36,8 +36,9 @@ export class DomService {
     // Get DOM element from component
     const childDomElem = (childComponentRef.hostView as EmbeddedViewRef<any>)
       .rootNodes[0] as HTMLElement;
-
+    console.log(childDomElem);
     // Append DOM element to the body
+    console.log(document.getElementById(parentId));
     document.getElementById(parentId).appendChild(childDomElem);
   }
 
@@ -47,8 +48,6 @@ export class DomService {
   }
 
   private attachConfig(config: ChildConfig, componentRef) {
-    console.log("Iam causing error");
-    console.log();
     const inputs = config.inputs;
     const outputs = config.outputs;
     for (const key of Object.keys(inputs)) {

@@ -14,7 +14,7 @@ import { GrantService } from "../grant.service";
   templateUrl: "./edit-grant-modal.html",
   styleUrls: ["./edit-grant-modal.css"],
 })
-export class EditGrantModalComponant {
+export class EditGrantModalComponent {
   userToEdit: UserDto;
   constructor(
     private readonly modalService: ModalService,

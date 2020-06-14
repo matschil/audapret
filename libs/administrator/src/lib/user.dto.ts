@@ -1,6 +1,6 @@
-import { UserType } from './dtos/shared';
+import { UserType } from "./dtos/shared";
 
-export interface UserDto {
+export interface StudyUserDto {
   studyDataManagerAddress: string;
   name: string;
   userType: UserType;

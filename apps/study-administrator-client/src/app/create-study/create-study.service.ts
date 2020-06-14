@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import {
   studyAdministratorPort,
-  studyAdministratorStudyPath
-} from '../../assets/config';
-import { StudyDto } from '@audapret/administrator';
-import { environment } from '../../environments/environment';
+  studyAdministratorStudyPath,
+} from "../../assets/config";
+import { StudyDto } from "@audapret/administrator";
+import { environment } from "../../environments/environment";
 
 @Injectable()
-export class AdministerStudyService {
+export class CreateStudyService {
   constructor(private readonly httpClient: HttpClient) {}
 
   createStudy(studyDto: StudyDto) {

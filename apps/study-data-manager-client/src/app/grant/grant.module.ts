@@ -5,14 +5,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { GrantComponent } from "./grant.component";
 import { GrantService } from "./grant.service";
 import { ModalModule } from "@audapret/shared";
-import { CreateGrantModalComponant } from "./create-grant-modal/create-grant-modal.component";
-import { EditGrantModalComponant } from "./edit-grant-modal/edit-grant-modal.component";
+import { CreateGrantModalComponent } from "./create-grant-modal/create-grant-modal.component";
+import { EditGrantModalComponent } from "./edit-grant-modal/edit-grant-modal.component";
 
 @NgModule({
   declarations: [
     GrantComponent,
-    CreateGrantModalComponant,
-    EditGrantModalComponant,
+    CreateGrantModalComponent,
+    EditGrantModalComponent,
   ],
   imports: [
     HttpClientModule,
@@ -21,7 +21,7 @@ import { EditGrantModalComponant } from "./edit-grant-modal/edit-grant-modal.com
     ReactiveFormsModule,
     ModalModule,
   ],
-  entryComponents: [CreateGrantModalComponant, EditGrantModalComponant],
+  entryComponents: [CreateGrantModalComponent, EditGrantModalComponent],
 
   providers: [GrantService],
 })

@@ -13,7 +13,7 @@ import { GrantService } from "../grant.service";
   templateUrl: "./create-grant-modal.html",
   styleUrls: ["./create-grant-modal.css"],
 })
-export class CreateGrantModalComponant {
+export class CreateGrantModalComponent {
   constructor(
     private readonly modalService: ModalService,
     private readonly grantService: GrantService

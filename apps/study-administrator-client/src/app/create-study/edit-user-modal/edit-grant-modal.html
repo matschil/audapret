@@ -30,6 +30,7 @@
         name="detailLevel"
         class="custom-select"
         [(ngModel)]="userToEdit.grant.detailLevel"
+        disabled
       >
         <option *ngFor="let detailLevel of detailLevels"
           >{{ detailLevel }}</option

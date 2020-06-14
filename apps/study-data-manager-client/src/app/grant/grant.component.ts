@@ -8,8 +8,8 @@ import {
   UserDto,
 } from "@audapret/shared";
 import { ModalService } from "@audapret/shared";
-import { CreateGrantModalComponant } from "./create-grant-modal/create-grant-modal.component";
-import { EditGrantModalComponant } from "./edit-grant-modal/edit-grant-modal.component";
+import { CreateGrantModalComponent } from "./create-grant-modal/create-grant-modal.component";
+import { EditGrantModalComponent } from "./edit-grant-modal/edit-grant-modal.component";
 
 import { map } from "rxjs/operators";
 
@@ -36,10 +36,10 @@ export class GrantComponent implements OnInit {
   }
 
   openCreateGrantModal() {
-    this.modalService.init(CreateGrantModalComponant, {}, {});
+    this.modalService.init(CreateGrantModalComponent, {}, {});
   }
   openEditGrantModal(user: UserDto) {
-    this.modalService.init(EditGrantModalComponant, { userToEdit: user }, {});
+    this.modalService.init(EditGrantModalComponent, { userToEdit: user }, {});
   }
   jsonTransform(object: object) {
     return JSON.stringify(object, null, "  ");
