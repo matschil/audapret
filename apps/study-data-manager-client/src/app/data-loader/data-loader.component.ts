@@ -1,6 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { DataLoaderService, JsonTable } from "./data-loader.service";
-import { AdapterDataDto, DataSourceDto } from "@audapret/shared";
+import { DataLoaderService } from "./data-loader.service";
+import {
+  AdapterDataDto,
+  DataSourceDto,
+  JsonTable,
+  getJsonTableRows,
+  tablifyJson,
+  getJsonTableColumns,
+} from "@audapret/shared";
 
 @Component({
   selector: "audapret-data-loader",
@@ -29,29 +36,19 @@ export class DataLoaderComponent implements OnInit {
       );
     });
   }
+
   loadDataFromSource(source: string) {
     this.selectedDataSource = source;
     const obs = this.dataLoaderService.fetchData(source);
     obs.subscribe((sth) => {
       this.data$ = <AdapterDataDto[]>sth;
-      console.log(this.data$.length);
-      this.dataTable$ = this.dataLoaderService.tablifyJson(
-        this.data$.map((data) => data.content)
-      );
-      // extract columns - limit to 15 columns
-      this.columns = Object.keys(this.dataTable$).slice(0, 12);
 
-      // determine number of rows
-      this.rows = [];
-      this.numberRows = this.dataTable$[this.columns[0]].length;
-      // extract rows
-      for (let rowIndex = 0; rowIndex < this.numberRows; rowIndex++) {
-        const row: string[] = [];
-        for (const column of this.columns) {
-          row.push(this.dataTable$[column][rowIndex]);
-        }
-        this.rows.push(row);
-      }
+      // Transform JSON into displayable table
+      this.dataTable$ = tablifyJson(this.data$.map((data) => data.content));
+      console.log(this.dataTable$);
+      this.rows = getJsonTableRows(this.dataTable$);
+      this.numberRows = this.rows.length;
+      this.columns = getJsonTableColumns(this.dataTable$);
     });
   }
 

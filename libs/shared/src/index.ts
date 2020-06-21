@@ -8,12 +8,15 @@ export * from "./lib/dtos/grant-payload.dto";
 export * from "./lib/dtos/create-grant-payload.dto";
 export * from "./lib/dtos/user.dto";
 
+// Utils
+export * from "./lib/util/tablify-json.util";
+
 // Components
-export * from "../../../apps/study-data-manager-client/src/app/alert/alert.component";
+export * from "./lib/client/alert/alert.component";
 // Services
-export * from "../../../apps/study-data-manager-client/src/app/alert/alert.service";
+export * from "./lib/client/alert/alert.service";
 
 // Modals
-export * from "./lib/client/modals/dom.service";
+export * from "./lib/client/dom.service";
 export * from "./lib/client/modals/modal.module";
 export * from "./lib/client/modals/modal.service";

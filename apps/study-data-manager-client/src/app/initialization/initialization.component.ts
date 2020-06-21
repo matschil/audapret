@@ -4,7 +4,7 @@ import { owner } from "../../assets/config";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { first, tap } from "rxjs/operators";
-import { AlertService } from "../alert/alert.service";
+import { AlertService } from "@audapret/shared";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({

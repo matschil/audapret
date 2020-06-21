@@ -122,7 +122,9 @@ export class AdapterDataController {
     );
     // Transform to AdapterDataDtos
     const adapterDataDtos: AdapterDataDto[] = adapterDataEntities.map(
-      (adapterDataEntity) => ({ content: adapterDataEntity.content })
+      (adapterDataEntity) => ({
+        content: adapterDataEntity.content,
+      })
     );
 
     return adapterDataDtos;
@@ -139,7 +141,10 @@ export class AdapterDataController {
     const adapterDataEntities: AdapterDataEntity[] = await this.adapterDataService.getAllAdapterData();
     // Transform to AdapterDataDtos
     const adapterDataDtos: AdapterDataDto[] = adapterDataEntities.map(
-      (adapterDataEntity) => ({ content: adapterDataEntity.content })
+      (adapterDataEntity) => ({
+        content: adapterDataEntity.content,
+        source: adapterDataEntity.contentSchema.dataSource.source,
+      })
     );
 
     return adapterDataDtos;
