@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { Validator, Schema } from 'jsonschema';
-import * as toJsonSchema from 'to-json-schema';
-import { ContentSchemaEntity } from '../entity/content-schema.entity';
-import { DataSourceEntity } from '../entity/data-source.entity';
-import { AdapterDataEntity } from '../entity/adapter-data.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, In } from 'typeorm';
-import { AdapterDataDto } from '@audapret/shared';
+import { Injectable } from "@nestjs/common";
+import { Validator, Schema } from "jsonschema";
+import * as toJsonSchema from "to-json-schema";
+import { ContentSchemaEntity } from "../entity/content-schema.entity";
+import { DataSourceEntity } from "../entity/data-source.entity";
+import { AdapterDataEntity } from "../entity/adapter-data.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, In } from "typeorm";
+import { AdapterDataDto } from "@audapret/shared";
 
 @Injectable()
 export class AdapterDataService {
@@ -56,11 +56,11 @@ export class AdapterDataService {
     dataSource: DataSourceEntity
   ): Promise<ContentSchemaEntity> {
     const generatedSchema: any = toJsonSchema(adapterData.content, {
-      required: true
+      required: true,
     });
     return this.contentSchemaRepository.create({
       schema: generatedSchema,
-      dataSource: dataSource
+      dataSource: dataSource,
     });
   }
 
@@ -94,8 +94,8 @@ export class AdapterDataService {
     sourceForSchema = this.dataSourceRepository.create(sourceForSchema);
     return this.contentSchemaRepository.find({
       where: {
-        dataSource: sourceForSchema
-      }
+        dataSource: sourceForSchema,
+      },
     });
   }
 
@@ -111,19 +111,19 @@ export class AdapterDataService {
     // join source, schema and adapterdata table
     const nestedContentSchemas = await this.contentSchemaRepository.find({
       join: {
-        alias: 'nestedSchema',
+        alias: "nestedSchema",
         innerJoinAndSelect: {
-          dataSource: 'nestedSchema.dataSource'
-        }
-      }
+          dataSource: "nestedSchema.dataSource",
+        },
+      },
     });
     const relevantContentSchemaIds = nestedContentSchemas
-      .filter(schema => schema.dataSource.source === source)
-      .map(schema => schema.id);
+      .filter((schema) => schema.dataSource.source === source)
+      .map((schema) => schema.id);
 
     const relevantAdapterData = await this.adapterDataRepository.find({
       where: { contentSchema: In(relevantContentSchemaIds) },
-      order: { createdAt: 'DESC' }
+      order: { createdAt: "DESC" },
     });
     return relevantAdapterData;
   }
@@ -131,7 +131,10 @@ export class AdapterDataService {
   /** TypeOrm Delegation for getting all existing AdapterDataEntites
    */
   async getAllAdapterData() {
-    return this.adapterDataRepository.find();
+    const adapterData = await this.adapterDataRepository.find({
+      relations: ["contentSchema", "contentSchema.dataSource"],
+    });
+    return adapterData;
   }
 
   /** TypeOrm Delegation for getting all existing ContentSchemaEntites with nested DataSource
@@ -139,11 +142,11 @@ export class AdapterDataService {
   async getAllSchemas() {
     const nestedContentSchemas = await this.contentSchemaRepository.find({
       join: {
-        alias: 'nestedSchema',
+        alias: "nestedSchema",
         innerJoinAndSelect: {
-          dataSource: 'nestedSchema.dataSource'
-        }
-      }
+          dataSource: "nestedSchema.dataSource",
+        },
+      },
     });
     return nestedContentSchemas;
   }

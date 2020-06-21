@@ -1,13 +1,13 @@
-import { Controller, Get, Query } from '@nestjs/common';
-import { RequestStudyDataService } from './request-study-data.service';
+import { Controller, Get, Query } from "@nestjs/common";
+import { RequestStudyDataService } from "./request-study-data.service";
 
-@Controller('studyData')
+@Controller("studyData")
 export class RequestStudyDataController {
   constructor(
     private readonly requestStudyDataService: RequestStudyDataService
   ) {}
 
-  @Get('all')
+  @Get("all")
   async getAllStudyData() {
     const allUsers = await this.requestStudyDataService.getAllUsers();
     const allStudyData = [];
@@ -25,12 +25,13 @@ export class RequestStudyDataController {
   }
 
   @Get()
-  async getStudyData(@Query('username') username: string) {
+  async getStudyData(@Query("username") username: string) {
     const user = await this.requestStudyDataService.getUserByName(username);
     try {
       const studyData = await this.requestStudyDataService.requestStudyData(
         user[0].studyDataManagerAddress
       );
+      console.log(studyData.data);
       return studyData.data;
     } catch (error) {
       console.error(error.message);

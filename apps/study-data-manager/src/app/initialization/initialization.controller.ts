@@ -28,8 +28,32 @@ export class InitializationController {
   @UsePipes(new CustomValidationPipe())
   @UseGuards(InitializationGuard)
   async create(@Body() userDto: UserDto) {
-    // Todo: Inconsistent. Decide wether to take Dtos or entities
-    const user = await this.userService.createOwnerUser(userDto, {
+    // Temporary for presentation: Save hard-coded grants upon initialization
+    await this.userService.createResearcherUser(
+      { password: "audapret", username: "Researcher1" },
+      {
+        detailLevel: DetailLevel.FULL,
+        grantedActions: [GrantedAction.READ],
+      }
+    );
+
+    await this.userService.createResearcherUser(
+      { password: "audapret", username: "Researcher2" },
+      {
+        detailLevel: DetailLevel.FULL,
+        grantedActions: [GrantedAction.READ],
+      }
+    );
+
+    await this.userService.createResearcherUser(
+      { password: "audapret", username: "Researcher3" },
+      {
+        detailLevel: DetailLevel.DAILY_AGGREGATE,
+        grantedActions: [GrantedAction.READ],
+      }
+    );
+
+    const owner = await this.userService.createOwnerUser(userDto, {
       detailLevel: DetailLevel.FULL,
       grantedActions: [
         GrantedAction.READ,
@@ -37,6 +61,6 @@ export class InitializationController {
         GrantedAction.UPDATE,
       ],
     });
-    return user;
+    return owner;
   }
 }

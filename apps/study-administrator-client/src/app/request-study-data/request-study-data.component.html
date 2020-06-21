@@ -1,73 +1,79 @@
 <header class="flex"></header>
-<br />
-<br />
-<font size="5"> Request User Data</font>
-<br />
-<br />
-<div>
-  <table border="1" class="table">
-    <thead>
-      <tr>
-        <th scope="col">
-          User
-        </th>
-        <th scope="col">
-          Type
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td scope="row">
-          {{ user.name }}
-        </td>
-        <td scope="row">
-          {{ user.userType }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="container-fluid">
-  <form #studyForm="ngForm" (ngSubmit)="loadData(studyForm.value.username)">
-    <div class="form-group">
-      <label>Username</label>
-      <input name="username" type="text" class="form-control" ngModel />
-    </div>
-    <button class="btn btn-primary" type="submit">Request Data</button>
-  </form>
-</div>
-<br />
-<br />
 
-<div class="container-fluid">
-  <form (ngSubmit)="loadDataFromAllUsers()">
-    <button class="btn btn-primary" type="submit">
-      Request StudyData from all Users
-    </button>
-  </form>
-</div>
-<br />
-<br />
-<br />
+<div class="request-data-flex">
+  <div class="top-item">
+    <font size="5"> Request User Data</font>
+    <hr width="600px" size="2px" color="black" align="left" />
+  </div>
 
-<div *ngFor="let content of currentContent">
-  <div *ngFor="let adapterData of content">
-    <table border="1" class="table">
+  <div class="request-data-item">
+    <table border="1" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th scope="col">
-            {{ adapterData }}
+            User
+          </th>
+          <th scope="col">
+            Type
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let user of users">
           <td scope="row">
-            {{ adapterData.content | json }}
+            {{ user.name }}
+          </td>
+          <td scope="row">
+            {{ user.userType }}
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="request-data-item">
+    <form #studyForm="ngForm" (ngSubmit)="loadData(studyForm.value.username)">
+      <div class="form-group">
+        <label>Username</label>
+        <input name="username" type="text" class="form-control" ngModel />
+      </div>
+      <button class="btn btn-primary" type="submit">Request Data</button>
+    </form>
+  </div>
+
+  <!-- <div class="request-data-item">
+    <form (ngSubmit)="loadDataFromAllUsers()">
+      <button class="btn btn-primary" type="submit">
+        Request Data from all Users
+      </button>
+    </form>
+  </div>
+   --><br />
+
+  <div *ngIf="tableInformations.length > 0" class="request-data-item">
+    <div *ngFor="let tableInformation of tableInformations">
+      <div class="request-data-table-item">
+        <h6>{{ tableInformation.dataSource }}</h6>
+
+        <div class="table-wrapper-scroll-y scrollbar p">
+          <table border="1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th *ngFor="let column of tableInformation.columns" scope="col">
+                  {{ column }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of tableInformation.rows" scope="row">
+                <td *ngFor="let cell of row" scope="col">
+                  {{ cell }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

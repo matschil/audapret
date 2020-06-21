@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { StudyDto } from '@audapret/administrator';
-import { OverviewService } from './overview.service';
+import { Component, OnInit } from "@angular/core";
+import { StudyDto, UserType } from "@audapret/administrator";
+import { OverviewService } from "./overview.service";
 
 @Component({
-  selector: 'audapret-overview',
-  templateUrl: './overview.component.html'
+  selector: "audapret-overview",
+  templateUrl: "./overview.component.html",
+  styleUrls: ["./overview.component.css"],
 })
 export class OverviewComponent implements OnInit {
   constructor(private readonly overviewService: OverviewService) {}
@@ -13,20 +14,21 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit() {
     const studiesObs = this.overviewService.getStudies();
-    studiesObs.subscribe(studies => {
+    studiesObs.subscribe((studies) => {
       this.studies = <StudyDto[]>studies;
-      console.log(this.studies);
     });
   }
 
-  extractResearcherNames(study: StudyDto) {
+  extractResearcherNames(study: StudyDto): String {
     return study.users
-      .filter(user => user.userType === 'researcher')
-      .map(researcher => researcher.name);
+      .filter((user) => user.userType === UserType.RESEARCHER)
+      .map((researcher) => researcher.name)
+      .toString();
   }
-  extractParticipantNames(study: StudyDto) {
+  extractParticipantNames(study: StudyDto): String {
     return study.users
-      .filter(user => user.userType === 'participant')
-      .map(participant => participant.name);
+      .filter((user) => user.userType === UserType.PARTICIPANT)
+      .map((participant) => participant.name)
+      .toString();
   }
 }

@@ -8,7 +8,7 @@ import { DataLoaderModule } from "./data-loader/data-loader.module";
 import { InitializationModule } from "./initialization/initialization.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LoginModule } from "./login/login.module";
-import { AlertComponent } from "./alert/alert.component";
+import { AlertComponent } from "@audapret/shared";
 import { JwtInterceptor } from "./jwt.interceptor";
 import { ModalModule } from "@audapret/shared";
 
