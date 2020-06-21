@@ -114,6 +114,63 @@
         }
       }
     },
+    "fitbit-adapter": {
+      "root": "apps/fitbit-adapter",
+      "sourceRoot": "apps/fitbit-adapter/src",
+      "projectType": "application",
+      "prefix": "fitbit-adapter",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/fitbit-adapter",
+            "main": "apps/fitbit-adapter/src/main.ts",
+            "tsConfig": "apps/fitbit-adapter/tsconfig.app.json",
+            "assets": ["apps/fitbit-adapter/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/fitbit-adapter/src/environments/environment.ts",
+                  "with": "apps/fitbit-adapter/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "fitbit-adapter:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/fitbit-adapter/.eslintrc",
+            "tsConfig": [
+              "apps/fitbit-adapter/tsconfig.app.json",
+              "apps/fitbit-adapter/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/fitbit-adapter/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/fitbit-adapter/jest.config.js",
+            "tsConfig": "apps/fitbit-adapter/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+
     "limesurvey-adapter": {
       "root": "apps/limesurvey-adapter",
       "sourceRoot": "apps/limesurvey-adapter/src",

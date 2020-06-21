@@ -60,7 +60,6 @@ export class RequestStudyDataComponent implements OnInit {
         const rows = getJsonTableRows(dataTable);
         const numberRows = rows.length;
         const columns = getJsonTableColumns(dataTable);
-        const dataSoruce = dataSource;
         tableInformations.push({
           rows,
           dataTable,

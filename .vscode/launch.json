@@ -33,6 +33,12 @@
       "type": "node",
       "request": "attach",
       "port": 7782
+    },
+    {
+      "name": "Debug Fitbit-adapter",
+      "type": "node",
+      "request": "attach",
+      "port": 7783
     }
   ]
 }
