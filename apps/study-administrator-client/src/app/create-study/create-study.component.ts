@@ -7,9 +7,10 @@ import { ModalService } from "@audapret/shared";
 import { AddUserModalComponent } from "./add-user-modal/add-user-modal.component";
 import { catchError } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { Router } from "@angular/router";
 import { EditUserModalComponent } from "./edit-user-modal/edit-user-modal.component";
+import { FormGroup } from "@angular/forms";
 @Component({
   selector: "audapret-study",
   templateUrl: "./create-study.component.html",
@@ -26,6 +27,7 @@ export class CreateStudyComponent implements OnInit {
   studies: StudyDto[] = [];
   roles: UserType[] = [UserType.PARTICIPANT, UserType.RESEARCHER];
   users: StudyUserDto[];
+
   ngOnInit() {
     this.users = this.studyService.getUsers();
   }
@@ -68,6 +70,6 @@ export class CreateStudyComponent implements OnInit {
   errorHandler(error: HttpErrorResponse) {
     // Todo: proper Error handling
     console.log("Server error");
-    return Observable.throw(error.message || "server error.");
+    return throwError(error.message || "server error.");
   }
 }

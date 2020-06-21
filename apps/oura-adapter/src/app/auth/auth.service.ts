@@ -1,12 +1,12 @@
 // Perform OAuth2 authentification with oura cloud
-import { Injectable, HttpService } from '@nestjs/common';
-import { OAuthClient, create } from 'simple-oauth2';
-import { redirectUri } from '../../assets/shared';
-import { ouraCredentials, ouraUri } from '../../assets/config';
+import { Injectable, HttpService } from "@nestjs/common";
+import { OAuthClient, create } from "simple-oauth2";
+import { redirectUri } from "../../assets/shared";
+import { ouraCredentials, ouraUri } from "../../assets/config";
 
-import * as express from 'express';
-import * as axiosOAuth from 'axios-oauth-client';
-import { AxiosOauth2Response } from '../../assets/shared';
+import * as express from "express";
+import * as axiosOAuth from "axios-oauth-client";
+import { AxiosOauth2Response } from "../../assets/shared";
 
 @Injectable()
 export class OuraAuthService {
@@ -20,10 +20,10 @@ export class OuraAuthService {
    * First part of authorization workflow.
    */
   async redirect(res: express.Response) {
-    console.log('authorization starting...');
+    console.log("authorization starting...");
 
     const authorizationUri = this.client.authorizationCode.authorizeURL({
-      redirect_uri: redirectUri
+      redirect_uri: redirectUri,
     });
     res.redirect(authorizationUri);
   }
@@ -34,18 +34,20 @@ export class OuraAuthService {
    */
   async getAccessToken(req: express.Request): Promise<AxiosOauth2Response> {
     // Split request URL at = to obtain its first query parameter (code)
-    const authCode = req.originalUrl.split('=')[1];
+    const authCode = req.originalUrl.split("=")[1].split("&")[0];
+
     try {
+      const payload = {
+        url: `${ouraUri}/oauth/token`,
+        grant_type: "authorization_code",
+        client_id: ouraCredentials.client.id,
+        client_secret: ouraCredentials.client.secret,
+        redirect_uri: redirectUri,
+        code: authCode,
+      };
       const getAuthorizationCode = axiosOAuth.client(
         this.httpService.axiosRef,
-        {
-          url: `${ouraUri}/oauth/token`,
-          grant_type: 'authorization_code',
-          client_id: ouraCredentials.client.id,
-          client_secret: ouraCredentials.client.secret,
-          redirect_uri: redirectUri,
-          code: authCode
-        }
+        payload
       );
       return getAuthorizationCode();
     } catch (error) {
@@ -57,11 +59,11 @@ export class OuraAuthService {
   async refreshAccessToken(refreshToken: string) {
     const getRefreshToken = axiosOAuth.client(this.httpService.axiosRef, {
       url: `${ouraUri}/oauth/token`,
-      grant_type: 'refresh_token',
+      grant_type: "refresh_token",
       client_id: ouraCredentials.client.id,
       client_secret: ouraCredentials.client.secret,
       redirect_uri: redirectUri,
-      refresh_token: refreshToken
+      refresh_token: refreshToken,
     });
 
     try {

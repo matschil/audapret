@@ -3,7 +3,10 @@
   <br />
   <font size="5">Add a User</font>
   <br />
-  <form #userForm="ngForm" (ngSubmit)="addUser(userForm.value)">
+  <form
+    #userForm="ngForm"
+    (ngSubmit)="addUser(userForm.value); userForm.resetForm()"
+  >
     <div class="form-group">
       <label>Username</label>
       <input name="name" type="text" class="form-control" ngModel />
