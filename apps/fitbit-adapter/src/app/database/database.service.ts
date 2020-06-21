@@ -4,9 +4,10 @@ import { AdapterAuthEntity } from "../entity/adapter-auth.entity";
 import * as _ from "lodash";
 import { Repository, Connection } from "typeorm";
 import { AxiosOauth2Response } from "../../assets/shared";
-import { OuraCategory } from "../../assets/shared";
+import { FitbitPath } from "../../assets/shared";
 import { MetaDataEntity } from "../entity/meta.entity";
-import { OuraMetaDataDto } from "../../assets/meta-data.dto";
+import { FitbitMetaDataDto } from "../../assets/meta-data.dto";
+import { Token } from "simple-oauth2";
 
 @Injectable()
 export class DatabaseService {
@@ -43,9 +44,7 @@ export class DatabaseService {
       console.error(error.message);
     }
   }
-  getAuthEntityFromAccessObject(
-    accessObject: AxiosOauth2Response
-  ): AdapterAuthEntity {
+  getAuthEntityFromAccessObject(accessObject: Token): AdapterAuthEntity {
     try {
       return this.adapterAuthRepository.create(accessObject);
     } catch (error) {
@@ -54,10 +53,9 @@ export class DatabaseService {
   }
 
   async getMetaDataEntity(
-    category:
-      | OuraCategory.SLEEP
-      | OuraCategory.ACTIVITY
-      | OuraCategory.READINESS
+    category: FitbitPath.ACTIVITIES | FitbitPath.SLEEP
+    /* | OuraCategory.ACTIVITY
+      | OuraCategory.READINESS */
   ) {
     return await this.metaDataRepository.findOne({
       where: { category: category },
@@ -66,7 +64,7 @@ export class DatabaseService {
   async saveMetaDataEntity(metaDataEntity: MetaDataEntity) {
     return await this.metaDataRepository.save(metaDataEntity);
   }
-  createMetaDataEntity(OuraMetaDataDto: OuraMetaDataDto) {
-    return this.metaDataRepository.create(OuraMetaDataDto);
+  createMetaDataEntity(FitbitMetaDataDto: FitbitMetaDataDto) {
+    return this.metaDataRepository.create(FitbitMetaDataDto);
   }
 }

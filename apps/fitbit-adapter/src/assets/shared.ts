@@ -1,10 +1,20 @@
 import { baseUrl } from "./config";
 export const workflowRoute = `${baseUrl}/api/cron/workflow`;
 export const redirectUri = `${baseUrl}/api/fitbit/callback`;
-export enum OuraCategory {
+export enum FitbitPath {
+  ACTIVITIES = "activities",
   SLEEP = "sleep",
-  ACTIVITY = "activity",
-  READINESS = "readiness",
+  /* activities/caloriesBMR
+activities/steps
+activities/distance
+activities/floors
+activities/elevation
+activities/minutesSedentary
+activities/minutesLightlyActive
+activities/minutesFairlyActive
+activities/minutesVeryActive
+activities/activityCalories
+ */
 }
 export class AxiosOauth2Response {
   access_token: string;

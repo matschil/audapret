@@ -4,6 +4,7 @@ import * as express from "express";
 import { DatabaseService } from "../database/database.service";
 import { AxiosOauth2Response } from "../../assets/shared";
 import { AdapterAuthEntity } from "../entity/adapter-auth.entity";
+import { Token } from "simple-oauth2";
 
 @Controller("fitbit")
 export class OuraAuthController {
@@ -21,12 +22,13 @@ export class OuraAuthController {
   /** Callback URL for Oauth2 authorization workflow of the fitbit cloud */
   @Get("callback")
   async callback(@Req() req: express.Request) {
-    let authResponse: AxiosOauth2Response;
+    let authResponse: Token;
     let authResponseEntity: AdapterAuthEntity;
 
     try {
       // retrieve whole authObject from cloud
       authResponse = await this.authService.getAccessToken(req);
+
       // transform it into etity
       authResponseEntity = this.databaseService.getAuthEntityFromAccessObject(
         authResponse

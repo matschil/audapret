@@ -22,7 +22,7 @@ export class OuraAuthService {
 
     const authorizationUri = this.client.authorizationCode.authorizeURL({
       redirect_uri: redirectUri,
-      scope: ["activity"], // Todo: Outsource
+      scope: ["activity", "sleep"], // Todo: Outsource
     });
     res.redirect(authorizationUri);
   }

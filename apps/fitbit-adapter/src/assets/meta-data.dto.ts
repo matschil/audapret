@@ -1,10 +1,10 @@
 import { IsEnum, IsDate } from "class-validator";
-import { OuraCategory } from "apps/fitbit-adapter/src/assets/shared";
+import { FitbitPath } from "apps/fitbit-adapter/src/assets/shared";
 
-export class OuraMetaDataDto {
+export class FitbitMetaDataDto {
   @IsDate()
   lastSuccessfulRetrieval: Date;
 
-  @IsEnum(OuraCategory)
-  category: OuraCategory;
+  @IsEnum(FitbitPath)
+  path: FitbitPath;
 }

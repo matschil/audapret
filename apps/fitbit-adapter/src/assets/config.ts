@@ -8,10 +8,11 @@ export const fitbitCredentials = {
     tokenHost: "https://api.fitbit.com",
     tokenPath: "/oauth2/token",
     authorizePath: "/oauth2/authorize",
-    authorizeHost: "https://www.fitbit.com", //"https://www.fitbit.com",
+    authorizeHost: "https://www.fitbit.com",
   },
 };
+export const userId = "7KCVVK";
 export const baseUrl = "http://localhost:3339";
 export const fitbitUri = "https://api.fitbit.com";
-export const triggerInterval = "*/4 * * * * *";
+export const triggerInterval = "*/30 * * * * *";
 export const dropSchemaAtEveryStart = true;

@@ -1,9 +1,9 @@
 import { Injectable, HttpService } from "@nestjs/common";
 import { studyDataManagerAdapterDataPath } from "@audapret/shared";
 import { AdapterPayloadDto, studyDataManagerPort } from "@audapret/shared";
-import { OuraCategory } from "../../assets/shared";
+import { FitbitPath } from "../../assets/shared";
 import { AxiosResponse } from "axios";
-import { fitbitUri } from "../../assets/config";
+import { fitbitUri, userId } from "../../assets/config";
 import "url";
 
 @Injectable()
@@ -16,49 +16,58 @@ export class CronService {
   private fitbitUri: URL;
 
   async sendData(data: any): Promise<AxiosResponse<any>[]> {
-    let responses = [];
+    const responses = [];
     for (const key of Object.keys(data)) {
-      for (const content of data[key]) {
-        try {
-          let payload: AdapterPayloadDto = {
-            source: `fitbit/${key}`,
-            description: key,
-            content: JSON.stringify(content),
-          };
-          // Validate request payload
-          let response = await this.httpService
-            .post(this.address, payload, { headers: { requester: "adapter" } })
-            .toPromise();
-          responses.push(response);
-          // Currently intentionally stop iteration here to restrict the payload size
-          //return res;
-        } catch (error) {
-          console.error(error.message);
-        }
+      //for (const content of data[key]) {
+      try {
+        const content = data[key];
+        const payload: AdapterPayloadDto = {
+          source: `fitbit/${key}`,
+          description: key,
+          content: JSON.stringify(content),
+        };
+        // Validate request payload
+        let response = await this.httpService
+          .post(this.address, payload, { headers: { requester: "adapter" } })
+          .toPromise();
+        responses.push(response);
+        // Currently intentionally stop iteration here to restrict the payload size
+        //return res;
+      } catch (error) {
+        console.error(error.message);
       }
+      //}
     }
     return responses;
   }
 
   /** Fetch all data of @param category that was measured between @param start and @param end */
   async fetchData(
-    category:
-      | OuraCategory.SLEEP
-      | OuraCategory.ACTIVITY
-      | OuraCategory.READINESS,
+    path: FitbitPath.ACTIVITIES | FitbitPath.SLEEP,
+    /* | OuraCategory.ACTIVITY
+      | OuraCategory.READINESS, */
     token: string,
     start?: string,
     end?: string
   ): Promise<AxiosResponse<any>> {
-    this.fitbitUri.pathname = `/v1/${category}`;
+    // Build path to fetch data from
+    this.fitbitUri.pathname = `/1/user/${userId}/${path}/date`;
     this.fitbitUri.searchParams.append("access_token", token);
     if (start) {
-      this.fitbitUri.searchParams.append("start", start);
+      this.fitbitUri.pathname += `/${start}`;
+      if (end) {
+        this.fitbitUri.pathname += `/${end}`;
+      }
+    } else {
+      this.fitbitUri.pathname += `/today`;
     }
-    if (end) {
-      this.fitbitUri.searchParams.append("end", end);
-    }
+    this.fitbitUri.pathname += `.json`;
 
-    return this.httpService.get(this.fitbitUri.href).toPromise();
+    // Build authorization request header
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    return this.httpService.get(this.fitbitUri.href, { headers }).toPromise();
   }
 }

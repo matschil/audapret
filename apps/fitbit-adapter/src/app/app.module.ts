@@ -25,7 +25,7 @@ import { dropSchemaAtEveryStart } from "../assets/config";
         database: "fitbit_adapter",
         entities: [AdapterAuthEntity, MetaDataEntity],
         synchronize: true,
-        dropSchema: dropSchemaAtEveryStart,
+        dropSchema: false /* dropSchemaAtEveryStart */,
       }),
     }),
   ],

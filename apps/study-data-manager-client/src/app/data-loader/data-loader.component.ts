@@ -42,7 +42,7 @@ export class DataLoaderComponent implements OnInit {
     const obs = this.dataLoaderService.fetchData(source);
     obs.subscribe((sth) => {
       this.data$ = <AdapterDataDto[]>sth;
-
+      console.log(this.data$);
       // Transform JSON into displayable table
       this.dataTable$ = tablifyJson(this.data$.map((data) => data.content));
       console.log(this.dataTable$);

@@ -4,7 +4,7 @@ import { AdapterPayloadDto } from "@audapret/shared";
 import { CronService } from "./cron.service";
 import { DatabaseService } from "../database/database.service";
 import { triggerInterval, StudyBeginDate } from "../../assets/config";
-import { OuraCategory } from "../../assets/shared";
+import { FitbitPath } from "../../assets/shared";
 import { OuraAuthService } from "../auth/auth.service";
 import { AdapterAuthEntity } from "../entity/adapter-auth.entity";
 
@@ -61,14 +61,14 @@ export class CronScheduleService {
     }
 
     // (2) Data processing workflow
-    for (const category of Object.values(OuraCategory)) {
+    for (const path of Object.values(FitbitPath)) {
       // (2.1) Get date of latest successful retrival of data of current category from fitbit cloud
-      let metaEntity = await this.databaseService.getMetaDataEntity(category);
+      let metaEntity = await this.databaseService.getMetaDataEntity(path);
       if (metaEntity === undefined) {
         // This adapter has never sent data
         // (2.1.1) Create new MetaEntity with begin date of study
         metaEntity = this.databaseService.createMetaDataEntity({
-          category: category,
+          path,
           lastSuccessfulRetrieval: StudyBeginDate,
         });
       }
@@ -82,24 +82,24 @@ export class CronScheduleService {
       try {
         // (2.3) Fetch data that was between today and the latestRetrivalDate
 
-        fitbitData = (
-          await this.cronService.fetchData(
-            category,
-            accessToken,
-            latestRetrievalDate
-          )
-        ).data;
+        fitbitData = await this.cronService.fetchData(
+          path,
+          accessToken,
+          latestRetrievalDate
+        );
+        fitbitData = fitbitData.data;
+
         if (
-          fitbitData[category.toString()].length === 0 ||
+          fitbitData[path.toString()].length === 0 ||
           new Date().toISOString().slice(0, 10) === latestRetrievalDate
         ) {
-          // No new data is available at the Oura API.
+          // No new data is available at the Fitbit API.
           // Do not send empty data - skip current iteration
           continue;
         }
       } catch (error) {
         console.error(
-          `Error while fetching data for ${category}: ${error.message}`
+          `Error while fetching data for ${path}: ${error.message}`
         );
       }
       try {
@@ -113,7 +113,7 @@ export class CronScheduleService {
         }
       } catch (error) {
         console.error(
-          `Error while sending ${category} data to studyDataManager: ${error.message}`
+          `Error while sending ${path} data to studyDataManager: ${error.message}`
         );
       }
     }
