@@ -13,10 +13,7 @@
     <div class="grant-item rounded">
       <!-- IN here: menu -->
       <div class="list-group">
-        <a
-          class="list-group-item list-group-item disabled"
-          style="/* border: 1px solid #3eb489; */"
-        >
+        <a class="list-group-item list-group-item disabled">
           <div class="list-group-item-flex">
             <div class="list-group-item-item-left">
               Researcher
@@ -28,7 +25,6 @@
         </a>
         <button
           type="button"
-          style="/*border: 1px solid;   #3eb489; border-top: none; */"
           class="list-group-item list-group-item-action"
           *ngFor="let user of users"
           (click)="openEditGrantModal(user)"
@@ -38,7 +34,7 @@
               {{ user.username }}
             </div>
             <div class="list-group-item-item-right">
-              {{ user.grant.createdAt }}
+              {{ user.grant.createdAt | date }}
             </div>
           </div>
         </button>

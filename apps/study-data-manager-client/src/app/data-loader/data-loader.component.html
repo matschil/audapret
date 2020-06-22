@@ -1,11 +1,16 @@
-<div class="data-loader-flex">
-  <div class="top-item">
-    <h2>View data</h2>
-    <hr width="600px" size="2px" color="black" align="left" />
-    Select the data source you want to view data from
-    <div class="dropdown">
+<div class="data-loader-flex bg-light rounded">
+  <div class="jumbotron-flexible">
+    <br />
+    <h2 align="center" class="display-5">
+      View Data
+    </h2>
+    <p class="lead">
+      Select the data source you want to view data from
+    </p>
+    <div class="dropdown" align="center">
       <button
         class="btn btn-secondary btn-sm dropdown-toggle"
+        style="background-color: #3eb489; border: #3eb489;"
         type="button"
         id="dropdownMenuButton"
         data-toggle="dropdown"
@@ -23,28 +28,32 @@
         >
       </div>
     </div>
+    <hr class="my-4" />
   </div>
-</div>
-<div class="data-loader-item">
-  <h6>{{ selectedDataSource ? selectedDataSource + ":" : "" }}</h6>
-  <div class="table-wrapper-scroll-y scrollbar p">
-    <!--div class="table-wrapper-scroll-y scrollbar"-->
-    <table border="1" class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th *ngFor="let column of columns" scope="col">
-            {{ column }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of rows" scope="row">
-          <td *ngFor="let cell of row" scope="col">
-            {{ cell }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div *ngIf="selectedDataSource" class="data-loader-item">
+    <h6>{{ selectedDataSource + ":" }}</h6>
+    <div class="table-wrapper-scroll-y scrollbar p">
+      <table
+        border="1"
+        class="table table-bordered table-striped"
+        style="font-size: small;"
+      >
+        <thead>
+          <tr>
+            <th *ngFor="let column of columns" scope="col">
+              {{ column }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows" scope="row">
+            <td *ngFor="let cell of row" scope="col">
+              {{ cell }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>
