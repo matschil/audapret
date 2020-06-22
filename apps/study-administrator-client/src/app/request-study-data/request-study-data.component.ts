@@ -51,6 +51,9 @@ export class RequestStudyDataComponent implements OnInit {
       // 2. Create JSON Table for each group
       const tableInformations = [];
       for (const dataSource of Object.keys(adapterDtosByDataSource)) {
+        if (dataSource === "fitbit/sleep") {
+          console.log(adapterDtosByDataSource[dataSource]);
+        }
         // Transform JSON into displayable table
         const dataTable = tablifyJson(
           adapterDtosByDataSource[dataSource].map(
