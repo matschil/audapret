@@ -1,37 +1,49 @@
-<!---
-<div class="sample-container">
-  <div class="sample-text">
-    This is the sample modal
-  </div>
-  
-</div>
--->
-
 <div class="container-fluid">
-  <br />
-  <font size="5">Edit User {{userToEdit.username}} </font>
-  <br />
-  <br />
-  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="text" name="name" [(ngModel)]="userToEdit.name" disabled />
-    </div>
+  <div class="edit-user-modal-flex">
+    <br />
+    <font size="5">Edit User {{userToEdit.username}} </font>
+    <br />
+    <br />
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          [(ngModel)]="userToEdit.name"
+          class="form-control"
+          disabled
+        />
+      </div>
 
-    <div class="form-group">
-      <label>Select Detail Level</label>
-      <select disabled>
-        <option *ngFor="let detailLevel of detailLevels"
-          >{{ detailLevel }}</option
-        >
-      </select>
-    </div>
-    <button class="btn btn-primary" type="submit" disabled>Save canges</button>
-    <button class="btn btn-secondary" (click)="close()">
-      Close Modal
-    </button>
-    <button class="btn btn-secondary" (click)="removeUser(userToEdit.username)">
-      Remove User
-    </button>
-  </form>
+      <div class="form-group">
+        <label>Select Detail Level</label>
+        <select class="custom-select" disabled>
+          <option *ngFor="let detailLevel of detailLevels"
+            >{{ detailLevel }}</option
+          >
+        </select>
+      </div>
+
+      <button
+        class="btn btn-secondary"
+        style="border: unset; margin-top: 10px; margin-left: 10px;"
+        (click)="close()"
+      >
+        Close Modal
+      </button>
+      <button
+        class="btn btn-secondary"
+        (click)="removeUser(userToEdit.username)"
+        style="
+          background-color: #ff8f31;
+          border: unset;
+          margin-top: 10px;
+          margin-left: 10px;
+        "
+      >
+        Remove User
+      </button>
+    </form>
+  </div>
 </div>

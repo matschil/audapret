@@ -1,34 +1,51 @@
 <div class="container-fluid">
-  <br />
-  <br />
-  <font size="5">Add a User</font>
-  <br />
-  <form
-    #userForm="ngForm"
-    (ngSubmit)="addUser(userForm.value); userForm.resetForm()"
-  >
-    <div class="form-group">
-      <label>Username</label>
-      <input name="name" type="text" class="form-control" ngModel />
-    </div>
-    <div class="form-group">
-      <label>User URL</label>
-      <input
-        name="studyDataManagerAddress"
-        type="text"
-        class="form-control"
-        ngModel
-      />
-    </div>
-    <div class="form-group">
-      <label>Role</label>
-      <select name="userType" class="custom-select" ngModel>
-        <option *ngFor="let role of roles">{{ role }}</option>
-      </select>
-    </div>
-    <button class="btn btn-primary" type="submit">Add User</button>
-    <button class="btn btn-secondary" (click)="close()">
-      Close Modal
-    </button>
-  </form>
+  <div class="add-user-modal-flex">
+    <br />
+    <br />
+    <font size="5">Add a User</font>
+    <br />
+    <form
+      #userForm="ngForm"
+      (ngSubmit)="addUser(userForm.value); userForm.resetForm()"
+    >
+      <div class="form-group">
+        <label>Username</label>
+        <input name="name" type="text" class="form-control" ngModel />
+      </div>
+      <div class="form-group">
+        <label>User URL</label>
+        <input
+          name="studyDataManagerAddress"
+          type="text"
+          class="form-control"
+          ngModel
+        />
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select name="userType" class="custom-select" ngModel>
+          <option *ngFor="let role of roles">{{ role }}</option>
+        </select>
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        style="
+          background-color: #ff8f31;
+          border: unset;
+          margin-top: 10px;
+          margin-right: 10px;
+        "
+      >
+        Add User
+      </button>
+      <button
+        class="btn btn-secondary"
+        style="border: unset; margin-top: 10px; margin-left: 10px;"
+        (click)="close()"
+      >
+        Close Modal
+      </button>
+    </form>
+  </div>
 </div>
