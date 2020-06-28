@@ -1,10 +1,13 @@
 <div class="container-fluid">
-  <div class="create-modal-container rounded">
+  <div class="create-modal-flex">
     <br />
     <font size="5">Create DataAccessGrant</font>
     <br />
-    <br />
-    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <form
+      #userForm="ngForm"
+      (ngSubmit)="onSubmit(userForm.value);
+    "
+    >
       <div class="form-group">
         <label>Name of Researcher</label>
         <input name="requester" type="text" class="form-control" ngModel />
@@ -18,8 +21,23 @@
           >
         </select>
       </div>
-      <button class="btn btn-primary" type="submit">Create Grant</button>
-      <button class="btn btn-secondary" (click)="close()">
+      <button
+        class="btn btn-primary"
+        type="submit"
+        style="
+          background-color: #3eb489;
+          border: unset;
+          margin-top: 10px;
+          margin-right: 10px;
+        "
+      >
+        Create Grant
+      </button>
+      <button
+        class="btn btn-secondary"
+        style="border: unset; margin-top: 10px; margin-left: 10px;"
+        (click)="close()"
+      >
         Close Modal
       </button>
     </form>
