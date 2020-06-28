@@ -43,7 +43,7 @@ export class DataLoaderComponent implements OnInit {
     obs.subscribe((sth) => {
       this.data$ = <AdapterDataDto[]>sth;
       this.data$.reverse();
-
+      console.log(this.data$);
       // Transform JSON into displayable table
       this.dataTable$ = tablifyJson(this.data$.map((data) => data.content));
       console.log(this.dataTable$);

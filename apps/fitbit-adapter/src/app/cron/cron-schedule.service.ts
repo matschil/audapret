@@ -1,6 +1,5 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Cron } from "@nestjs/schedule";
-import { AdapterPayloadDto } from "@audapret/shared";
 import { CronService } from "./cron.service";
 import { DatabaseService } from "../database/database.service";
 import { triggerInterval, StudyBeginDate } from "../../assets/config";
@@ -61,7 +60,7 @@ export class CronScheduleService {
     }
 
     // (2) Data processing workflow
-    for (const path of Object.values(FitbitPath)) {
+    for (const path of [FitbitPath.SLEEP]) {
       // (2.1) Get date of latest successful retrival of data of current category from fitbit cloud
       let metaEntity = await this.databaseService.getMetaDataEntity(path);
       if (metaEntity === undefined) {
@@ -77,6 +76,14 @@ export class CronScheduleService {
       const latestRetrievalDate = metaEntity.lastSuccessfulRetrieval
         .toISOString()
         .slice(0, 10);
+
+      const newRetrievalDate = new Date(
+        metaEntity.lastSuccessfulRetrieval.setDate(
+          metaEntity.lastSuccessfulRetrieval.getDate() + 5
+        )
+      )
+        .toISOString()
+        .slice(0, 10);
       let fitbitData: any;
 
       try {
@@ -85,13 +92,14 @@ export class CronScheduleService {
         fitbitData = await this.cronService.fetchData(
           path,
           accessToken,
-          latestRetrievalDate
+          latestRetrievalDate,
+          newRetrievalDate
         );
         fitbitData = fitbitData.data;
 
         if (
           fitbitData[path.toString()].length === 0 ||
-          new Date().toISOString().slice(0, 10) === latestRetrievalDate
+          new Date().toISOString().slice(0, 10) <= newRetrievalDate
         ) {
           // No new data is available at the Fitbit API.
           // Do not send empty data - skip current iteration

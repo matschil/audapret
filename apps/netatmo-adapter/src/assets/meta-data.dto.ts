@@ -1,3 +1,3 @@
 export class NetatmoMetaDataDto {
-  lastRetreivedUserDataId: string;
+  dateOfLastRetrievedData: number;
 }

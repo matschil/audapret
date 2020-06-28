@@ -53,9 +53,7 @@ export class DatabaseService {
   }
 
   async getMetaDataEntity(
-    category: FitbitPath.ACTIVITIES | FitbitPath.SLEEP
-    /* | OuraCategory.ACTIVITY
-      | OuraCategory.READINESS */
+    category: /* FitbitPath.ACTIVITIES | */ FitbitPath.SLEEP
   ) {
     return await this.metaDataRepository.findOne({
       where: { category: category },
@@ -64,7 +62,7 @@ export class DatabaseService {
   async saveMetaDataEntity(metaDataEntity: MetaDataEntity) {
     return await this.metaDataRepository.save(metaDataEntity);
   }
-  createMetaDataEntity(FitbitMetaDataDto: FitbitMetaDataDto) {
-    return this.metaDataRepository.create(FitbitMetaDataDto);
+  createMetaDataEntity(fitbitMetaDataDto: FitbitMetaDataDto) {
+    return this.metaDataRepository.create(fitbitMetaDataDto);
   }
 }

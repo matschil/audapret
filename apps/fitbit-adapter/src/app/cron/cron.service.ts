@@ -18,34 +18,31 @@ export class CronService {
   async sendData(data: any): Promise<AxiosResponse<any>[]> {
     const responses = [];
     for (const key of Object.keys(data)) {
-      //for (const content of data[key]) {
-      try {
-        const content = data[key];
-        const payload: AdapterPayloadDto = {
-          source: `fitbit/${key}`,
-          description: key,
-          content: JSON.stringify(content),
-        };
-        // Validate request payload
-        let response = await this.httpService
-          .post(this.address, payload, { headers: { requester: "adapter" } })
-          .toPromise();
-        responses.push(response);
-        // Currently intentionally stop iteration here to restrict the payload size
-        //return res;
-      } catch (error) {
-        console.error(error.message);
+      for (const content of data[key]) {
+        try {
+          const payload: AdapterPayloadDto = {
+            source: `fitbit/${key}`,
+            description: key,
+            content: JSON.stringify(content),
+          };
+          // Validate request payload
+          let response = await this.httpService
+            .post(this.address, payload, { headers: { requester: "adapter" } })
+            .toPromise();
+          responses.push(response);
+          // Currently intentionally stop iteration here to restrict the payload size
+          //return res;
+        } catch (error) {
+          console.error(error.message);
+        }
       }
-      //}
     }
     return responses;
   }
 
   /** Fetch all data of @param category that was measured between @param start and @param end */
   async fetchData(
-    path: FitbitPath.ACTIVITIES | FitbitPath.SLEEP,
-    /* | OuraCategory.ACTIVITY
-      | OuraCategory.READINESS, */
+    path: /* FitbitPath.ACTIVITIES | */ FitbitPath.SLEEP,
     token: string,
     start?: string,
     end?: string
@@ -55,6 +52,7 @@ export class CronService {
     this.fitbitUri.searchParams.append("access_token", token);
     if (start) {
       this.fitbitUri.pathname += `/${start}`;
+      //this.fitbitUri.pathname += `/2020-03-21`;
       if (end) {
         this.fitbitUri.pathname += `/${end}`;
       }
@@ -68,6 +66,9 @@ export class CronService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.httpService.get(this.fitbitUri.href, { headers }).toPromise();
+    const response = await this.httpService
+      .get(this.fitbitUri.href, { headers })
+      .toPromise();
+    return response;
   }
 }

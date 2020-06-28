@@ -14,5 +14,5 @@ export const fitbitCredentials = {
 export const userId = "7KCVVK";
 export const baseUrl = "http://localhost:3339";
 export const fitbitUri = "https://api.fitbit.com";
-export const triggerInterval = "*/30 * * * * *";
+export const triggerInterval = "*/20 * * * * *";
 export const dropSchemaAtEveryStart = true;

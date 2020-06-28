@@ -2,7 +2,7 @@ import { baseUrl } from "./config";
 export const workflowRoute = `${baseUrl}/api/cron/workflow`;
 export const redirectUri = `${baseUrl}/api/fitbit/callback`;
 export enum FitbitPath {
-  ACTIVITIES = "activities",
+  //  ACTIVITIES = "activities",
   SLEEP = "sleep",
   /* activities/caloriesBMR
 activities/steps
