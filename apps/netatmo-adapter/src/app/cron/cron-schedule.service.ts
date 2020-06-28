@@ -1,6 +1,6 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { Cron } from "@nestjs/schedule";
-import { AdapterPayloadDto } from "@audapret/shared";
+import { AdapterPayloadDto, tablifyJson } from "@audapret/shared";
 import { CronService } from "./cron.service";
 import { AuthService } from "../auth/auth.service";
 import { DatabaseService } from "../database/database.service";
@@ -32,9 +32,11 @@ export class CronScheduleService {
       if (metaEntity === undefined) {
         // This adapter has never sent data
 
-        // (2.2.1) Create new MetaEntity
+        // (2.2.1) Create new MetaEntity with latest measurement date
         metaEntity = this.databaseService.createMetaDataEntity({
-          lastRetreivedUserDataId: netatmoData._id,
+          dateOfLastRetrievedData: this.cronService.getLatestMeasurementDate(
+            netatmoData
+          ),
         });
 
         // (2.2.2) Remember that this is the first AdapterDataDto from the NetatmoAdapter
@@ -43,23 +45,28 @@ export class CronScheduleService {
 
       // (2.3) Check whether the fetched data has already been sent to the StudyDataManager
       if (
-        metaEntity.lastRetreivedUserDataId !== netatmoData._id ||
+        metaEntity.dateOfLastRetrievedData >
+          this.cronService.getLatestMeasurementDate(netatmoData) ||
         this.initialAdapterData
       ) {
-        // (2.4) Build adapterPayload
-        const adapterPayload: AdapterPayloadDto = {
-          content: JSON.stringify(netatmoData),
-          description: "netatmo_data",
-          source: "netatmo_API",
-        };
+        for (const date of netatmoData) {
+          // (2.4) Build adapterPayload
+          const adapterPayload: AdapterPayloadDto = {
+            content: JSON.stringify(date),
+            description: "netatmo_data",
+            source: "netatmo/indoor",
+          };
 
-        // (2.5) Send data to StudyDataManager
-        const res = await this.cronService.sendData(adapterPayload);
+          // (2.5) Send data to StudyDataManager
+          const res = await this.cronService.sendData(adapterPayload);
 
-        if (res.status === 201) {
-          // (2.6) Update metaDataEntity
-          metaEntity.lastRetreivedUserDataId = netatmoData._id;
-          await this.databaseService.saveMetaDataEntity(metaEntity);
+          if (res.status === 201) {
+            // (2.6) Update metaDataEntity
+            metaEntity.dateOfLastRetrievedData = this.cronService.getLatestMeasurementDate(
+              netatmoData
+            );
+            await this.databaseService.saveMetaDataEntity(metaEntity);
+          }
         }
       }
     } catch (error) {

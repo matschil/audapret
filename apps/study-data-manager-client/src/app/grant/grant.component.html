@@ -1,40 +1,52 @@
-<div class="grant-flex">
-  <div class="top-item">
-    <h2>Manage your Data Access Grants</h2>
-    <hr width="600px" size="2px" color="black" align="left" />
-  </div>
+<div class="grant-flex bg-light rounded">
+  <div class="jumbotron-flexible">
+    <br />
+    <h2 align="center" class="display-5">
+      Manage your Data Access Grants
+    </h2>
+    <p class="lead">
+      Add and edit Data Access Grants to provide access to your personal Study
+      Data
+    </p>
+    <hr class="my-4" />
 
-  <div class="grant-item">
-    <!-- IN here: menu -->
-    <div class="list-group">
-      <a class="list-group-item list-group-item disabled">
-        <div class="list-group-item-flex">
-          <div class="list-group-item-item-left">
-            Researcher
+    <div class="grant-item rounded">
+      <!-- IN here: menu -->
+      <div class="list-group">
+        <a class="list-group-item list-group-item disabled">
+          <div class="list-group-item-flex">
+            <div class="list-group-item-item-left">
+              Researcher
+            </div>
+            <div class="list-group-item-item-right">
+              Creation date
+            </div>
           </div>
-          <div class="list-group-item-item-right">
-            Creation date
+        </a>
+        <button
+          type="button"
+          class="list-group-item list-group-item-action"
+          *ngFor="let user of users"
+          (click)="openEditGrantModal(user)"
+        >
+          <div class="list-group-item-flex">
+            <div class="list-group-item-item-left">
+              {{ user.username }}
+            </div>
+            <div class="list-group-item-item-right">
+              {{ user.grant.createdAt | date }}
+            </div>
           </div>
-        </div>
-      </a>
+        </button>
+      </div>
+      <br />
       <button
-        type="button"
-        class="list-group-item list-group-item-action"
-        *ngFor="let user of users"
-        (click)="openEditGrantModal(user)"
+        class="btn btn-primary"
+        style="background-color: #3eb489; border: #3eb489;"
+        (click)="openCreateGrantModal()"
       >
-        <div class="list-group-item-flex">
-          <div class="list-group-item-item-left">
-            {{ user.username }}
-          </div>
-          <div class="list-group-item-item-right">
-            {{ user.grant.createdAt }}
-          </div>
-        </div>
+        Create
       </button>
     </div>
-    <button class="btn btn-primary" (click)="openCreateGrantModal()">
-      Create
-    </button>
   </div>
 </div>

@@ -1,6 +1,8 @@
 /*Todo adjust for grant modal*/
-.sample-container {
-  display: grid;
+.create-modal-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
   grid-template-columns: 1fr;
 }
 .sample-text {
@@ -10,9 +12,4 @@
 }
 .sample-close {
   text-align: center;
-}
-.sample-close button {
-  width: 200px;
-  height: 200px;
-  color: tomato;
 }

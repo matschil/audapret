@@ -1,12 +1,12 @@
 // Perform OAuth2 authentification with oura cloud
-import { Injectable, HttpService } from '@nestjs/common';
-import { AxiosResponse } from 'axios';
+import { Injectable, HttpService } from "@nestjs/common";
+import { AxiosResponse } from "axios";
 import {
   studyDataManagerAdapterDataPath,
   AdapterPayloadDto,
-  studyDataManagerPort
-} from '@audapret/shared';
-import { netatmoUrl } from '../../assets/config';
+  studyDataManagerPort,
+} from "@audapret/shared";
+import { netatmoUrl, netatmoIndoorDeviceId } from "../../assets/config";
 
 @Injectable()
 export class CronService {
@@ -17,22 +17,30 @@ export class CronService {
   private address: string;
   private netatmoUrl: URL;
 
-  /**
-   * Attention: At implementation time there was no data available at the Netatmo account of the specified credentials.
-   * To show that the Adapter can be used, the user information of the Netatmo account gets retrieved from the cloud.
-   * Status 27.01.2020: The route /getuser is deprecated and no longer supported. However it can still be called and returns a valid payload.
-   * As /getuser is the only route that can be called without a device_id, it is the only route that can be called in the scope of the prototype
-   */
+  resetUrl() {
+    this.netatmoUrl.pathname = "/api/getmeasure"; //'/api/getuser';
+
+    // Remove exesting parameters from url
+    this.netatmoUrl.searchParams.forEach((param) =>
+      this.netatmoUrl.searchParams.delete(param)
+    );
+
+    // Append required parameters
+    this.netatmoUrl.searchParams.append("device_id", netatmoIndoorDeviceId);
+    this.netatmoUrl.searchParams.append("scale", "3hours");
+    this.netatmoUrl.searchParams.append("type", "temperature");
+  }
   async fetchData(accessToken: string) {
-    this.netatmoUrl.pathname = '/api/getuser';
-    return await this.httpService
+    this.resetUrl();
+    const response = await this.httpService
       .get(this.netatmoUrl.href, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
-          accept: 'application/json'
-        }
+          accept: "application/json",
+        },
       })
       .toPromise();
+    return response;
   }
 
   // Send adapterDataPayload to studyDataManager
@@ -42,11 +50,16 @@ export class CronService {
     try {
       return this.httpService
         .post(this.address, adapterPayload, {
-          headers: { requester: 'adapter' }
+          headers: { requester: "adapter" },
         })
         .toPromise();
     } catch (error) {
       console.error(error.message);
     }
+  }
+
+  getLatestMeasurementDate(netatmoData: [{ beg_time: number }]) {
+    const measureTimes = netatmoData.map((data) => data.beg_time) as number[];
+    return measureTimes.sort((a, b) => b - a).pop();
   }
 }
