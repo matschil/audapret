@@ -1,12 +1,15 @@
-<header class="flex"></header>
-
-<div class="request-data-flex">
-  <div class="top-item">
-    <font size="5"> Request User Data</font>
-    <hr width="600px" size="2px" color="black" align="left" />
+<div class="request-data-flex rounded">
+  <div class="jumbotron-flexible">
+    <h2 align="center" class="display-5">
+      Request User Data
+    </h2>
+    <p class="lead">
+      Select the user you want to view data from
+    </p>
+    <hr class="my-4" />
   </div>
 
-  <div class="request-data-item">
+  <div class="request-data-item" style="width: 400px;">
     <table border="1" class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -29,15 +32,19 @@
         </tr>
       </tbody>
     </table>
-  </div>
 
-  <div class="request-data-item">
     <form #studyForm="ngForm" (ngSubmit)="loadData(studyForm.value.username)">
       <div class="form-group">
         <label>Username</label>
         <input name="username" type="text" class="form-control" ngModel />
       </div>
-      <button class="btn btn-primary" type="submit">Request Data</button>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        style="background-color: #ff8f31; border: #ff8f31;"
+      >
+        Request Data
+      </button>
     </form>
   </div>
 
@@ -47,33 +54,37 @@
         Request Data from all Users
       </button>
     </form>
-  </div>
+  
    --><br />
-
   <div *ngIf="tableInformations.length > 0" class="request-data-item">
     <div *ngFor="let tableInformation of tableInformations">
-      <div class="request-data-table-item">
-        <h6>{{ tableInformation.dataSource }}</h6>
+      <br />
+      <!--  <div class="request-data-table-item"> -->
+      <h6>{{ tableInformation.dataSource }}</h6>
 
-        <div class="table-wrapper-scroll-y scrollbar p">
-          <table border="1" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th *ngFor="let column of tableInformation.columns" scope="col">
-                  {{ column }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of tableInformation.rows" scope="row">
-                <td *ngFor="let cell of row" scope="col">
-                  {{ cell }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="table-wrapper-scroll-y scrollbar p">
+        <table
+          border="1"
+          class="table table-bordered table-striped"
+          style="font-size: small;"
+        >
+          <thead>
+            <tr>
+              <th *ngFor="let column of tableInformation.columns" scope="col">
+                {{ column }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of tableInformation.rows" scope="row">
+              <td *ngFor="let cell of row" scope="col">
+                {{ cell }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <!-- </div> -->
     </div>
   </div>
 </div>
