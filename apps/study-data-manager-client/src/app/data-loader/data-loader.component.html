@@ -1,10 +1,16 @@
-<div class="data-loader-flex bg-light rounded">
+<div class="data-loader-flex">
   <div class="jumbotron-flexible">
     <br />
-    <h2 align="center" class="display-5">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Open+Sans"
+    />
+    <h2 align="center" class="display-5" style="font-family: Open Sans;">
       View Data
     </h2>
-    <p class="lead">
+
+    <p class="lead" style="font-family: Open Sans; font-size: 17px;">
       Select the data source you want to view data from
     </p>
     <div class="dropdown" align="center">
@@ -20,23 +26,27 @@
         Data Source
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a
-          *ngFor="let source of dataSources$"
-          class="dropdown-item"
-          (click)="loadDataFromSource(source)"
-          >{{ source }}</a
-        >
+        <div *ngFor="let source of dataSources$">
+          <a
+            class="dropdown-item"
+            id="{{ source }}"
+            (click)="loadDataFromSource(source); updateButtonText($event)"
+            >{{ source }}</a
+          >
+        </div>
       </div>
     </div>
     <hr class="my-4" />
   </div>
   <div *ngIf="selectedDataSource" class="data-loader-item">
-    <h6>{{ selectedDataSource + ":" }}</h6>
-    <div class="table-wrapper-scroll-y scrollbar p">
+    <div
+      class="table-wrapper-scroll-y scrollbar p"
+      style="border: 1px solid lightgray; border-radius: 5px;"
+      href="anchor"
+    >
       <table
-        border="1"
         class="table table-bordered table-striped"
-        style="font-size: small;"
+        style="font-size: smaller;"
       >
         <thead>
           <tr>

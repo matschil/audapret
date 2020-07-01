@@ -15,7 +15,6 @@ export class AuthenticationGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log("got triggered");
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
       // authorised so return true

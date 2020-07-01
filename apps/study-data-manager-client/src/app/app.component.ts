@@ -30,4 +30,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  setNavItemActive(event) {
+    // Determine Element to set active
+    const toSetActive = document.getElementById(event.target.id);
+    // Remove active from all NavItems
+    toSetActive.parentElement.childNodes.forEach((node) =>
+      (node as HTMLElement).classList.remove("active")
+    );
+    // Set target element active
+    toSetActive.classList.add("active");
+  }
 }

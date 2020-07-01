@@ -1,17 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { GrantService } from "./grant.service";
-import {
-  DetailLevel,
-  GrantedAction,
-  CreateGrantPayloadDto,
-  GrantPayloadDto,
-  UserDto,
-} from "@audapret/shared";
+import { UserDto } from "@audapret/shared";
 import { ModalService } from "@audapret/shared";
 import { CreateGrantModalComponent } from "./create-grant-modal/create-grant-modal.component";
 import { EditGrantModalComponent } from "./edit-grant-modal/edit-grant-modal.component";
-
-import { map } from "rxjs/operators";
 
 @Component({
   selector: "audapret-grant",
