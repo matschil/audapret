@@ -28,6 +28,7 @@ export class CreateGrantModalComponent {
   }
   onSubmit(anyData: any) {
     // Create new Grant
+
     const createGrantPayload: CreateGrantPayloadDto = {
       username: anyData.requester,
       grantedActions: [GrantedAction.READ],

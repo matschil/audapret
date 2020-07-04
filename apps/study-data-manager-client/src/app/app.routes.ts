@@ -15,6 +15,7 @@ const routes: Routes = [
   {
     path: "data-loader",
     component: DataLoaderComponent,
+    canActivate: [AuthenticationGuard],
   },
   {
     path: "init",

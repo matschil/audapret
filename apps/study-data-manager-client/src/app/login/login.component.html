@@ -1,15 +1,24 @@
-<div class="login-flex rounded" style="background-color: #3eb489;">
+<div class="login-flex" style="background-color: #3eb489;">
   <div class="jumbotron-flexible">
     <br />
-    <h2 align="center" class="display-5">
-      Login
-    </h2>
-    <p class="lead">
-      Please provide your credentials below
-    </p>
-    <hr class="my-4" />
 
     <div class="login-item">
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="//fonts.googleapis.com/css?family=Open+Sans"
+      />
+      <h2 align="center" class="display-5" style="font-family: Open Sans;">
+        Login
+      </h2>
+      <p
+        class="lead"
+        style="font-family: Open Sans; margin-top: 15px; font-size: 17px;"
+      >
+        Please provide your credentials below
+      </p>
+      <hr class="my-4" />
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Username</label>
@@ -38,7 +47,7 @@
         <div class="form-group" align="center">
           <button
             [disabled]="loading"
-            class="btn btn-lg btn-primary"
+            class="btn btn-primary"
             style="background-color: #3eb489; border: unset; margin-top: 10px;"
           >
             <span

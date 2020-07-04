@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { DataLoaderService } from "./data-loader.service";
+import * as delay from "delay";
 import {
   AdapterDataDto,
   DataSourceDto,
@@ -46,11 +47,28 @@ export class DataLoaderComponent implements OnInit {
       console.log(this.data$);
       // Transform JSON into displayable table
       this.dataTable$ = tablifyJson(this.data$.map((data) => data.content));
-      console.log(this.dataTable$);
+      //console.log(this.dataTable$);
       this.rows = getJsonTableRows(this.dataTable$);
       this.numberRows = this.rows.length;
       this.columns = getJsonTableColumns(this.dataTable$);
+
+      // Scroll down
+      this.scrollToTable();
     });
+  }
+
+  updateButtonText(event) {
+    console.log(event.target);
+    const toSetActive = document.getElementById(event.target.id);
+    document.getElementById("dropdownMenuButton").textContent =
+      toSetActive.textContent;
+  }
+
+  async scrollToTable() {
+    await delay(10);
+
+    window.scrollBy({ top: 100, behavior: "smooth" });
+    console.log("lel");
   }
 
   jsonTransform(object: object) {

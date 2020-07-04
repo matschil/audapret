@@ -1,46 +1,54 @@
-<header class="flex"></header>
-
 <div class="overview-flex">
-  <div class="top-item">
-    <h2>Your current studies</h2>
-    <hr width="600px" size="2px" color="black" align="left" />
-  </div>
+  <div class="jumbotron-flexible">
+    <br />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Open+Sans"
+    />
+    <h2 align="center" class="display-5" style="font-family: Open Sans;">
+      Overview of your current studies
+    </h2>
+    <hr class="my-4" />
 
-  <div class="overview-item">
-    <div *ngIf="studies.length !== 0; then thenBlock; else elseBlock"></div>
+    <div class="overview-item rounded">
+      <div *ngIf="studies.length !== 0; then thenBlock; else elseBlock"></div>
 
-    <ng-template #elseBlock>You currently have no ongoing studies</ng-template>
-    <ng-template #thenBlock>
-      <div>
-        <table border="1" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th scope="col">
-                Title
-              </th>
-              <th scope="col">
-                Participants
-              </th>
-              <th scope="col">
-                Researcher
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let study of studies">
-              <td scope="row">
-                {{ study.studyTitle }}
-              </td>
-              <td scope="row">
-                {{ extractParticipantNames(study) }}
-              </td>
-              <td scope="row">
-                {{ extractResearcherNames(study) }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </ng-template>
+      <ng-template #elseBlock>
+        You currently have no ongoing studies
+      </ng-template>
+      <ng-template #thenBlock>
+        <div>
+          <table border="1" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th scope="col">
+                  Title
+                </th>
+                <th scope="col">
+                  Participants
+                </th>
+                <th scope="col">
+                  Researcher
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let study of studies">
+                <td scope="row">
+                  {{ study.studyTitle }}
+                </td>
+                <td scope="row">
+                  {{ extractParticipantNames(study) }}
+                </td>
+                <td scope="row">
+                  {{ extractResearcherNames(study) }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>

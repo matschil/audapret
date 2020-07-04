@@ -7,25 +7,7 @@
   flex-direction: column;
   align-items: center;
   height: 570px;
-  /* margin: 5px 5px 5px 5px;
-  display: flex;
-  border-radius: 5px;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: flex-start;
-  border: 1px dashed;
-  height: 500px; */
 }
-/* .top-item {
-  margin: 5px 5px 5px 5px;
-  border-radius: 5px;
-  border: 1px dashed;
-  height: auto;
-} */
-/* .header-title-item {
-  align-items: flex-start;
-  height: auto;
-} */
 .initialization-item {
   margin: 0px 0px 20px 5px;
   background-color: #e9faf2;

@@ -1,29 +1,33 @@
 .grant-flex {
-  margin: 0% 2% 2% 2%;
+  margin: 0% 0% 0% 0%;
   display: flex;
   justify-content: center;
-  border: 1px solid lightgray;
+  /* border-top: 1px solid lightgray; */
   flex-direction: column;
   align-items: center;
   height: auto;
 }
-.top-item {
+/* .top-item {
   margin: 50px 50px 5px 50px;
   border: 1px solid lightgray;
   height: auto;
   justify-content: center;
   background-color: white;
   width: 90%;
-}
+} */
 .grant-item {
-  margin: 5px 5px 20px 5px;
+  display: flex;
+  margin: 0px 20px 20px 0px;
   background-color: white;
   border-radius: 5px;
-  border: 1px solid #3eb489;
-  padding: 10px;
-  width: 90%;
+  width: 100%;
+  flex-direction: column;
   height: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.grant-button {
+  width: 15%;
+  align-self: center;
 }
 .hoizontal-Line {
   border-bottom: thick solid black;
