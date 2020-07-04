@@ -5,7 +5,7 @@
     <br />
     <form
       #userForm="ngForm"
-      (ngSubmit)="onSubmit(userForm.value);
+      (ngSubmit)="onSubmit(userForm.value); close()
     "
     >
       <div class="form-group">
@@ -29,13 +29,19 @@
           border: unset;
           margin-top: 10px;
           margin-right: 10px;
+          margin-bottom: 20px;
         "
       >
         Create Grant
       </button>
       <button
         class="btn btn-secondary"
-        style="border: unset; margin-top: 10px; margin-left: 10px;"
+        style="
+          border: unset;
+          margin-top: 10px;
+          margin-left: 10px;
+          margin-bottom: 20px;
+        "
         (click)="close()"
       >
         Close Modal

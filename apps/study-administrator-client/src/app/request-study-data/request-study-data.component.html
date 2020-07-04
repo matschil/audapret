@@ -1,15 +1,24 @@
-<div class="request-data-flex rounded">
+<div class="request-data-flex">
   <div class="jumbotron-flexible">
-    <h2 align="center" class="display-5">
+    <br />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Open+Sans"
+    />
+    <h2 align="center" class="display-5" style="font-family: Open Sans;">
       Request User Data
     </h2>
-    <p class="lead">
+    <p
+      class="lead"
+      style="font-family: Open Sans; margin-top: 15px; font-size: 20px;"
+    >
       Select the user you want to view data from
     </p>
     <hr class="my-4" />
   </div>
 
-  <div class="request-data-item" style="width: 400px;">
+  <div class="request-data-item-bordered" style="width: 400px;">
     <table border="1" class="table table-bordered table-striped">
       <thead>
         <tr>
@@ -32,9 +41,14 @@
         </tr>
       </tbody>
     </table>
-
-    <form #studyForm="ngForm" (ngSubmit)="loadData(studyForm.value.username)">
-      <div class="form-group">
+  </div>
+  <div class="request-data-item-not-bordered" style="width: 400px;">
+    <form
+      #studyForm="ngForm"
+      (ngSubmit)="loadData(studyForm.value.username)"
+      style="margin-left: 30%; margin-bottom: 10%;"
+    >
+      <div class="form-group" style="width: 50%;">
         <label>Username</label>
         <input name="username" type="text" class="form-control" ngModel />
       </div>
@@ -56,7 +70,7 @@
     </form>
   
    --><br />
-  <div *ngIf="tableInformations.length > 0" class="request-data-item">
+  <div *ngIf="tableInformations.length > 0" class="request-data-item-bordered">
     <div *ngFor="let tableInformation of tableInformations">
       <br />
       <!--  <div class="request-data-table-item"> -->

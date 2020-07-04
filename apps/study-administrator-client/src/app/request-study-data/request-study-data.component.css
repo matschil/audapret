@@ -8,23 +8,30 @@
   overflow-y: scroll;
 }
 .request-data-flex {
-  margin: 0% 2% 2% 2%;
+  margin: 0% 0% 0% 0%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 1px solid lightgray;
   height: auto;
 }
-.request-data-item {
+.request-data-item-bordered {
   margin: 5px 5px 20px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   border-radius: 5px;
-  border: 1px solid #0072b8;
+  border: 1px solid lightgray;
+  width: 100%;
+  height: auto;
+}
+
+.request-data-item-not-bordered {
+  margin: 5px 245px 20px 5px;
+  align-items: left;
   background-color: white;
-  padding: 10px;
-  width: 90%;
-  height: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 100%;
   height: auto;
 }
 

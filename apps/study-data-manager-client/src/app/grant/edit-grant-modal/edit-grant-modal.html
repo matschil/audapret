@@ -13,7 +13,7 @@
     <font size="5">Edit Access Grant of {{userToEdit.username}} </font>
     <br />
     <br />
-    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value); close()">
       <div class="form-group">
         <label>Name of Researcher</label>
         <input
@@ -46,6 +46,7 @@
           border: unset;
           margin-top: 10px;
           margin-right: 10px;
+          margin-bottom: 20px;
         "
       >
         Save canges
@@ -53,7 +54,12 @@
       <button
         class="btn btn-secondary"
         (click)="close()"
-        style="border: unset; margin-top: 10px; margin-left: 10px;"
+        style="
+          border: unset;
+          margin-top: 10px;
+          margin-left: 10px;
+          margin-bottom: 20px;
+        "
       >
         Close Modal
       </button>
