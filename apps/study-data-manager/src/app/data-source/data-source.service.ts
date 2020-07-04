@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
-import { DataSourceEntity } from '../entity/data-source.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { DataSourceDto } from '@audapret/shared';
+import { DataSourceEntity } from "../entity/data-source.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { DataSourceDto } from "@audapret/shared";
 
 @Injectable()
 export class DataSourceService {

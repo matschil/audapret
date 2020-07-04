@@ -13,53 +13,128 @@
       class="lead"
       style="font-family: Open Sans; margin-top: 10px; font-size: 20px;"
     >
-      Select the user you want to view data from
+      1. Select the user you want to view data from
     </p>
     <hr class="my-4" />
   </div>
 
-  <div class="request-data-item-top" style="width: 400px; margin-top: -10px;">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">
-            User
-          </th>
-          <th scope="col">
-            Type
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td scope="row">
-            {{ user.name }}
-          </td>
-          <td scope="row">
-            {{ user.userType }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="request-data-item-middle" style="width: 400px;">
-    <form
-      #studyForm="ngForm"
-      (ngSubmit)="loadData(studyForm.value.username)"
-      style="margin-left: 30%; margin-bottom: 10%;"
-    >
-      <div class="form-group" style="width: 50%;">
-        <label>Username</label>
-        <input name="username" type="text" class="form-control" ngModel />
-      </div>
-      <button
-        class="btn btn-primary"
-        type="submit"
-        style="background-color: #0072b8; border: #0072b8;"
+  <!-- Top of Page -->
+  <div class="request-data-item-top">
+    <div class="list-group" style="padding: 0px 50px 0px 50px;">
+      <a
+        class="list-group-item list-group-item disabled"
+        style="border: 1px solid lightgray; background-color: whitesmoke;"
       >
-        Request Data
+        <div class="list-group-item-flex" style="font-size: 15px;">
+          <div class="list-group-item-item-left">
+            User
+          </div>
+          <div class="list-group-item-item-right">
+            Type
+          </div>
+        </div>
+      </a>
+      <button
+        type="button"
+        class="list-group-item list-group-item-action"
+        *ngFor="let user of users"
+        (click)="setUser(user); loadDataSources()"
+      >
+        <div class="list-group-item-flex" style="font-size: smaller;">
+          <div class="list-group-item-item-left">
+            {{ user.name }}
+          </div>
+          <div class="list-group-item-item-right">
+            {{ user.userType }}
+          </div>
+        </div>
       </button>
-    </form>
+    </div>
+  </div>
+
+  <!-- Middle page -->
+  <div *ngIf="this.selectedUsername" class="request-data-item-middle">
+    <br />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Open+Sans"
+    />
+
+    <p
+      class="lead"
+      style="font-family: Open Sans; margin-top: 10px; font-size: 20px;"
+    >
+      2. Which data do you want to request?
+    </p>
+    <hr class="my-4" style="width: 100%;" />
+    <div
+      class="flex"
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+      "
+    >
+      <div style="margin-top: 15px; margin-right: 90px;">
+        <p style="font-family: Open Sans; margin-top: 10px; font-size: 20px;">
+          2.a Request all data of user {{ this.selectedUsername }}
+        </p>
+        <div align="center">
+          <button
+            class="btn btn-primary"
+            (click)="loadAllDataFromOneUser()"
+            style="
+              background-color: #0072b8;
+              border: #0072b8;
+              margin-right: 15px;
+            "
+          >
+            Request All Data
+          </button>
+        </div>
+      </div>
+
+      <hr
+        style="
+          border-left: thin solid lightgrey;
+          height: 200px;
+          margin-top: -3%;
+        "
+      />
+
+      <div style="margin-top: 15px; margin-left: 90px;">
+        <p style="font-family: Open Sans; margin-top: 10px; font-size: 20px;">
+          2.b Request data of one source
+        </p>
+
+        <div class="dropdown" align="center">
+          <button
+            *ngIf="this.selectedUsername"
+            class="btn btn-primary dropdown-toggle"
+            style="background-color: #0072b8; border: #0072b8;"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="true"
+          >
+            Data Source
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div *ngFor="let source of dataSources">
+              <a
+                class="dropdown-item"
+                id="{{ source }}"
+                (click)="loadDataForSource(source)"
+                >{{ source }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -72,10 +147,51 @@
   
    -->
 
-<div *ngIf="tableInformations.length > 0" class="request-data-flex-bottom">
-  <br />
-  <hr class="my-4" />
+<!-- If only one table -> Template, If two tables -> template-->
 
+<div *ngIf="tableInformations.length > 0" class="request-data-flex-bottom">
+  <hr class="my-4" style="width: 100%; margin-top: -1% !important;" />
+
+  <div
+    *ngIf="tableInformations.length === 1; then thenBlock; else elseBlock"
+  ></div>
+</div>
+
+<ng-template #thenBlock>
+  <h6>{{ tableInformations[0].dataSource }}</h6>
+
+  <div
+    class="table-wrapper-scroll-y scrollbar p"
+    style="
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      width: 85%;
+      margin-bottom: 50px;
+    "
+  >
+    <table
+      class="table table-bordered table-striped"
+      style="font-size: smaller;"
+    >
+      <thead>
+        <tr>
+          <th *ngFor="let column of tableInformations[0].columns" scope="col">
+            {{ column }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of tableInformations[0].rows" scope="row">
+          <td *ngFor="let cell of row" scope="col">
+            {{ cell }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
+
+<ng-template #elseBlock>
   <div *ngFor="let tableInformation of tableInformations">
     <div class="request-data-item-bottom">
       <br />
@@ -109,4 +225,4 @@
       <!-- </div> -->
     </div>
   </div>
-</div>
+</ng-template>

@@ -8,6 +8,8 @@ import {
   tablifyJson,
   getJsonTableRows,
   getJsonTableColumns,
+  DataSourceDto,
+  UserDto,
 } from "@audapret/shared";
 
 @Component({
@@ -19,6 +21,8 @@ export class RequestStudyDataComponent implements OnInit {
   constructor(private readonly dataLoaderService: RequestStudyDataService) {}
 
   users: StudyUserDto[] = [];
+  dataSources: string[];
+  selectedUsername: string;
   studies: StudyDto[] = [];
   tableInformations = [];
   ngOnInit() {
@@ -34,8 +38,45 @@ export class RequestStudyDataComponent implements OnInit {
     });
   }
 
-  loadData(username: string) {
-    const dataObservable = this.dataLoaderService.getData(username);
+  loadDataForSource(dataSource: string) {
+    const dataObservable = this.dataLoaderService.getDataOfSource(
+      this.selectedUsername,
+      dataSource
+    );
+    dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
+      console.log(adapterDataDtos);
+    });
+    dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
+      // 1. Create JSON Table
+
+      // Transform JSON into displayable table
+      const dataTable = tablifyJson(
+        adapterDataDtos.map((adapterData) => adapterData.content)
+      );
+      const rows = getJsonTableRows(dataTable);
+      const numberRows = rows.length;
+      const columns = getJsonTableColumns(dataTable);
+
+      this.tableInformations = [
+        {
+          rows,
+          dataTable,
+          numberRows,
+          columns,
+          dataSource,
+        },
+      ];
+    });
+  }
+
+  setUser(user: StudyUserDto) {
+    console.log(user);
+    this.selectedUsername = user.name;
+  }
+  loadAllDataFromOneUser() {
+    const dataObservable = this.dataLoaderService.getAllDataForOneUser(
+      this.selectedUsername
+    );
     const adapterDtosByDataSource = {};
     dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
       // 1. Group adapterDataDtos by data source
@@ -80,6 +121,18 @@ export class RequestStudyDataComponent implements OnInit {
     const dataObservable = this.dataLoaderService.getDataForAllUsers();
     dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
       //this = adapterDataDtos;
+    });
+  }
+
+  loadDataSources() {
+    console.log("HERE");
+    const dataObservable = this.dataLoaderService.getDataSources(
+      this.selectedUsername
+    );
+    dataObservable.subscribe((dataSources: DataSourceDto[]) => {
+      this.dataSources = dataSources.map(
+        (dataSourceObject) => dataSourceObject.source
+      );
     });
   }
 }

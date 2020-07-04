@@ -1,3 +1,4 @@
+/*Table*/
 .scrollbar {
   width: auto;
   height: auto;
@@ -9,6 +10,8 @@
   overflow-x: auto;
   overflow-y: auto;
 }
+
+/*Main Structure*/
 .request-data-flex-top {
   margin: 0% 0% 0% 0%;
   display: flex;
@@ -16,26 +19,25 @@
   flex-direction: column;
   align-items: center;
   height: auto;
+  width: 100%;
 }
 
 .request-data-item-top {
   margin: 5px 5px 20px 5px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  border-radius: 5px;
-  border: 1px solid lightgray;
-  padding-bottom: -100%;
-  width: 100%;
+  width: 40%;
   height: auto;
 }
 
 .request-data-item-middle {
-  margin: 5px 245px 20px 5px;
-  align-items: left;
-  background-color: white;
-  width: 100%;
+  margin: 0% 0% 0% 0%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: auto;
+  width: 100%;
 }
 
 .request-data-flex-bottom {
@@ -45,12 +47,34 @@
   flex-direction: column;
   align-items: center;
   height: auto;
+
   background-color: white;
 }
+
 .request-data-item-bottom {
   margin: 5px 5px 20px 5px;
   background-color: white;
 
   padding: 10px;
   height: 100%;
+}
+
+/*List Gruop*/
+.list-group-item-flex {
+  margin: 1px 1px 1px 1px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+  height: auto;
+}
+.list-group-item-item-right {
+  margin: 1px 1px 1px 100px;
+  width: auto;
+  height: auto;
+}
+.list-group-item-item-left {
+  margin: 1px 1px 1px 1px;
+  width: auto;
+  height: auto;
 }
