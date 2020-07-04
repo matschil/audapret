@@ -1,4 +1,4 @@
-<div class="request-data-flex">
+<div class="request-data-flex-top">
   <div class="jumbotron-flexible">
     <br />
     <link
@@ -11,15 +11,15 @@
     </h2>
     <p
       class="lead"
-      style="font-family: Open Sans; margin-top: 15px; font-size: 20px;"
+      style="font-family: Open Sans; margin-top: 10px; font-size: 20px;"
     >
       Select the user you want to view data from
     </p>
     <hr class="my-4" />
   </div>
 
-  <div class="request-data-item-bordered" style="width: 400px;">
-    <table border="1" class="table table-bordered table-striped">
+  <div class="request-data-item-top" style="width: 400px; margin-top: -10px;">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">
@@ -42,7 +42,7 @@
       </tbody>
     </table>
   </div>
-  <div class="request-data-item-not-bordered" style="width: 400px;">
+  <div class="request-data-item-middle" style="width: 400px;">
     <form
       #studyForm="ngForm"
       (ngSubmit)="loadData(studyForm.value.username)"
@@ -61,26 +61,34 @@
       </button>
     </form>
   </div>
+</div>
 
-  <!-- <div class="request-data-item">
+<!-- <div class="request-data-item">
     <form (ngSubmit)="loadDataFromAllUsers()">
       <button class="btn btn-primary" type="submit">
         Request Data from all Users
       </button>
     </form>
   
-   --><br />
-  <div *ngIf="tableInformations.length > 0" class="request-data-item-bordered">
-    <div *ngFor="let tableInformation of tableInformations">
+   -->
+
+<div *ngIf="tableInformations.length > 0" class="request-data-flex-bottom">
+  <br />
+  <hr class="my-4" />
+
+  <div *ngFor="let tableInformation of tableInformations">
+    <div class="request-data-item-bottom">
       <br />
       <!--  <div class="request-data-table-item"> -->
       <h6>{{ tableInformation.dataSource }}</h6>
 
-      <div class="table-wrapper-scroll-y scrollbar p">
+      <div
+        class="table-wrapper-scroll-y scrollbar p"
+        style="border: 1px solid lightgray; border-radius: 5px;"
+      >
         <table
-          border="1"
           class="table table-bordered table-striped"
-          style="font-size: small;"
+          style="font-size: small; background-color: white;"
         >
           <thead>
             <tr>
