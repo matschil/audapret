@@ -47,7 +47,7 @@ h2 {
   padding: 3px 9px;
   text-decoration: none;
 }
-*/ .resource:hover {
+.resource:hover {
   background-color: rgba(68, 138, 255, 0.04);
 }
 .hidden {

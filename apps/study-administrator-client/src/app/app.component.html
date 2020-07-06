@@ -1,9 +1,27 @@
 <div class="flex" style="background-color: #0072b8;">
   <nav class="navbar navbar-expand navbar-dark">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/overview">Overview</a>
-      <a class="nav-item nav-link" routerLink="/study">Create Study</a>
-      <a class="nav-item nav-link" routerLink="/data-loader">Request Data</a>
+      <a
+        id="link1"
+        class="nav-item nav-link"
+        (click)="setNavItemActive($event)"
+        routerLink="/overview"
+        >Overview</a
+      >
+      <a
+        id="link2"
+        class="nav-item nav-link"
+        (click)="setNavItemActive($event)"
+        routerLink="/study"
+        >Create Study</a
+      >
+      <a
+        id="link3"
+        class="nav-item nav-link"
+        (click)="setNavItemActive($event)"
+        routerLink="/data-loader"
+        >Request Data</a
+      >
     </div>
   </nav>
   <img
