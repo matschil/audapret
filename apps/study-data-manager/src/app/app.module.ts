@@ -35,7 +35,7 @@ import { UserEntity } from "./entity/user.entity";
           UserEntity,
         ],
         synchronize: true,
-        dropSchema: false /* dropSchemaAtEveryStart */,
+        dropSchema: true /* dropSchemaAtEveryStart */,
       }),
     }),
     GrantModule,
@@ -49,5 +49,5 @@ import { UserEntity } from "./entity/user.entity";
   providers: [],
 })
 export class AppModule {
-  constructor(private readonly connection: Connection) {}
+  constructor(private readonly connection: Connection) { }
 }

@@ -45,6 +45,12 @@ export class DataLoaderComponent implements OnInit {
       this.data$ = <AdapterDataDto[]>sth;
       this.data$.reverse();
       console.log(this.data$);
+      // Only for presentation: Remove afterwards
+      if (source === "netatmo/indoor") {
+        this.dataTable$ = tablifyJson(
+          this.data$.map((data) => data.content["value"])
+        );
+      }
       // Transform JSON into displayable table
       this.dataTable$ = tablifyJson(this.data$.map((data) => data.content));
       //console.log(this.dataTable$);

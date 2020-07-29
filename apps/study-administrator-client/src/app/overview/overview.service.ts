@@ -8,7 +8,7 @@ import { environment } from "../../environments/environment";
 
 @Injectable()
 export class OverviewService {
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) { }
 
   getStudies() {
     console.log("getting studies");

@@ -4,6 +4,7 @@ import { DataSourceDto, GrantedAction } from "@audapret/shared";
 import { DataSourceEntity } from "../entity/data-source.entity";
 import { Grants } from "../decorator/grant.decorator";
 import { JwtAuthGuard } from "../guard/jwt-auth.guard";
+import { GrantGuard } from "../guard/grant.guard";
 
 @Controller("dataSource")
 export class DataSourceController {
@@ -11,7 +12,7 @@ export class DataSourceController {
 
   @Get("")
   /** @returns All DataSources (DataSourceDto[]) */
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   //@UseGuards(GrantGuard)
   @Grants(GrantedAction.READ)
   async getAllDataSources() {
