@@ -19,7 +19,7 @@ import { dropSchemaAtEveryStart } from "../assets/config";
         database: "study_administrator",
         entities: [StudyEntity, UserEntity],
         synchronize: true,
-        dropSchema: false /* dropSchemaAtEveryStart */,
+        dropSchema: true /* dropSchemaAtEveryStart */,
       }),
     }),
     HttpModule,
@@ -28,5 +28,5 @@ import { dropSchemaAtEveryStart } from "../assets/config";
   ],
 })
 export class AppModule {
-  constructor(private readonly connection: Connection) {}
+  constructor(private readonly connection: Connection) { }
 }

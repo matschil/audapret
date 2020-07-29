@@ -1,2 +1,2 @@
-export const researcherName = 'Requester1';
+export const researcherName = 'Ralf';
 export const dropSchemaAtEveryStart = true;
