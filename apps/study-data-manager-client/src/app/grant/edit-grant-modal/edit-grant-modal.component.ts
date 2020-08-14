@@ -39,7 +39,7 @@ export class EditGrantModalComponent {
       detailLevel: this.userToEdit.grant.detailLevel,
     };
     console.log(updateGrantPayload);
-    const obs = this.grantService.putGrant(updateGrantPayload);
-    obs.subscribe((obj) => console.log(obj));
+    const grantObservable = this.grantService.putGrant(updateGrantPayload);
+    grantObservable.subscribe((obj) => console.log(obj));
   }
 }

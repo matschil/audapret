@@ -39,7 +39,7 @@ export class OuraAuthController {
     try {
       // get latest authorization entity
       const latestAuthEntity = await this.databaseService.getLatestAuthEntity();
-      if (latestAuthEntity != undefined) {
+      if (latestAuthEntity !== undefined) {
         // An authEntity already exists in the DB
         authResponseEntity.id = latestAuthEntity.id;
       }

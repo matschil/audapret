@@ -21,17 +21,11 @@ export class InitializationComponent implements OnInit {
     private readonly initializationService: InitializationService,
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
-    //private authenticationService: AuthenticationService,
     private readonly alertService: AlertService
-  ) {
-    // redirect to home if already logged in
-    if (false /* this.authenticationService.currentUserValue */) {
-      // Todo: Outsource view data page path to use globally
-      this.router.navigate(["/"]);
-    }
-  }
+  ) {}
 
   ngOnInit() {
+    // Activate Form Validation
     this.registerForm = this.formBuilder.group({
       username: ["", Validators.required],
       password: ["", [Validators.required, Validators.minLength(6)]],
@@ -60,6 +54,7 @@ export class InitializationComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
+          // Redirect to the Login page if initialization was successful
           this.alertService.success("Registration successful", true);
           this.router.navigate(["/login"]);
         },

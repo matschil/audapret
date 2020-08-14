@@ -17,7 +17,7 @@ async function bootstrap() {
     process.env.STUDY_DATA_MANAGER_ADDRESS = "http://localhost";
   }
   if (!process.env.OURA_ADAPTER_DB) {
-    process.env.OURA_ADAPTER_DB = ""; //'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
+    process.env.OURA_ADAPTER_DB = "";
   }
   if (!process.env.OURA_ADAPTER_ADDRESS) {
     process.env.OURA_ADAPTER_ADDRESS = "http://localhost/";

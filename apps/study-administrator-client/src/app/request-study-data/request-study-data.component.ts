@@ -27,11 +27,11 @@ export class RequestStudyDataComponent implements OnInit {
   tableInformations = [];
   ngOnInit() {
     // Get all studies
-    const studiesObs = this.dataLoaderService.getStudies();
-    studiesObs.subscribe((studies) => {
+    const studiesObservable = this.dataLoaderService.getStudies();
+    studiesObservable.subscribe((studies) => {
       this.studies = <StudyDto[]>studies;
 
-      // Flatten arrays of array of users and append it to users
+      // Flatten arrays of array of users and append it to local users array
       this.users = this.users.concat(
         ...this.studies.map((study) => study.users)
       );
@@ -43,9 +43,7 @@ export class RequestStudyDataComponent implements OnInit {
       this.selectedUsername,
       dataSource
     );
-    dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
-      console.log(adapterDataDtos);
-    });
+
     dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
       // 1. Create JSON Table
 
@@ -70,7 +68,6 @@ export class RequestStudyDataComponent implements OnInit {
   }
 
   setUser(user: StudyUserDto) {
-    console.log(user);
     this.selectedUsername = user.name;
   }
   loadAllDataFromOneUser() {
@@ -117,15 +114,7 @@ export class RequestStudyDataComponent implements OnInit {
     });
   }
 
-  loadDataFromAllUsers() {
-    const dataObservable = this.dataLoaderService.getDataForAllUsers();
-    dataObservable.subscribe((adapterDataDtos: AdapterDataDto[]) => {
-      //this = adapterDataDtos;
-    });
-  }
-
   loadDataSources() {
-    console.log("HERE");
     const dataObservable = this.dataLoaderService.getDataSources(
       this.selectedUsername
     );

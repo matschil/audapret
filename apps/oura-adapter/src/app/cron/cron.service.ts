@@ -16,22 +16,20 @@ export class CronService {
   private ouraUri: URL;
 
   async sendData(data: any): Promise<AxiosResponse<any>[]> {
-    let responses = [];
+    const responses = [];
     for (const key of Object.keys(data)) {
       for (const content of data[key]) {
         try {
-          let payload: AdapterPayloadDto = {
+          const payload: AdapterPayloadDto = {
             source: `oura/${key}`,
             description: key,
             content: JSON.stringify(content),
           };
           // Validate request payload
-          let response = await this.httpService
+          const response = await this.httpService
             .post(this.address, payload, { headers: { requester: "adapter" } })
             .toPromise();
           responses.push(response);
-          // Currently intentionally stop iteration here to restrict the payload size
-          //return res;
         } catch (error) {
           console.error(error.message);
         }

@@ -1,3 +1,3 @@
 export const jwtConstants = {
-  secret: "secretKey", // TODO NOT SECURE!
+  secret: "secretKey", // NOT SECURE!
 };

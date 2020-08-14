@@ -14,6 +14,7 @@
     <div class="overview-item rounded">
       <div *ngIf="studies.length !== 0; then thenBlock; else elseBlock"></div>
 
+      <!-- List of ongoing studies (if applicable)-->
       <ng-template #elseBlock>
         You currently have no ongoing studies
       </ng-template>

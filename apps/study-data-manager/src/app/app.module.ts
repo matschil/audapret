@@ -8,7 +8,6 @@ import { ContentSchemaEntity } from "./entity/content-schema.entity";
 import { GrantEntity } from "./entity/grant.entity";
 import { GrantModule } from "./grant/grant.module";
 import { GuardModule } from "./guard/guard.module";
-import { TestingModule } from "./testing/testing.module";
 import { DataSourceModule } from "./data-source/data-source.module";
 import { InitializationModule } from "./initialization/initialization.module";
 import { dropSchemaAtEveryStart } from "../assets/config";
@@ -35,12 +34,11 @@ import { UserEntity } from "./entity/user.entity";
           UserEntity,
         ],
         synchronize: true,
-        dropSchema: true /* dropSchemaAtEveryStart */,
+        dropSchema: dropSchemaAtEveryStart,
       }),
     }),
     GrantModule,
     GuardModule,
-    TestingModule,
     DataSourceModule,
     InitializationModule,
     AuthModule,
@@ -49,5 +47,5 @@ import { UserEntity } from "./entity/user.entity";
   providers: [],
 })
 export class AppModule {
-  constructor(private readonly connection: Connection) { }
+  constructor(private readonly connection: Connection) {}
 }

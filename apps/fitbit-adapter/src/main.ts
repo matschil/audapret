@@ -17,7 +17,7 @@ async function bootstrap() {
     process.env.STUDY_DATA_MANAGER_ADDRESS = "http://localhost";
   }
   if (!process.env.FITBIT_ADAPTER_DB) {
-    process.env.FITBIT_ADAPTER_DB = ""; //'audapret-db.cbza68dntfrf.eu-central-1.rds.amazonaws.com';
+    process.env.FITBIT_ADAPTER_DB = "";
   }
   if (!process.env.FITBIT_ADAPTER_ADDRESS) {
     process.env.FITBIT_ADAPTER_ADDRESS = "http://localhost/";
@@ -38,11 +38,6 @@ async function bootstrap() {
         globalPrefix
     );
   });
-  /* // start cronjob to trigger adapterWorkFlow
-  cron.schedule(triggerInterval, async () => {
-    console.log("triggered");
-    await httpService.get(workflowRoute).toPromise();
-  }); */
 }
 
 bootstrap();

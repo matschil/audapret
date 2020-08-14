@@ -24,7 +24,7 @@ export class UserEntity {
   password: string;
 
   @Column()
-  username: string; // ToDO!
+  username: string;
 
   @OneToOne((type) => GrantEntity, {
     cascade: true,

@@ -31,7 +31,6 @@ export class CronScheduleService {
         const expiration_date =
           latestAuthEntity.updatedAt.valueOf() +
           latestAuthEntity.expires_in * 100;
-        console.log(Date.now());
         if (expiration_date > Date.now()) {
           // Refresh token
           const token = await this.authService.refreshAccessToken(

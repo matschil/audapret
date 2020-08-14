@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 import { ModalService } from "@audapret/shared";
 import {
@@ -28,13 +28,12 @@ export class CreateGrantModalComponent {
   }
   onSubmit(anyData: any) {
     // Create new Grant
-
     const createGrantPayload: CreateGrantPayloadDto = {
       username: anyData.requester,
       grantedActions: [GrantedAction.READ],
       detailLevel: anyData.detailLevel,
     };
-    const obs = this.grantService.postGrant(createGrantPayload);
-    obs.subscribe((obj) => console.log(obj));
+    const grantObservable = this.grantService.postGrant(createGrantPayload);
+    grantObservable.subscribe((obj) => console.log(obj));
   }
 }

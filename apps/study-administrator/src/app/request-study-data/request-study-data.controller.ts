@@ -6,30 +6,12 @@ export class RequestStudyDataController {
   constructor(
     private readonly requestStudyDataService: RequestStudyDataService
   ) {}
-  /* 
-  @Get("all")
-  async getAllStudyData() {
-    const allUsers = await this.requestStudyDataService.getAllUsers();
-    const allStudyData = [];
-    for (const user of allUsers) {
-      try {
-        const studyData = await this.requestStudyDataService.requestStudyData(
-          user.studyDataManagerAddress
-        );
-        allStudyData.push(studyData.data);
-      } catch (error) {
-        console.error(error.message);
-      }
-    }
-    return allStudyData;
-  } */
 
   @Get("forSource")
   async getStudyDataForDataSource(
     @Query("username") username: string,
     @Query("dataSource") dataSource: string
   ) {
-    console.log("For Source");
     const user = await this.requestStudyDataService.getUserByName(username);
     try {
       const studyData = await this.requestStudyDataService.requestStudyDataOfSource(
@@ -44,7 +26,6 @@ export class RequestStudyDataController {
 
   @Get("forUser")
   async getStudyDataForUser(@Query("username") username: string) {
-    console.log("For User");
     const user = await this.requestStudyDataService.getUserByName(username);
     try {
       const studyData = await this.requestStudyDataService.requestStudyDataForUser(

@@ -14,7 +14,6 @@ export class CreateStudyService {
   private users: StudyUserDto[] = [];
 
   createStudy(studyDto: StudyDto) {
-    console.log(studyDto);
     return this.httpClient.post(
       `${environment.STUDY_ADMINISTRATOR_ADDRESS}:${studyAdministratorPort}${studyAdministratorStudyPath}`,
       studyDto

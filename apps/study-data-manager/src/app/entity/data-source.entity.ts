@@ -25,6 +25,7 @@ export class DataSourceEntity {
     { onDelete: "CASCADE" }
   )
   contentSchemas?: ContentSchemaEntity[];
+
   toDto(): DataSourceDto {
     return {
       source: this.source,

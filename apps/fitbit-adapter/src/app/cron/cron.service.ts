@@ -26,12 +26,10 @@ export class CronService {
             content: JSON.stringify(content),
           };
           // Validate request payload
-          let response = await this.httpService
+          const response = await this.httpService
             .post(this.address, payload, { headers: { requester: "adapter" } })
             .toPromise();
           responses.push(response);
-          // Currently intentionally stop iteration here to restrict the payload size
-          //return res;
         } catch (error) {
           console.error(error.message);
         }
@@ -42,7 +40,7 @@ export class CronService {
 
   /** Fetch all data of @param category that was measured between @param start and @param end */
   async fetchData(
-    path: /* FitbitPath.ACTIVITIES | */ FitbitPath.SLEEP,
+    path: FitbitPath.SLEEP,
     token: string,
     start?: string,
     end?: string
@@ -52,7 +50,6 @@ export class CronService {
     this.fitbitUri.searchParams.append("access_token", token);
     if (start) {
       this.fitbitUri.pathname += `/${start}`;
-      //this.fitbitUri.pathname += `/2020-03-21`;
       if (end) {
         this.fitbitUri.pathname += `/${end}`;
       }

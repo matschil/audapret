@@ -24,7 +24,6 @@ export class RequestStudyDataService {
   }
 
   getDataSources(username: string) {
-    console.log(username);
     return this.httpClient.get(
       `${environment.STUDY_ADMINISTRATOR_ADDRESS}:${studyAdministratorPort}${studyAdministratorStudyDataSourcesPath}`,
       {

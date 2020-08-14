@@ -43,7 +43,7 @@ export class AdapterDataController {
     let dataSource: DataSourceEntity = this.dataSourceService.createDataSourceEntity(
       { source: adapterPayloadDto.source }
     );
-    let adapterData: AdapterDataEntity = this.adapterDataService.createAdapterDataEntity(
+    const adapterData: AdapterDataEntity = this.adapterDataService.createAdapterDataEntity(
       {
         content: JSON.parse(adapterPayloadDto.content),
       }

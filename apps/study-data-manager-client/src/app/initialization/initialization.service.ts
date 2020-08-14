@@ -7,11 +7,6 @@ export class InitializationService {
   constructor(private readonly httpClient: HttpClient) {}
 
   initializeServer(userDto: UserDto) {
-    console.log(
-      "environment.STUDY_DATA_MANAGER_ADDRESS = " +
-        environment.STUDY_DATA_MANAGER_ADDRESS
-    );
-
     return this.httpClient.post(
       `${environment.STUDY_DATA_MANAGER_ADDRESS}:${studyDataManagerPort}` +
         "/api/initialization",

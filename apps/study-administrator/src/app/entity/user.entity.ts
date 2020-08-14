@@ -25,6 +25,7 @@ export class UserEntity {
 
   @Column("enum", { name: "user_type", enum: UserType })
   userType: UserType;
+
   toDto(): StudyUserDto {
     return {
       studyDataManagerAddress: this.studyDataManagerAddress,

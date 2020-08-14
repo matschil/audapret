@@ -12,6 +12,8 @@ import { CreateStudyService } from "../create-study.service";
 })
 export class EditUserModalComponent {
   userToEdit: StudyUserDto;
+  detailLevels = DetailLevel;
+
   constructor(
     private readonly modalService: ModalService,
     private readonly createStudyService: CreateStudyService
@@ -28,7 +30,7 @@ export class EditUserModalComponent {
     this.createStudyService.updateUser(userToUpdate);
   }
   removeUser() {
-    // Update user in list of users
+    // Remove user from list of users
     this.createStudyService.removeUser(this.userToEdit);
   }
 }

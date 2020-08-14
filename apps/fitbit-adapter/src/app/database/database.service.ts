@@ -52,9 +52,7 @@ export class DatabaseService {
     }
   }
 
-  async getMetaDataEntity(
-    category: /* FitbitPath.ACTIVITIES | */ FitbitPath.SLEEP
-  ) {
+  async getMetaDataEntity(category: FitbitPath.SLEEP) {
     return await this.metaDataRepository.findOne({
       where: { category: category },
     });

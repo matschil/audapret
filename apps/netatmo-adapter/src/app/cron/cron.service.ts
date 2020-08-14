@@ -18,7 +18,7 @@ export class CronService {
   private netatmoUrl: URL;
 
   resetUrl() {
-    this.netatmoUrl.pathname = "/api/getmeasure"; //'/api/getuser';
+    this.netatmoUrl.pathname = "/api/getmeasure";
 
     // Remove exesting parameters from url
     this.netatmoUrl.searchParams.forEach((param) =>

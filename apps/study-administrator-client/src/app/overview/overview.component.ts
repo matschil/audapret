@@ -13,8 +13,8 @@ export class OverviewComponent implements OnInit {
   studies: StudyDto[] = [];
 
   ngOnInit() {
-    const studiesObs = this.overviewService.getStudies();
-    studiesObs.subscribe((studies) => {
+    const studiesObservable = this.overviewService.getStudies();
+    studiesObservable.subscribe((studies) => {
       this.studies = <StudyDto[]>studies;
     });
   }

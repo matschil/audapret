@@ -1,7 +1,8 @@
+<!-- This modal is for editing users that have already been added to a study -->
 <div class="container-fluid">
   <div class="edit-user-modal-flex">
     <br />
-    <font size="5">Edit User {{userToEdit.username}} </font>
+    <font size="5">Edit User {{userToEdit.name}} </font>
     <br />
     <br />
     <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
@@ -34,7 +35,7 @@
       </button>
       <button
         class="btn btn-secondary"
-        (click)="removeUser(userToEdit.username)"
+        (click)="removeUser(userToEdit.name)"
         style="
           background-color: #0072b8;
           border: unset;

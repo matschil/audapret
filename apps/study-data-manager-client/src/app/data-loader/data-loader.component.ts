@@ -40,8 +40,8 @@ export class DataLoaderComponent implements OnInit {
 
   loadDataFromSource(source: string) {
     this.selectedDataSource = source;
-    const obs = this.dataLoaderService.fetchData(source);
-    obs.subscribe((sth) => {
+    const grantObservable = this.dataLoaderService.fetchData(source);
+    grantObservable.subscribe((sth) => {
       this.data$ = <AdapterDataDto[]>sth;
       this.data$.reverse();
       console.log(this.data$);
@@ -53,18 +53,16 @@ export class DataLoaderComponent implements OnInit {
       }
       // Transform JSON into displayable table
       this.dataTable$ = tablifyJson(this.data$.map((data) => data.content));
-      //console.log(this.dataTable$);
       this.rows = getJsonTableRows(this.dataTable$);
       this.numberRows = this.rows.length;
       this.columns = getJsonTableColumns(this.dataTable$);
 
-      // Scroll down
+      // Scroll down in case table is too large
       this.scrollToTable();
     });
   }
 
   updateButtonText(event) {
-    console.log(event.target);
     const toSetActive = document.getElementById(event.target.id);
     document.getElementById("dropdownMenuButton").textContent =
       toSetActive.textContent;
@@ -74,7 +72,6 @@ export class DataLoaderComponent implements OnInit {
     await delay(10);
 
     window.scrollBy({ top: 100, behavior: "smooth" });
-    console.log("lel");
   }
 
   jsonTransform(object: object) {
