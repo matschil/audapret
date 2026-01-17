@@ -1,7 +1,11 @@
 # What is AUDAPRET? 
 
-AUDAPRET, short for AUtomatic DAta Processing in REsearch Trials, is a Software Project I have built as part of my Bachelors Thesis at the Technical University of Munich (TUM) in 2019. 
-The System enables automatic data collection from multiple cloud-based data-sources such as Oura-Rings, Fitbit-Bracelets and Surveys to conduct research studies among multiple participants.
+AUDAPRET, short for AUtomatic DAta Processing in REsearch Trials, is a software project I have built as part of my Bachelors Thesis at the Technical University of Munich (TUM) in 2019. 
+The system enables automatic data collection from multiple cloud-based data-sources such as Oura-Rings, Fitbit-Bracelets and form-based surveys to conduct research studies among multiple participants.
+
+The PDF of my full Thesis can be downloaded here: https://drive.google.com/file/d/1Gg0W5Gd0s2-vQv-71tcJ1SdHwfp8LKZr/view?usp=sharing
+
+This research also led to a publication in the Proceedings of the International Conference on E-Health (MCCSIS) and can be downloaded here: https://www.iadisportal.org/digital-library/audapret-towards-a-cloud-architecture-supporting-multi-device-research-studies
 
 # USAGE OF AUDAPRET PROTOTYPE
 
