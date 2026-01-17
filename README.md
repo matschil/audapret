@@ -1,3 +1,8 @@
+# What is AUDAPRET? 
+
+AUDAPRET, short for AUtomatic DAta Processing in REsearch Trials, is a Software Project I have built as part of my Bachelors Thesis at the Technical University of Munich (TUM) in 2019. 
+The System enables automatic data collection from multiple cloud-based data-sources such as Oura-Rings, Fitbit-Bracelets and Surveys to conduct research studies among multiple participants.
+
 # USAGE OF AUDAPRET PROTOTYPE
 
 ### Setup with Docker
@@ -24,7 +29,7 @@
 10. Run `nx serve netatmo-adapter`
 11. Run `nx serve oura-adapter`
 12. Open http://localhost:3334/api/oura in your browser
-13. Login to Oura Cloud. Email: `felix.matschilles@gmx.de`, password: `audapret`
+13. Login to Oura Cloud. Email: `xxx`, password: `xxx`
 14. Run `nx serve study-administrator`
 15. Run `nx serve study-data-manager-client`
 16. Run `nx serve study-administrator-client --port 4201`
